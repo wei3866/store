@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+  	
+  	<!-- 抑制注释生成 -->
+  	<commentGenerator>
+	  <property name="suppressAllComments" value="true" />
+	</commentGenerator>
+  	
+  	<!-- 配置数据库链接 -->
+    <jdbcConnection 
+    	driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql:///store"
+        userId="root"
+        password="root">
+    </jdbcConnection>
+
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+	
+	<!-- 指定javaBean生成的位置 -->
+    <javaModelGenerator targetPackage="com.geruisi.bean" targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+	
+	<!-- 指定SQL映射文件生成的位置 -->
+    <sqlMapGenerator targetPackage="mapper"  targetProject=".\src\main\resources">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+	
+	<!-- 指定mapper接口生成的位置 -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.geruisi.dao"  targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+	
+	<!-- table指定表生成策略 -->
+    <table tableName="commodity" domainObjectName="Commodity"></table>
+    <table tableName="delivery" domainObjectName="Delivery"></table>
+    <table tableName="merchant" domainObjectName="Merchant"></table>
+    <table tableName="money" domainObjectName="Money"></table>
+    <table tableName="record" domainObjectName="Record"></table>
+    <table tableName="status" domainObjectName="Status"></table>
+    <table tableName="user" domainObjectName="user"></table>
+
+  </context>
+</generatorConfiguration>

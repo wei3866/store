@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geruisi.dao.CommodityMapper">
+  <resultMap id="BaseResultMap" type="com.geruisi.bean.Commodity">
+    <id column="c_id" jdbcType="INTEGER" property="cId" />
+    <result column="c_merchant_id" jdbcType="INTEGER" property="cMerchantId" />
+    <result column="c_name" jdbcType="VARCHAR" property="cName" />
+    <result column="c_type_a" jdbcType="VARCHAR" property="cTypeA" />
+    <result column="c_type_b" jdbcType="VARCHAR" property="cTypeB" />
+    <result column="c_price" jdbcType="INTEGER" property="cPrice" />
+    <result column="c_putaway" jdbcType="DATE" property="cPutaway" />
+    <result column="c_inventory" jdbcType="INTEGER" property="cInventory" />
+    <result column="c_sales" jdbcType="INTEGER" property="cSales" />
+    <result column="c_expressage" jdbcType="VARCHAR" property="cExpressage" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    c_id, c_merchant_id, c_name, c_type_a, c_type_b, c_price, c_putaway, c_inventory, 
+    c_sales, c_expressage
+  </sql>
+  <select id="selectByExample" parameterType="com.geruisi.bean.CommodityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from commodity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from commodity
+    where c_id = #{cId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from commodity
+    where c_id = #{cId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.geruisi.bean.CommodityExample">
+    delete from commodity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.geruisi.bean.Commodity">
+    insert into commodity (c_id, c_merchant_id, c_name, 
+      c_type_a, c_type_b, c_price, 
+      c_putaway, c_inventory, c_sales, 
+      c_expressage)
+    values (#{cId,jdbcType=INTEGER}, #{cMerchantId,jdbcType=INTEGER}, #{cName,jdbcType=VARCHAR}, 
+      #{cTypeA,jdbcType=VARCHAR}, #{cTypeB,jdbcType=VARCHAR}, #{cPrice,jdbcType=INTEGER}, 
+      #{cPutaway,jdbcType=DATE}, #{cInventory,jdbcType=INTEGER}, #{cSales,jdbcType=INTEGER}, 
+      #{cExpressage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.geruisi.bean.Commodity">
+    insert into commodity
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cId != null">
+        c_id,
+      </if>
+      <if test="cMerchantId != null">
+        c_merchant_id,
+      </if>
+      <if test="cName != null">
+        c_name,
+      </if>
+      <if test="cTypeA != null">
+        c_type_a,
+      </if>
+      <if test="cTypeB != null">
+        c_type_b,
+      </if>
+      <if test="cPrice != null">
+        c_price,
+      </if>
+      <if test="cPutaway != null">
+        c_putaway,
+      </if>
+      <if test="cInventory != null">
+        c_inventory,
+      </if>
+      <if test="cSales != null">
+        c_sales,
+      </if>
+      <if test="cExpressage != null">
+        c_expressage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cId != null">
+        #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="cMerchantId != null">
+        #{cMerchantId,jdbcType=INTEGER},
+      </if>
+      <if test="cName != null">
+        #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cTypeA != null">
+        #{cTypeA,jdbcType=VARCHAR},
+      </if>
+      <if test="cTypeB != null">
+        #{cTypeB,jdbcType=VARCHAR},
+      </if>
+      <if test="cPrice != null">
+        #{cPrice,jdbcType=INTEGER},
+      </if>
+      <if test="cPutaway != null">
+        #{cPutaway,jdbcType=DATE},
+      </if>
+      <if test="cInventory != null">
+        #{cInventory,jdbcType=INTEGER},
+      </if>
+      <if test="cSales != null">
+        #{cSales,jdbcType=INTEGER},
+      </if>
+      <if test="cExpressage != null">
+        #{cExpressage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.geruisi.bean.CommodityExample" resultType="java.lang.Long">
+    select count(*) from commodity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update commodity
+    <set>
+      <if test="record.cId != null">
+        c_id = #{record.cId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cMerchantId != null">
+        c_merchant_id = #{record.cMerchantId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cName != null">
+        c_name = #{record.cName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cTypeA != null">
+        c_type_a = #{record.cTypeA,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cTypeB != null">
+        c_type_b = #{record.cTypeB,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cPrice != null">
+        c_price = #{record.cPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.cPutaway != null">
+        c_putaway = #{record.cPutaway,jdbcType=DATE},
+      </if>
+      <if test="record.cInventory != null">
+        c_inventory = #{record.cInventory,jdbcType=INTEGER},
+      </if>
+      <if test="record.cSales != null">
+        c_sales = #{record.cSales,jdbcType=INTEGER},
+      </if>
+      <if test="record.cExpressage != null">
+        c_expressage = #{record.cExpressage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update commodity
+    set c_id = #{record.cId,jdbcType=INTEGER},
+      c_merchant_id = #{record.cMerchantId,jdbcType=INTEGER},
+      c_name = #{record.cName,jdbcType=VARCHAR},
+      c_type_a = #{record.cTypeA,jdbcType=VARCHAR},
+      c_type_b = #{record.cTypeB,jdbcType=VARCHAR},
+      c_price = #{record.cPrice,jdbcType=INTEGER},
+      c_putaway = #{record.cPutaway,jdbcType=DATE},
+      c_inventory = #{record.cInventory,jdbcType=INTEGER},
+      c_sales = #{record.cSales,jdbcType=INTEGER},
+      c_expressage = #{record.cExpressage,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.geruisi.bean.Commodity">
+    update commodity
+    <set>
+      <if test="cMerchantId != null">
+        c_merchant_id = #{cMerchantId,jdbcType=INTEGER},
+      </if>
+      <if test="cName != null">
+        c_name = #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cTypeA != null">
+        c_type_a = #{cTypeA,jdbcType=VARCHAR},
+      </if>
+      <if test="cTypeB != null">
+        c_type_b = #{cTypeB,jdbcType=VARCHAR},
+      </if>
+      <if test="cPrice != null">
+        c_price = #{cPrice,jdbcType=INTEGER},
+      </if>
+      <if test="cPutaway != null">
+        c_putaway = #{cPutaway,jdbcType=DATE},
+      </if>
+      <if test="cInventory != null">
+        c_inventory = #{cInventory,jdbcType=INTEGER},
+      </if>
+      <if test="cSales != null">
+        c_sales = #{cSales,jdbcType=INTEGER},
+      </if>
+      <if test="cExpressage != null">
+        c_expressage = #{cExpressage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.geruisi.bean.Commodity">
+    update commodity
+    set c_merchant_id = #{cMerchantId,jdbcType=INTEGER},
+      c_name = #{cName,jdbcType=VARCHAR},
+      c_type_a = #{cTypeA,jdbcType=VARCHAR},
+      c_type_b = #{cTypeB,jdbcType=VARCHAR},
+      c_price = #{cPrice,jdbcType=INTEGER},
+      c_putaway = #{cPutaway,jdbcType=DATE},
+      c_inventory = #{cInventory,jdbcType=INTEGER},
+      c_sales = #{cSales,jdbcType=INTEGER},
+      c_expressage = #{cExpressage,jdbcType=VARCHAR}
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+</mapper>
