@@ -12,6 +12,33 @@
     <result column="r_Receiving" jdbcType="DATE" property="rReceiving" />
     <result column="r_state" jdbcType="INTEGER" property="rState" />
   </resultMap>
+  <resultMap type="com.geruisi.bean.Record" id="WithAllBaseResultMap">
+  	<id column="r_id" jdbcType="INTEGER" property="rId" />
+    <result column="r_order_id" jdbcType="VARCHAR" property="rOrderId" />
+    <result column="r_u_number" jdbcType="VARCHAR" property="rUNumber" />
+    <result column="r_c_id" jdbcType="INTEGER" property="rCId" />
+    <result column="r_mer_id" jdbcType="INTEGER" property="rMerId" />
+    <result column="r_monery" jdbcType="INTEGER" property="rMonery" />
+    <result column="r_deliver" jdbcType="DATE" property="rDeliver" />
+    <result column="r_Receiving" jdbcType="DATE" property="rReceiving" />
+    <result column="r_state" jdbcType="INTEGER" property="rState" />
+    <association property="user" javaType="com.geruisi.bean.User">
+    	<id column="u_number" property="uNumber"/>
+    	<result column="u_name" property="uName"/>
+    </association>
+    <association property="commodity" javaType="com.geruisi.bean.Commodity">
+    	<id column="c_id" property="cId"/>
+    	<result column="c_merchant_id" property="cMerchantId"/>
+    	<result column="c_name" property="cName"/>
+    	<result column="c_type_a" property="cTypeA"/>
+    	<result column="c_type_b" property="cTypeB"/>
+    	<result column="c_price" property="cPrice"/>
+    </association>
+    <association property="status" javaType="com.geruisi.bean.Status">
+    	<id column="s_id" property="sId"/>
+    	<result column="s_r_state" property="sRState"/>
+    </association>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -71,8 +98,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    r_id, r_order_id, r_u_number, r_c_id, r_mer_id, r_monery, r_deliver, r_Receiving, 
-    r_state
+    r_id, r_order_id,r_u_number, r_c_id, r_mer_id, r_monery, r_deliver, r_Receiving, 
+   r_state
   </sql>
   <select id="selectByExample" parameterType="com.geruisi.bean.RecordExample" resultMap="BaseResultMap">
     select
@@ -80,7 +107,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from record
+    from record 
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,6 +115,23 @@
       order by ${orderByClause}
     </if>
   </select>
+  <!-- List<Record> selectByExampleWithAll(RecordExample example); -->
+  <select id="selectByExampleWithAll" resultMap="WithAllBaseResultMap">
+  	select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from record  
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

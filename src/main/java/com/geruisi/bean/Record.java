@@ -1,6 +1,6 @@
 package com.geruisi.bean;
 
-
+import org.apache.shiro.authz.aop.UserAnnotationHandler;
 
 public class Record {
 	
@@ -21,25 +21,15 @@ public class Record {
     //收货时间
     private String rReceiving;
     //商品状态
-    private Integer rState;
+    private String rState;
     
-    public Record() {
-		super();
-	}
+    private Status status;
     
-	public Record(Integer rId, String rOrderId, String rUNumber, Integer rCId, Integer rMerId, Integer rMonery,
-			String rDeliver, String rReceiving, Integer rState) {
-		super();
-		this.rId = rId;
-		this.rOrderId = rOrderId;
-		this.rUNumber = rUNumber;
-		this.rCId = rCId;
-		this.rMerId = rMerId;
-		this.rMonery = rMonery;
-		this.rDeliver = rDeliver;
-		this.rReceiving = rReceiving;
-		this.rState = rState;
-	}
+    private Commodity commodity;
+    
+    private User user; 
+    
+	
 
 	public Integer getrId() {
         return rId;
@@ -105,11 +95,59 @@ public class Record {
         this.rReceiving = rReceiving;
     }
 
-    public Integer getrState() {
+    public String  getrState() {
         return rState;
     }
 
-    public void setrState(Integer rState) {
+    public void setrState(String rState) {
         this.rState = rState;
     }
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public Commodity getCommodity() {
+		return commodity;
+	}
+
+	public void setCommodity(Commodity commodity) {
+		this.commodity = commodity;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Record(Integer rId, String rOrderId, String rUNumber, Integer rCId, Integer rMerId, Integer rMonery,
+			String rDeliver, String rReceiving, String rState, Status status, Commodity commodity, User user) {
+		super();
+		this.rId = rId;
+		this.rOrderId = rOrderId;
+		this.rUNumber = rUNumber;
+		this.rCId = rCId;
+		this.rMerId = rMerId;
+		this.rMonery = rMonery;
+		this.rDeliver = rDeliver;
+		this.rReceiving = rReceiving;
+		this.rState = rState;
+		this.status = status;
+		this.commodity = commodity;
+		this.user = user;
+	}
+
+	public Record() {
+		super();
+	}
+
+	
+    
 }

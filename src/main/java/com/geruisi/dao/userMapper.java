@@ -1,30 +1,30 @@
 package com.geruisi.dao;
 
-import com.geruisi.bean.user;
-import com.geruisi.bean.userExample;
+import com.geruisi.bean.User;
+import com.geruisi.bean.UserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface userMapper {
-    long countByExample(userExample example);
+    long countByExample(UserExample example);
 
-    int deleteByExample(userExample example);
+    int deleteByExample(UserExample example);
 
     int deleteByPrimaryKey(String uNumber);
 
-    int insert(user record);
+    int insert(User record);
 
-    int insertSelective(user record);
+    int insertSelective(User record);
 
-    List<user> selectByExample(userExample example);
+    List<User> selectByExample(UserExample example);
 
-    user selectByPrimaryKey(String uNumber);
+    User selectByPrimaryKey(String uNumber);
 
-    int updateByExampleSelective(@Param("record") user record, @Param("example") userExample example);
+    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 
-    int updateByExample(@Param("record") user record, @Param("example") userExample example);
+    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
 
-    int updateByPrimaryKeySelective(user record);
+    int updateByPrimaryKeySelective(User record);
 
-    int updateByPrimaryKey(user record);
+    int updateByPrimaryKey(User record);
 }
