@@ -15,9 +15,9 @@ public class Record {
 
     private Integer rMonery;
 
-    private Date rDeliver;
+    private String rDeliver;
 
-    private Date rReceiving;
+    private String rReceiving;
 
     private Integer rState;
 
@@ -69,19 +69,19 @@ public class Record {
         this.rMonery = rMonery;
     }
 
-    public Date getrDeliver() {
+    public String getrDeliver() {
         return rDeliver;
     }
 
-    public void setrDeliver(Date rDeliver) {
+    public void setrDeliver(String rDeliver) {
         this.rDeliver = rDeliver;
     }
 
-    public Date getrReceiving() {
+    public String getrReceiving() {
         return rReceiving;
     }
 
-    public void setrReceiving(Date rReceiving) {
+    public void setrReceiving(String rReceiving) {
         this.rReceiving = rReceiving;
     }
 
