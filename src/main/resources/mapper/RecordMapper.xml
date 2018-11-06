@@ -101,13 +101,17 @@
     r_id, r_order_id,r_u_number, r_c_id, r_mer_id, r_monery, r_deliver, r_Receiving, 
    r_state
   </sql>
+  <sql id="WithAllBase_Column_List">
+  	r_id, r_order_id,r_u_number, r_c_id, r_mer_id, r_monery, r_deliver, r_Receiving, 
+   r_state
+  </sql>
   <select id="selectByExample" parameterType="com.geruisi.bean.RecordExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from record 
+    from record r
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -121,7 +125,7 @@
     <if test="distinct">
       distinct
     </if>
-    <include refid="Base_Column_List" />
+    <include refid="WithAllBase_Column_List" />
     from record  
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
