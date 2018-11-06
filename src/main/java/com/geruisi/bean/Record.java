@@ -1,27 +1,47 @@
 package com.geruisi.bean;
 
-import java.util.Date;
+
 
 public class Record {
+	
+	//id
     private Integer rId;
-
+    //订单号
     private String rOrderId;
-
+    //客户手机号
     private String rUNumber;
-
+    //商品id
     private Integer rCId;
-
+    //商家id
     private Integer rMerId;
-
+    //价格
     private Integer rMonery;
-
+    //发货时间
     private String rDeliver;
-
+    //收货时间
     private String rReceiving;
-
+    //商品状态
     private Integer rState;
+    
+    public Record() {
+		super();
+	}
+    
+	public Record(Integer rId, String rOrderId, String rUNumber, Integer rCId, Integer rMerId, Integer rMonery,
+			String rDeliver, String rReceiving, Integer rState) {
+		super();
+		this.rId = rId;
+		this.rOrderId = rOrderId;
+		this.rUNumber = rUNumber;
+		this.rCId = rCId;
+		this.rMerId = rMerId;
+		this.rMonery = rMonery;
+		this.rDeliver = rDeliver;
+		this.rReceiving = rReceiving;
+		this.rState = rState;
+	}
 
-    public Integer getrId() {
+	public Integer getrId() {
         return rId;
     }
 
