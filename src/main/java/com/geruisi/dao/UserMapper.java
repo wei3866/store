@@ -5,7 +5,7 @@ import com.geruisi.bean.UserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface userMapper {
+public interface UserMapper {
     long countByExample(UserExample example);
 
     int deleteByExample(UserExample example);
