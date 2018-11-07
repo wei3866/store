@@ -22,11 +22,6 @@
 <script
 	src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-	$(function(){
-		$
-		
-	})
-
 </script>		
 </head>
 <body>
