@@ -148,6 +148,28 @@ public class Record {
 		super();
 	}
 
+	@Override
+	public String toString() {
+		return "Record [rId=" + rId + ", rOrderId=" + rOrderId + ", rUNumber=" + rUNumber + ", rCId=" + rCId
+				+ ", rMerId=" + rMerId + ", rMonery=" + rMonery + ", rDeliver=" + rDeliver + ", rReceiving="
+				+ rReceiving + ", rState=" + rState + ", status=" + status + ", commodity=" + commodity + ", user="
+				+ user + "]";
+	}
+
+	public Record(Integer rId, String rOrderId, String rUNumber, Integer rCId, Integer rMerId, Integer rMonery,
+			String rDeliver, String rReceiving, String rState) {
+		super();
+		this.rId = rId;
+		this.rOrderId = rOrderId;
+		this.rUNumber = rUNumber;
+		this.rCId = rCId;
+		this.rMerId = rMerId;
+		this.rMonery = rMonery;
+		this.rDeliver = rDeliver;
+		this.rReceiving = rReceiving;
+		this.rState = rState;
+	}
+
 	
     
 }
