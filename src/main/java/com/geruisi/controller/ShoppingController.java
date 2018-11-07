@@ -1,7 +1,6 @@
 package com.geruisi.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +26,22 @@ public class ShoppingController {
 	
 	@Autowired
 	private ShoppingService shoppingService;
+	
+	/**
+	 * 修改商品数量
+	 * @param id
+	 * @param quantity
+	 * @return
+	 */
+	@RequestMapping("/updateShoop")
+	@ResponseBody
+	public Msg getupdateShoop(@RequestParam("id")Integer id,@RequestParam("quantity")int quantity,
+			HttpServletRequest request, HttpServletResponse response){
+		
+		ShoppingCart sc = CommodityStoreWebUtils.getShoppingCart(request);
+		shoppingService.quantity(id,quantity,sc);
+		return Msg.success();
+	}
 	
 	/**
 	 * 获取全部商品
@@ -82,12 +97,11 @@ public class ShoppingController {
 	}
 	
 	/**
-	 * 获取购物车全部全部商品,并转想购物车页面
+	 * 转想购物车页面
 	 * @return
 	 */
 	@RequestMapping("/shooping")
-	public String getShooping(Map<String,Object> map,
-			HttpServletRequest request, HttpServletResponse response){
+	public String getShooping(){
 		
 		return "shopping";
 	}

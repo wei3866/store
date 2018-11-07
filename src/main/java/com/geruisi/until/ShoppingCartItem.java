@@ -15,37 +15,13 @@ public class ShoppingCartItem {
 	private Commodity commodity;
 	//该商品的数量
 	private int quantity;
-	//商品的店铺
-	private Merchant merchant;
-	//购物车中的店铺
-	private Integer merchantId;
 
-	public ShoppingCartItem(Commodity commodity,Merchant merchant, Integer shoops) {
+	public ShoppingCartItem(Commodity commodity,Integer shoops) {
 		super();
 		this.commodity = commodity;
 		this.quantity = shoops;
-		this.merchant = merchant;
-		this.merchantId = commodity.getcMerchantId();
 	}
 
-	
-	
-	public Integer getMerchantId() {
-		return merchantId;
-	}
-
-
-
-	public void setMerchantId(Integer merchantId) {
-		this.merchantId = merchantId;
-	}
-
-
-
-	public Merchant getMerchant() {
-		return merchant;
-	}
-	
 	public Commodity getCommodity() {
 		return commodity;
 	}
