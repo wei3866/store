@@ -21,6 +21,13 @@
 	rel="stylesheet">
 <script
 	src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$
+		
+	})
+
+</script>		
 </head>
 <body>
 <!-- 搭建显示页面 -->
@@ -43,15 +50,19 @@
 				<table class="table table-hover">
 					<tr>
 						<th>订单号</th>
+						<th>商品</th>
+						<th>下单时间</th>
 						<th>操作</th>
 						
 					</tr>
 					<c:forEach items="${pageInfo.list }" var="reca">
 						<tr>
 							<th>${reca.rOrderId }</th>
+							<th>${reca.commodity.cName }</th>
+							<th>${reca.rDeliver }</th>
 							
 							<th>
-								<button class="btn btn-primary btn-sm">
+								<button class="btn btn-primary btn-sm" id="query_one_record">
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									查看
 								</button>
@@ -104,6 +115,7 @@
 		</div>
 		
 	</div>
+	
 
 
 </body>

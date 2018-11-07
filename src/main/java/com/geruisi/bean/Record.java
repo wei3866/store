@@ -16,7 +16,7 @@ public class Record {
     private Integer rMerId;
     //价格
     private Integer rMonery;
-    //发货时间
+    //下单时间
     private String rDeliver;
     //收货时间
     private String rReceiving;
