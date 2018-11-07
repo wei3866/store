@@ -3,10 +3,12 @@ package com.geruisi.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.geruisi.bean.Commodity;
 import com.geruisi.dao.CommodityMapper;
 
+@Service
 public class CommodityService {
 	
 	@Autowired

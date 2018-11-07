@@ -84,13 +84,13 @@
                 <p class="mod_cate_r"><a href="">手机</a></p>
                 <p class="mod_cate_r"><a href="">电脑</a></p>
                 <p class="mod_cate_r"><a href="">平板</a></p>
-              </li>
+            </li>
     	    <li class="mod_cate mod_on">
             	<h2><i class="arrow_dot fr"></i><a href="">服装</a></h2>
                 <p class="mod_cate_r"><a href="">女装</a></p>
                 <p class="mod_cate_r"><a href="">男士</a></p>
                 <p class="mod_cate_r"><a href="">童装</a></p>
-              </li>
+            </li>
     	    <li class="mod_cate mod_on">
             	<h2><i class="arrow_dot fr"></i><a href="">家电</a></h2>
                 <p class="mod_cate_r"><a href="">空调</a></p>
@@ -163,10 +163,17 @@
 </head>
 <body>
 <script type="text/javascript">
+var totalRecord, currentPage;
 //1.页面加载完成后,直接去发送ajax请求,要到分页数据
 $(function(){
+	 //去首页
+	 to_page(1);
+});
+
+function to_page(pn){
 	$.ajax({
 		url:"${APP_PATH}/commodities",
+		data:"pn="+pn,
 		type:"GET",
 		success:function(result){
 			//1.解析并显示商品数据
@@ -177,7 +184,8 @@ $(function(){
  			build_page_nav(result);
 		}
 	});
-});
+ }
+
 //显示商品数据
 function build_commodities_table(result){
 	
