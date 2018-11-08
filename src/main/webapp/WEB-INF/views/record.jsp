@@ -22,9 +22,47 @@
 <script
 	src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+$(function(){
+	$(".record_get_model_btn").click(function(){
+		$("#recordGetModel").modal({
+			backdrop:"static"
+		});
+	});
+	return false;
+})
 </script>		
 </head>
 <body>
+
+<!-- 查看该订单号的订单信息的模态框 -->
+<div class="modal fade" id="recordGetModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">订单详情</h4>
+      </div>
+      <div class="modal-body">
+        	订单号:
+        	商品名：名字  类型
+        	商品价格：
+        	下单时间：
+        	收货时间：
+        	商品状态：
+        	收货人:名字  电话
+        	收货地址:
+        	商家: id 电话
+        	 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
 <!-- 搭建显示页面 -->
 	<div class="container">
 		<!-- 标题 -->
@@ -33,12 +71,7 @@
 				<h1>您的订单</h1>
 			</div>
 		</div>
-		<!-- 按钮 -->
-		<div class="row">
-			<div class="col-md-4 col-md-offset-8">
-				<button class="btn btn-danger">删除</button>
-			</div>
-		</div>
+		<br>
 		<!-- 显示表格数据 -->
 		<div class="row">
 			<div class="col-md-12">
@@ -57,7 +90,7 @@
 							<th>${reca.rDeliver }</th>
 							
 							<th>
-								<button class="btn btn-primary btn-sm" id="query_one_record">
+								<button class="btn btn-primary record_get_model_btn btn-sm">
 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 									查看
 								</button>

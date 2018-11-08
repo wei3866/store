@@ -23,5 +23,15 @@ public class RecordService {
 		return recordMapper.selectByExampleWithAll(example);
 		
 	}
+
+	public List<Record> getOneRecord(String str) {
+		RecordExample example = new RecordExample();
+		RecordExample.Criteria criteria = example.createCriteria();
+		criteria.andROrderIdEqualTo(str);
+		return recordMapper.selectByExampleWithAll(example);
+		
+	}
+
+	
 	
 }
