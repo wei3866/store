@@ -31,7 +31,11 @@ public class Record {
     
 	
 
-	public Integer getrId() {
+
+    private String rDel;
+
+    public Integer getrId() {
+
         return rId;
     }
 
@@ -172,4 +176,11 @@ public class Record {
 
 	
     
+    public String getrDel() {
+        return rDel;
+    }
+
+    public void setrDel(String rDel) {
+        this.rDel = rDel == null ? null : rDel.trim();
+    }
 }

@@ -104,63 +104,123 @@ public class DeliveryExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andDIdIsNull() {
-            addCriterion("d_id is null");
+        public Criteria andUIdIsNull() {
+            addCriterion("u_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andDIdIsNotNull() {
-            addCriterion("d_id is not null");
+        public Criteria andUIdIsNotNull() {
+            addCriterion("u_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDIdEqualTo(Integer value) {
-            addCriterion("d_id =", value, "dId");
+        public Criteria andUIdEqualTo(Integer value) {
+            addCriterion("u_id =", value, "uId");
             return (Criteria) this;
         }
 
-        public Criteria andDIdNotEqualTo(Integer value) {
-            addCriterion("d_id <>", value, "dId");
+        public Criteria andUIdNotEqualTo(Integer value) {
+            addCriterion("u_id <>", value, "uId");
             return (Criteria) this;
         }
 
-        public Criteria andDIdGreaterThan(Integer value) {
-            addCriterion("d_id >", value, "dId");
+        public Criteria andUIdGreaterThan(Integer value) {
+            addCriterion("u_id >", value, "uId");
             return (Criteria) this;
         }
 
-        public Criteria andDIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("d_id >=", value, "dId");
+        public Criteria andUIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("u_id >=", value, "uId");
             return (Criteria) this;
         }
 
-        public Criteria andDIdLessThan(Integer value) {
-            addCriterion("d_id <", value, "dId");
+        public Criteria andUIdLessThan(Integer value) {
+            addCriterion("u_id <", value, "uId");
             return (Criteria) this;
         }
 
-        public Criteria andDIdLessThanOrEqualTo(Integer value) {
-            addCriterion("d_id <=", value, "dId");
+        public Criteria andUIdLessThanOrEqualTo(Integer value) {
+            addCriterion("u_id <=", value, "uId");
             return (Criteria) this;
         }
 
-        public Criteria andDIdIn(List<Integer> values) {
-            addCriterion("d_id in", values, "dId");
+        public Criteria andUIdIn(List<Integer> values) {
+            addCriterion("u_id in", values, "uId");
             return (Criteria) this;
         }
 
-        public Criteria andDIdNotIn(List<Integer> values) {
-            addCriterion("d_id not in", values, "dId");
+        public Criteria andUIdNotIn(List<Integer> values) {
+            addCriterion("u_id not in", values, "uId");
             return (Criteria) this;
         }
 
-        public Criteria andDIdBetween(Integer value1, Integer value2) {
-            addCriterion("d_id between", value1, value2, "dId");
+        public Criteria andUIdBetween(Integer value1, Integer value2) {
+            addCriterion("u_id between", value1, value2, "uId");
             return (Criteria) this;
         }
 
-        public Criteria andDIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("d_id not between", value1, value2, "dId");
+        public Criteria andUIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("u_id not between", value1, value2, "uId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDUIdIsNull() {
+            addCriterion("d_u_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDUIdIsNotNull() {
+            addCriterion("d_u_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDUIdEqualTo(Integer value) {
+            addCriterion("d_u_id =", value, "dUId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDUIdNotEqualTo(Integer value) {
+            addCriterion("d_u_id <>", value, "dUId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDUIdGreaterThan(Integer value) {
+            addCriterion("d_u_id >", value, "dUId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDUIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("d_u_id >=", value, "dUId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDUIdLessThan(Integer value) {
+            addCriterion("d_u_id <", value, "dUId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDUIdLessThanOrEqualTo(Integer value) {
+            addCriterion("d_u_id <=", value, "dUId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDUIdIn(List<Integer> values) {
+            addCriterion("d_u_id in", values, "dUId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDUIdNotIn(List<Integer> values) {
+            addCriterion("d_u_id not in", values, "dUId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDUIdBetween(Integer value1, Integer value2) {
+            addCriterion("d_u_id between", value1, value2, "dUId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDUIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("d_u_id not between", value1, value2, "dUId");
             return (Criteria) this;
         }
 

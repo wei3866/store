@@ -1,7 +1,9 @@
 package com.geruisi.bean;
 
 public class Delivery {
-    private Integer dId;
+    private Integer uId;
+
+    private Integer dUId;
 
     private String dName;
 
@@ -11,12 +13,20 @@ public class Delivery {
 
     private String dDeliveryPus;
 
-    public Integer getdId() {
-        return dId;
+    public Integer getuId() {
+        return uId;
     }
 
-    public void setdId(Integer dId) {
-        this.dId = dId;
+    public void setuId(Integer uId) {
+        this.uId = uId;
+    }
+
+    public Integer getdUId() {
+        return dUId;
+    }
+
+    public void setdUId(Integer dUId) {
+        this.dUId = dUId;
     }
 
     public String getdName() {
