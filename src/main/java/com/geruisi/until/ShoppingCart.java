@@ -1,26 +1,28 @@
 package com.geruisi.until;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import com.geruisi.bean.Commodity;
-import com.geruisi.bean.Merchant;
+import org.springframework.stereotype.Component;
 
+import com.geruisi.bean.Commodity;
+
+@Component
 public class ShoppingCart {
 	
 	private Map<Integer, ShoppingCartItem> commoditys = new HashMap<>();
 	
-	private List<Integer> shoopId = new ArrayList<>();
 	/**
 	 * 修改指定购物项的数量
 	 */
 	public void updateItemQuantity(Integer id,int quantity){
 		ShoppingCartItem sci = commoditys.get(id);
 		if (sci != null) {
+			System.out.println(quantity);
 			sci.setQuantity(quantity);
+		}else {
+			System.out.println("wwwwwww");
 		}
 	}
 	
@@ -55,18 +57,6 @@ public class ShoppingCart {
 		return commoditys.values();
 	}
 	
-	private List<Integer> getShoop(){
-		Collection<ShoppingCartItem> values = commoditys.values();
-		for (ShoppingCartItem shoppingCartItem : values) {
-			Integer id = shoppingCartItem.getMerchantId();
-			for (Integer shopping : shoopId) {
-				if (shopping != id) {
-					shoopId.add(id);
-				}
-			}
-		}
-		return shoopId;
-	}
 	
 	/**
 	 * 返回购物车中商品的总数量
@@ -100,13 +90,13 @@ public class ShoppingCart {
 	 * @param commodity
 	 * @param shoops 
 	 */
-	public void addCommodity(Commodity commodity,Merchant merchant, Integer shoops){
+	public void addCommodity(Commodity commodity,Integer shoops){
 		//1. 检查购物车中有没有该商品, 若有, 则使其数量 +1, 若没有, 
 		//新创建其对应的 ShoppingCartItem, 并把其加入到 books 中
 		ShoppingCartItem sci = commoditys.get(commodity.getcId());
-		
+		System.out.println(commodity.getcId());
 		if(sci == null){
-			sci = new ShoppingCartItem(commodity,merchant,shoops);
+			sci = new ShoppingCartItem(commodity,shoops);
 			commoditys.put(commodity.getcId(), sci);
 		}else{
 			sci.increment();

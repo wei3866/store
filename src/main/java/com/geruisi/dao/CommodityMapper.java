@@ -6,6 +6,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface CommodityMapper {
+	
+	//查询所有
+	List<Commodity> getCommodity();
+	
+	//按条件查找商品
+	//List<Commodity> getCommodityByName(String cName);
+	
     long countByExample(CommodityExample example);
 
     int deleteByExample(CommodityExample example);

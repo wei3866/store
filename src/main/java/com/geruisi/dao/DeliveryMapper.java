@@ -10,7 +10,7 @@ public interface DeliveryMapper {
 
     int deleteByExample(DeliveryExample example);
 
-    int deleteByPrimaryKey(Integer dId);
+    int deleteByPrimaryKey(Integer uId);
 
     int insert(Delivery record);
 
@@ -18,7 +18,7 @@ public interface DeliveryMapper {
 
     List<Delivery> selectByExample(DeliveryExample example);
 
-    Delivery selectByPrimaryKey(Integer dId);
+    Delivery selectByPrimaryKey(Integer uId);
 
     int updateByExampleSelective(@Param("record") Delivery record, @Param("example") DeliveryExample example);
 

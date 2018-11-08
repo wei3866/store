@@ -108,6 +108,5 @@ public class User {
 		return "User [uName=" + uName + "]";
 	}
 
-	
-    
+
 }

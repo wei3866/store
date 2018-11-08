@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.geruisi.bean.Commodity;
-import com.geruisi.bean.Merchant;
 import com.geruisi.dao.CommodityMapper;
-import com.geruisi.dao.MerchantMapper;
 import com.geruisi.until.ShoppingCart;
 
 /**
@@ -21,9 +19,6 @@ public class ShoppingService {
 
 	@Autowired
 	private CommodityMapper commodityMapper;
-	
-	@Autowired
-	private MerchantMapper merchantMapper;
 	
 	public List<Commodity> getAll() {
 		List<Commodity> example = commodityMapper.selectByExample(null);
@@ -39,13 +34,22 @@ public class ShoppingService {
 		Commodity commodity = commodityMapper.selectByPrimaryKey(id);
 		
 		if (commodity != null) {
-			Merchant merchant = merchantMapper.selectByPrimaryKey(commodity.getcMerchantId());
 			
-			sc.addCommodity(commodity,merchant,shoops);
+			sc.addCommodity(commodity,shoops);
 			return true;
 		}
 		
 		return false;
+	}
+
+	/**
+	 * 修改商品数量
+	 * @param id
+	 * @param quantity
+	 * @param sc 
+	 */
+	public void quantity(Integer id,int quantity, ShoppingCart sc) {
+		sc.updateItemQuantity(id, quantity);
 	}
 
 
