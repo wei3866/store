@@ -171,21 +171,21 @@
 		</div>
 		<table class="table">
 		  <tr>
-		    <td><a href="/commodity.jsp">小米6</a><br>归类:数码&nbsp;&nbsp;类型:手机</td>
+		    <td><a href="${APP_PATH }/commodity.jsp">小米6</a><br>归类:数码&nbsp;&nbsp;类型:手机</td>
 		    <td>3000</td>
-		    <td><a href="/commodity.jsp">华为p20</a><br>归类:数码&nbsp;&nbsp;类型:手机</td>
+		    <td><a href="${APP_PATH }/commodity.jsp">华为p20</a><br>归类:数码&nbsp;&nbsp;类型:手机</td>
 			<td>3500</td>
 		  </tr>
 		  <tr>
-			 <td><a href="/commodity.jsp">夹克</a><br>归类:服装&nbsp;&nbsp;类型:上衣</td>
+			 <td><a href="${APP_PATH }/commodity.jsp">夹克</a><br>归类:服装&nbsp;&nbsp;类型:上衣</td>
 			 <td>100</td>
-			 <td><a href="/commodity.jsp">安踏</a><br>归类:服装&nbsp;&nbsp;类型:鞋子</td>
+			 <td><a href="${APP_PATH }/commodity.jsp">安踏</a><br>归类:服装&nbsp;&nbsp;类型:鞋子</td>
 			 <td>100</td>
 		  </tr>
 		  <tr>
-			 <td><a href="/commodity.jsp">牛仔裤</a><br>归类:服装&nbsp;&nbsp;类型:裤子</td>
+			 <td><a href="${APP_PATH }/commodity.jsp">牛仔裤</a><br>归类:服装&nbsp;&nbsp;类型:裤子</td>
 			 <td>200</td>
-			 <td><a href="/commodity.jsp">联想</a><br>归类:数码&nbsp;&nbsp;类型:电脑</td>
+			 <td><a href="${APP_PATH }/commodity.jsp">联想</a><br>归类:数码&nbsp;&nbsp;类型:电脑</td>
 			 <td>5000</td>
 		  </tr>
 		</table>
