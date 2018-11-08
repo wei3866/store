@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.geruisi.dao.DeliveryMapper">
   <resultMap id="BaseResultMap" type="com.geruisi.bean.Delivery">
-    <id column="d_id" jdbcType="INTEGER" property="dId" />
+    <id column="u_id" jdbcType="INTEGER" property="uId" />
+    <result column="d_u_id" jdbcType="INTEGER" property="dUId" />
     <result column="d_name" jdbcType="VARCHAR" property="dName" />
     <result column="d_number" jdbcType="INTEGER" property="dNumber" />
     <result column="d_delivery" jdbcType="VARCHAR" property="dDelivery" />
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    d_id, d_name, d_number, d_delivery, d_delivery_pus
+    u_id, d_u_id, d_name, d_number, d_delivery, d_delivery_pus
   </sql>
   <select id="selectByExample" parameterType="com.geruisi.bean.DeliveryExample" resultMap="BaseResultMap">
     select
@@ -87,11 +88,11 @@
     select 
     <include refid="Base_Column_List" />
     from delivery
-    where d_id = #{dId,jdbcType=INTEGER}
+    where u_id = #{uId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from delivery
-    where d_id = #{dId,jdbcType=INTEGER}
+    where u_id = #{uId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.geruisi.bean.DeliveryExample">
     delete from delivery
@@ -100,16 +101,21 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.geruisi.bean.Delivery">
-    insert into delivery (d_id, d_name, d_number, 
-      d_delivery, d_delivery_pus)
-    values (#{dId,jdbcType=INTEGER}, #{dName,jdbcType=VARCHAR}, #{dNumber,jdbcType=INTEGER}, 
-      #{dDelivery,jdbcType=VARCHAR}, #{dDeliveryPus,jdbcType=VARCHAR})
+    insert into delivery (u_id, d_u_id, d_name, 
+      d_number, d_delivery, d_delivery_pus
+      )
+    values (#{uId,jdbcType=INTEGER}, #{dUId,jdbcType=INTEGER}, #{dName,jdbcType=VARCHAR}, 
+      #{dNumber,jdbcType=INTEGER}, #{dDelivery,jdbcType=VARCHAR}, #{dDeliveryPus,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.geruisi.bean.Delivery">
     insert into delivery
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="dId != null">
-        d_id,
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="dUId != null">
+        d_u_id,
       </if>
       <if test="dName != null">
         d_name,
@@ -125,8 +131,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="dId != null">
-        #{dId,jdbcType=INTEGER},
+      <if test="uId != null">
+        #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="dUId != null">
+        #{dUId,jdbcType=INTEGER},
       </if>
       <if test="dName != null">
         #{dName,jdbcType=VARCHAR},
@@ -151,8 +160,11 @@
   <update id="updateByExampleSelective" parameterType="map">
     update delivery
     <set>
-      <if test="record.dId != null">
-        d_id = #{record.dId,jdbcType=INTEGER},
+      <if test="record.uId != null">
+        u_id = #{record.uId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dUId != null">
+        d_u_id = #{record.dUId,jdbcType=INTEGER},
       </if>
       <if test="record.dName != null">
         d_name = #{record.dName,jdbcType=VARCHAR},
@@ -173,7 +185,8 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update delivery
-    set d_id = #{record.dId,jdbcType=INTEGER},
+    set u_id = #{record.uId,jdbcType=INTEGER},
+      d_u_id = #{record.dUId,jdbcType=INTEGER},
       d_name = #{record.dName,jdbcType=VARCHAR},
       d_number = #{record.dNumber,jdbcType=INTEGER},
       d_delivery = #{record.dDelivery,jdbcType=VARCHAR},
@@ -185,6 +198,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.geruisi.bean.Delivery">
     update delivery
     <set>
+      <if test="dUId != null">
+        d_u_id = #{dUId,jdbcType=INTEGER},
+      </if>
       <if test="dName != null">
         d_name = #{dName,jdbcType=VARCHAR},
       </if>
@@ -198,14 +214,15 @@
         d_delivery_pus = #{dDeliveryPus,jdbcType=VARCHAR},
       </if>
     </set>
-    where d_id = #{dId,jdbcType=INTEGER}
+    where u_id = #{uId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.geruisi.bean.Delivery">
     update delivery
-    set d_name = #{dName,jdbcType=VARCHAR},
+    set d_u_id = #{dUId,jdbcType=INTEGER},
+      d_name = #{dName,jdbcType=VARCHAR},
       d_number = #{dNumber,jdbcType=INTEGER},
       d_delivery = #{dDelivery,jdbcType=VARCHAR},
       d_delivery_pus = #{dDeliveryPus,jdbcType=VARCHAR}
-    where d_id = #{dId,jdbcType=INTEGER}
+    where u_id = #{uId,jdbcType=INTEGER}
   </update>
 </mapper>

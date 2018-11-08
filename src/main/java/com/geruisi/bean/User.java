@@ -2,7 +2,7 @@ package com.geruisi.bean;
 
 import java.util.Date;
 
-public class user {
+public class User {
     private String uNumber;
 
     private Integer uId;

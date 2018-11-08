@@ -691,6 +691,76 @@ public class RecordExample {
             addCriterion("r_state not between", value1, value2, "rState");
             return (Criteria) this;
         }
+
+        public Criteria andRDelIsNull() {
+            addCriterion("r_del is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRDelIsNotNull() {
+            addCriterion("r_del is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRDelEqualTo(String value) {
+            addCriterion("r_del =", value, "rDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andRDelNotEqualTo(String value) {
+            addCriterion("r_del <>", value, "rDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andRDelGreaterThan(String value) {
+            addCriterion("r_del >", value, "rDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andRDelGreaterThanOrEqualTo(String value) {
+            addCriterion("r_del >=", value, "rDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andRDelLessThan(String value) {
+            addCriterion("r_del <", value, "rDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andRDelLessThanOrEqualTo(String value) {
+            addCriterion("r_del <=", value, "rDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andRDelLike(String value) {
+            addCriterion("r_del like", value, "rDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andRDelNotLike(String value) {
+            addCriterion("r_del not like", value, "rDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andRDelIn(List<String> values) {
+            addCriterion("r_del in", values, "rDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andRDelNotIn(List<String> values) {
+            addCriterion("r_del not in", values, "rDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andRDelBetween(String value1, String value2) {
+            addCriterion("r_del between", value1, value2, "rDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andRDelNotBetween(String value1, String value2) {
+            addCriterion("r_del not between", value1, value2, "rDel");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -46,7 +46,7 @@
     <table tableName="money" domainObjectName="Money"></table>
     <table tableName="record" domainObjectName="Record"></table>
     <table tableName="status" domainObjectName="Status"></table>
-    <table tableName="user" domainObjectName="user"></table>
+    <table tableName="user" domainObjectName="User"></table>
 
   </context>
 </generatorConfiguration>

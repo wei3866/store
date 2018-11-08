@@ -11,6 +11,7 @@
     <result column="r_deliver" jdbcType="DATE" property="rDeliver" />
     <result column="r_Receiving" jdbcType="DATE" property="rReceiving" />
     <result column="r_state" jdbcType="INTEGER" property="rState" />
+    <result column="r_del" jdbcType="VARCHAR" property="rDel" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,7 +73,7 @@
   </sql>
   <sql id="Base_Column_List">
     r_id, r_order_id, r_u_number, r_c_id, r_mer_id, r_monery, r_deliver, r_Receiving, 
-    r_state
+    r_state, r_del
   </sql>
   <select id="selectByExample" parameterType="com.geruisi.bean.RecordExample" resultMap="BaseResultMap">
     select
@@ -107,12 +108,12 @@
   <insert id="insert" parameterType="com.geruisi.bean.Record">
     insert into record (r_id, r_order_id, r_u_number, 
       r_c_id, r_mer_id, r_monery, 
-      r_deliver, r_Receiving, r_state
-      )
+      r_deliver, r_Receiving, r_state, 
+      r_del)
     values (#{rId,jdbcType=INTEGER}, #{rOrderId,jdbcType=VARCHAR}, #{rUNumber,jdbcType=VARCHAR}, 
       #{rCId,jdbcType=INTEGER}, #{rMerId,jdbcType=INTEGER}, #{rMonery,jdbcType=INTEGER}, 
-      #{rDeliver,jdbcType=DATE}, #{rReceiving,jdbcType=DATE}, #{rState,jdbcType=INTEGER}
-      )
+      #{rDeliver,jdbcType=DATE}, #{rReceiving,jdbcType=DATE}, #{rState,jdbcType=INTEGER}, 
+      #{rDel,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.geruisi.bean.Record">
     insert into record
@@ -144,6 +145,9 @@
       <if test="rState != null">
         r_state,
       </if>
+      <if test="rDel != null">
+        r_del,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="rId != null">
@@ -172,6 +176,9 @@
       </if>
       <if test="rState != null">
         #{rState,jdbcType=INTEGER},
+      </if>
+      <if test="rDel != null">
+        #{rDel,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -211,6 +218,9 @@
       <if test="record.rState != null">
         r_state = #{record.rState,jdbcType=INTEGER},
       </if>
+      <if test="record.rDel != null">
+        r_del = #{record.rDel,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -226,7 +236,8 @@
       r_monery = #{record.rMonery,jdbcType=INTEGER},
       r_deliver = #{record.rDeliver,jdbcType=DATE},
       r_Receiving = #{record.rReceiving,jdbcType=DATE},
-      r_state = #{record.rState,jdbcType=INTEGER}
+      r_state = #{record.rState,jdbcType=INTEGER},
+      r_del = #{record.rDel,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -258,6 +269,9 @@
       <if test="rState != null">
         r_state = #{rState,jdbcType=INTEGER},
       </if>
+      <if test="rDel != null">
+        r_del = #{rDel,jdbcType=VARCHAR},
+      </if>
     </set>
     where r_id = #{rId,jdbcType=INTEGER}
   </update>
@@ -270,7 +284,8 @@
       r_monery = #{rMonery,jdbcType=INTEGER},
       r_deliver = #{rDeliver,jdbcType=DATE},
       r_Receiving = #{rReceiving,jdbcType=DATE},
-      r_state = #{rState,jdbcType=INTEGER}
+      r_state = #{rState,jdbcType=INTEGER},
+      r_del = #{rDel,jdbcType=VARCHAR}
     where r_id = #{rId,jdbcType=INTEGER}
   </update>
 </mapper>

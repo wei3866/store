@@ -21,6 +21,8 @@ public class Record {
 
     private Integer rState;
 
+    private String rDel;
+
     public Integer getrId() {
         return rId;
     }
@@ -91,5 +93,13 @@ public class Record {
 
     public void setrState(Integer rState) {
         this.rState = rState;
+    }
+
+    public String getrDel() {
+        return rDel;
+    }
+
+    public void setrDel(String rDel) {
+        this.rDel = rDel == null ? null : rDel.trim();
     }
 }
