@@ -29,10 +29,20 @@ public class Record {
     
     private User user; 
     
+    private Merchant merchant;
+    
 	
 
 
-    private String rDel;
+    public Merchant getMerchant() {
+		return merchant;
+	}
+
+	public void setMerchant(Merchant merchant) {
+		this.merchant = merchant;
+	}
+
+	private String rDel;
 
     public Integer getrId() {
 
@@ -160,8 +170,13 @@ public class Record {
 				+ user + "]";
 	}
 
-	public Record(Integer rId, String rOrderId, String rUNumber, Integer rCId, Integer rMerId, Integer rMonery,
-			String rDeliver, String rReceiving, String rState) {
+	
+
+	
+    
+    public Record(Integer rId, String rOrderId, String rUNumber, Integer rCId, Integer rMerId, Integer rMonery,
+			String rDeliver, String rReceiving, String rState, 
+			String rDel) {
 		super();
 		this.rId = rId;
 		this.rOrderId = rOrderId;
@@ -172,11 +187,10 @@ public class Record {
 		this.rDeliver = rDeliver;
 		this.rReceiving = rReceiving;
 		this.rState = rState;
+		this.rDel = rDel;
 	}
 
-	
-    
-    public String getrDel() {
+	public String getrDel() {
         return rDel;
     }
 

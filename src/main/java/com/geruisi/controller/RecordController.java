@@ -29,7 +29,7 @@ public class RecordController {
 		// 这不是一个分页查询；
 		// 引入PageHelper分页插件
 		// 在查询之前只需要调用，传入页码，以及每页的大小
-		PageHelper.startPage(pn, 8);
+		PageHelper.startPage(pn, 5);
 		// startPage后面紧跟的这个查询就是一个分页查询
 		
 		List<Record> records = recordService.getAll("17890364829");
@@ -44,7 +44,7 @@ public class RecordController {
 	public Msg getRecordOne(@RequestParam("id")String str){
 		 List<Record> list = recordService.getOneRecord(str);
 		
-		return Msg.success().add("record", list);
+		return Msg.success().add("oneRecord", list);
 	}
 	
 
