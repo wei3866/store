@@ -52,6 +52,45 @@ public class ShoppingService {
 		sc.updateItemQuantity(id, quantity);
 	}
 
+	/**
+	 * 商品数量+1
+	 * @param id
+	 * @param sc
+	 */
+	public void plusShoop(Integer id, ShoppingCart sc) {
+		sc.plusQuantity(id);
+	}
+
+	/**
+	 * 商品-1
+	 * @param id
+	 * @param sc
+	 */
+	public void minusShoop(Integer id, ShoppingCart sc) {
+		sc.minusQuantity(id);
+	}
+
+	/**
+	 * 删除多个商品
+	 * @param ids
+	 * @param sc
+	 */
+	public void deleteShoops(List<Integer> ids, ShoppingCart sc) {
+		for (Integer id : ids) {
+			sc.removeItem(id);
+		}
+		
+	}
+
+	/**
+	 * 删除单个商品
+	 * @param id
+	 * @param sc
+	 */
+	public void deleteShoop(int id, ShoppingCart sc) {
+		sc.removeItem(id);
+	}
+
 
 	
 }

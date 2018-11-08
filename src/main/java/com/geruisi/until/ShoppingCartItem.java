@@ -3,7 +3,6 @@ package com.geruisi.until;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.geruisi.bean.Commodity;
-import com.geruisi.bean.Merchant;
 
 /**
  * 封装了购物车中的商品, 包含对商品的引用以及购物车中该商品的数量
@@ -40,6 +39,20 @@ public class ShoppingCartItem {
 	 */
 	public void increment(){
 		quantity++;
+	}
+	
+	/**
+	 * 使商品数量 - 1
+	 */
+	public void minus(){
+		quantity--;
+	}
+	
+	/**
+	 * 该商品共需多上钱
+	 */
+	public int money(){
+		return quantity*commodity.getcPrice();
 	}
 	
 }

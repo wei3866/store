@@ -1,5 +1,6 @@
 package com.geruisi.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,67 @@ public class ShoppingController {
 	
 	@Autowired
 	private ShoppingService shoppingService;
+	
+	
+	@RequestMapping("/deleteShoops")
+	@ResponseBody
+	public Msg getdeleteShoops(@RequestParam("ids")String idString,
+			HttpServletRequest request, HttpServletResponse response){
+		
+		if (idString.contains(",")) {
+			List<Integer> ids = new ArrayList<>();
+			String[] str = idString.split(",");
+			for (String id : str) {
+				ids.add(Integer.parseInt(id));
+			}
+			
+			ShoppingCart sc = CommodityStoreWebUtils.getShoppingCart(request);
+			shoppingService.deleteShoops(ids,sc);
+		}else {
+			int id = Integer.parseInt(idString);
+			ShoppingCart sc = CommodityStoreWebUtils.getShoppingCart(request);
+			shoppingService.deleteShoop(id,sc);
+		}
+		
+		return Msg.success().add("deleteShoops", "已删除商品");
+	}
+	
+	
+	/**
+	 * 商品-1
+	 * @param id
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("/minusShoop")
+	@ResponseBody
+	public Msg getminusShoop(@RequestParam("id")Integer id,
+			HttpServletRequest request, HttpServletResponse response){
+		ShoppingCart sc = CommodityStoreWebUtils.getShoppingCart(request);
+		shoppingService.minusShoop(id,sc);
+		
+		return null;
+	}
+	
+	
+	/**
+	 * 商品+1
+	 * @param id
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("/plusShoop")
+	@ResponseBody
+	public Msg getPlusShoop(@RequestParam("id")Integer id,
+			HttpServletRequest request, HttpServletResponse response){
+		ShoppingCart sc = CommodityStoreWebUtils.getShoppingCart(request);
+		shoppingService.plusShoop(id,sc);
+		
+		return Msg.success();
+	}
+	
 	
 	/**
 	 * 修改商品数量
