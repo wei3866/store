@@ -115,7 +115,7 @@
     		</bean>
     	</property>
     </bean>
-	
+
     <!--  
 	    6. 配置 ShiroFilter. 
 	    6.1 id 必须和 web.xml 文件中配置的 DelegatingFilterProxy 的 <filter-name> 一致.
@@ -125,6 +125,7 @@
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/login.jsp"/>
         <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
+        
         <!--  
         	配置哪些页面需要受保护. 
         	以及访问这些页面需要的权限. 

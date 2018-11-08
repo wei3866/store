@@ -102,4 +102,9 @@ public class User {
     public void setuMer(Integer uMer) {
         this.uMer = uMer;
     }
+
+	@Override
+	public String toString() {
+		return "User [uName=" + uName + "]";
+	}
 }
