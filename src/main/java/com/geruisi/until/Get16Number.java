@@ -4,6 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
 public class Get16Number {
 
 	public static String getUUID(){
@@ -24,5 +28,7 @@ public class Get16Number {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String str = format.format(date);
 		return str;
-		 } 
+		 }
+	
+	
 }
