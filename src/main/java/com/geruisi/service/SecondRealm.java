@@ -1,4 +1,4 @@
-package com.geruisi.controller;
+package com.geruisi.service;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;

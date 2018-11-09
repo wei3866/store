@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.geruisi.bean.Commodity;
 import com.geruisi.service.ShoppingService;
 import com.geruisi.until.CommodityStoreWebUtils;
+import com.geruisi.until.EncodingTool;
 import com.geruisi.until.ShoppingCart;
 
 /**
@@ -28,7 +30,81 @@ public class ShoppingController {
 	@Autowired
 	private ShoppingService shoppingService;
 	
+	/**
+	 * 结算
+	 * @return
+	 * "name=" + name + "&number="+ number + "&str="+ str + "&ids="+ ids + "&moneys="+ moneys,
+	 */
+	@RequestMapping("/allStive")
+	@ResponseBody
+	public Msg getallStive(@RequestParam("name")String name,@RequestParam("number")String number,
+			@RequestParam("str")String str,@RequestParam("ids")String idString,
+			@RequestParam("moneys")String strmoneys,HttpServletRequest request, HttpServletResponse response){
+		String strs = EncodingTool.encodeStr(str);
+		
+		if (idString.contains(",")) {
+			List<Integer> ids = new ArrayList<>();
+			String[] strids = idString.split(",");
+			for (String id : strids) {
+				ids.add(Integer.parseInt(id));
+			}
+			int moneys = Integer.parseInt(strmoneys);
+			
+			ShoppingCart sc = CommodityStoreWebUtils.getShoppingCart(request);
+			boolean b = shoppingService.allStives(sc,name,number,strs,ids,moneys,request);
+			
+			if (b == false) {
+				return Msg.fail().add("fail", "余额不足,请充值!");
+			}
+		}else {
+			int id = Integer.parseInt(idString);
+			int moneys = Integer.parseInt(strmoneys);
+			ShoppingCart sc = CommodityStoreWebUtils.getShoppingCart(request);
+			boolean b = shoppingService.allStive(sc,name,number,strs,id,moneys,request);
+			
+			if (b == false) {
+				return Msg.fail().add("fail", "余额不足,请充值!");
+			}
+		}
+		
+		return Msg.success();
+	}
 	
+	
+	/**
+	 * 验证是否登录
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("/loginUser")
+	@ResponseBody
+	public Msg getlogin(HttpServletRequest request, HttpServletResponse response){
+		HttpSession session = request.getSession();
+		Object attribute = session.getAttribute("userLogin");
+		if (attribute == null) {
+			return Msg.fail().add("login", "您还未登录,请先登录!");
+		}else {
+			return Msg.success();
+		}
+	}
+	
+	/**
+	 * 转向登录页面
+	 * @return
+	 */
+	@RequestMapping("/login")
+	public String getlogin(){
+		return "login";
+	}
+	
+	/**
+	 * 删除商品
+	 * @param idString
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping("/deleteShoops")
 	@ResponseBody
 	public Msg getdeleteShoops(@RequestParam("ids")String idString,
