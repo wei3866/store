@@ -1,12 +1,25 @@
 package com.geruisi.service;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.geruisi.bean.Commodity;
+import com.geruisi.bean.Money;
+import com.geruisi.bean.MoneyExample;
+import com.geruisi.bean.MoneyExample.Criteria;
+import com.geruisi.bean.Record;
 import com.geruisi.dao.CommodityMapper;
+import com.geruisi.dao.MerchantMapper;
+import com.geruisi.dao.MoneyMapper;
+import com.geruisi.dao.RecordMapper;
+import com.geruisi.until.EncodingTool;
+import com.geruisi.until.Get16Number;
 import com.geruisi.until.ShoppingCart;
 
 /**
@@ -19,6 +32,15 @@ public class ShoppingService {
 
 	@Autowired
 	private CommodityMapper commodityMapper;
+	
+	@Autowired
+	private MoneyMapper moneyMapper;
+	
+	@Autowired
+	private Get16Number get16Number;
+	
+	@Autowired
+	private RecordMapper recordMapper;
 	
 	public List<Commodity> getAll() {
 		List<Commodity> example = commodityMapper.selectByExample(null);
@@ -50,6 +72,117 @@ public class ShoppingService {
 	 */
 	public void quantity(Integer id,int quantity, ShoppingCart sc) {
 		sc.updateItemQuantity(id, quantity);
+	}
+
+	/**
+	 * 商品数量+1
+	 * @param id
+	 * @param sc
+	 */
+	public void plusShoop(Integer id, ShoppingCart sc) {
+		sc.plusQuantity(id);
+	}
+
+	/**
+	 * 商品-1
+	 * @param id
+	 * @param sc
+	 */
+	public void minusShoop(Integer id, ShoppingCart sc) {
+		sc.minusQuantity(id);
+	}
+
+	/**
+	 * 删除多个商品
+	 * @param ids
+	 * @param sc
+	 */
+	public void deleteShoops(List<Integer> ids, ShoppingCart sc) {
+		for (Integer id : ids) {
+			sc.removeItem(id);
+		}
+		
+	}
+
+	/**
+	 * 删除单个商品
+	 * @param id
+	 * @param sc
+	 */
+	public void deleteShoop(int id, ShoppingCart sc) {
+		sc.removeItem(id);
+	}
+
+	/**
+	 * 结算
+	 * @param sc
+	 * @param name
+	 * @param number
+	 * @param str
+	 * @param ids
+	 * @param moneys
+	 * @param request 
+	 * @return
+	 */
+	public boolean allStives(ShoppingCart sc, String name, String number, String str, List<Integer> ids, int moneys,
+			HttpServletRequest request) {
+		
+		//HttpSession session = request.getSession();
+		//String strNmnber = (String) session.getAttribute("userLogin");
+		String strNmnber = "18463903746";
+		//查询用户余额
+		Money money = moneyMapper.selectByKey(strNmnber);
+		int mon = money.getmMoney();
+		
+		int i = mon-moneys;
+		
+		if (i>0) {
+			for (Integer id : ids) {
+				
+				Commodity commodity = commodityMapper.selectByPrimaryKey(id);
+				Integer merchantId = commodity.getcMerchantId();
+				Integer price = commodity.getcPrice();
+				
+				String rOrderId = get16Number.getUUID();
+				String dateToStr = get16Number.DateToStr(new Date());
+				Record record = new Record(null, rOrderId, strNmnber, id, merchantId, price, dateToStr, null, "1", str);
+				recordMapper.insertSelective(record);
+				sc.removeItem(id);
+			}
+			return true;
+		}
+		
+		return false;
+	}
+
+	public boolean allStive(ShoppingCart sc, String name, String number, String str, int id, int moneys,
+			HttpServletRequest request) {
+		
+		//HttpSession session = request.getSession();
+		//String strNmnber = (String) session.getAttribute("userLogin");
+		String strNmnber = "18463903746";
+		//查询用户余额
+		Money money = moneyMapper.selectByKey(strNmnber);
+		int mon = money.getmMoney();
+		
+		int i = mon-moneys;
+		
+		if (i>0) {
+			
+			Commodity commodity = commodityMapper.selectByPrimaryKey(id);
+			Integer merchantId = commodity.getcMerchantId();
+			Integer price = commodity.getcPrice();
+			
+			String rOrderId = get16Number.getUUID();
+			String dateToStr = get16Number.DateToStr(new Date());
+			Record record = new Record(null, rOrderId, strNmnber, id, merchantId, price, dateToStr, null, "1", str);
+			recordMapper.insertSelective(record);
+			sc.removeItem(id);
+			
+			return true;
+		}
+				
+		return false;
 	}
 
 

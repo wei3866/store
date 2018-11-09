@@ -19,12 +19,32 @@ public class ShoppingCart {
 	public void updateItemQuantity(Integer id,int quantity){
 		ShoppingCartItem sci = commoditys.get(id);
 		if (sci != null) {
-			System.out.println(quantity);
 			sci.setQuantity(quantity);
-		}else {
-			System.out.println("wwwwwww");
 		}
 	}
+	
+	/**
+	 * 商品数量+1
+	 * @param id
+	 */
+	public void plusQuantity(Integer id){
+		ShoppingCartItem sci = commoditys.get(id);
+		if (sci != null) {
+			sci.increment();
+		}
+	}
+	
+	/**
+	 * 商品数量-1
+	 * @param id
+	 */
+	public void minusQuantity(Integer id){
+		ShoppingCartItem sci = commoditys.get(id);
+		if (sci != null) {
+			sci.minus();
+		}
+	}
+	
 	
 	/**
 	 * 移除指定的购物项

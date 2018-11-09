@@ -38,19 +38,19 @@ public class RecordMapperTest {
 	}
 	
 	}
-	@Test
-	public  void  testInsertOne(){
-		recordMapper.insertSelective(new Record(null, Get16Number.getUUID(), "17890364829", 1, 2, 122, Get16Number.DateToStr(new Date()), null, "2","河南省郑州市管城回族区郑汴路与未来路交叉口绿都广场2504"));
-	}
-	 @Test
-	 public void testInsertAll(){
-		 
-		 RecordMapper mapper = sqlSession.getMapper(RecordMapper.class);
-		 for(int i = 0;i<100;i++){
-			 recordMapper.insertSelective(new Record(null, Get16Number.getUUID(), "17890364829", 1, 2, 10000, Get16Number.DateToStr(new Date()), null, "2","河南省郑州市管城回族区郑汴路与未来路交叉口绿都广场2504"));
-			// recordMapper.deleteByExample(null);
-		 }
-		 System.out.println("批量完成");
-	 }
+//	@Test
+//	public  void  testInsertOne(){
+//		recordMapper.insertSelective(new Record(null, Get16Number.getUUID(), "17890364829", 1, 2, 122, Get16Number.DateToStr(new Date()), null, "2","河南省郑州市管城回族区郑汴路与未来路交叉口绿都广场2504"));
+//	}
+//	 @Test
+//	 public void testInsertAll(){
+//		 
+//		 RecordMapper mapper = sqlSession.getMapper(RecordMapper.class);
+//		 for(int i = 0;i<100;i++){
+//			 recordMapper.insertSelective(new Record(null, Get16Number.getUUID(), "17890364829", 1, 2, 10000, Get16Number.DateToStr(new Date()), null, "2","河南省郑州市管城回族区郑汴路与未来路交叉口绿都广场2504"));
+//			// recordMapper.deleteByExample(null);
+//		 }
+//		 System.out.println("批量完成");
+//	 }
 	 
 }

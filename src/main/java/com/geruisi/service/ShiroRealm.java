@@ -1,4 +1,4 @@
-package com.geruisi.controller;
+package com.geruisi.service;
 
 import java.util.HashSet;
 import java.util.Set;
