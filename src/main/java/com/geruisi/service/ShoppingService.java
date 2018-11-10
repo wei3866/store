@@ -128,7 +128,7 @@ public class ShoppingService {
 		//查询用户余额
 		Money money = moneyMapper.selectByKey(strNmnber);
 		int mon = money.getmMoney();
-		
+		int monId = money.getmId();
 		int i = mon-moneys;
 		
 		if (i>0) {
@@ -141,13 +141,16 @@ public class ShoppingService {
 				String rOrderId = get16Number.getUUID();
 				String dateToStr = get16Number.DateToStr(new Date());
 				
+				//添加订单
 				Record record = new Record(null, rOrderId, strNmnber, id, merchantId, price, dateToStr, null, 1, str, name, number);
 				recordMapper.insertSelective(record);
 				
 				sc.removeItem(id);
 			}
-			Money money2 = new Money(i);
-			moneyMapper.updateByPrimaryKeySelective(money2);
+			
+			//修改余额
+			Money money2 = new Money(monId, strNmnber, i);
+			moneyMapper.updateByPrimaryKey(money2);
 			
 			return true;
 		}
@@ -164,7 +167,7 @@ public class ShoppingService {
 		//查询用户余额
 		Money money = moneyMapper.selectByKey(strNmnber);
 		int mon = money.getmMoney();
-		
+		int monId = money.getmId();
 		int i = mon-moneys;
 		
 		if (i>0) {
@@ -176,8 +179,14 @@ public class ShoppingService {
 			String rOrderId = get16Number.getUUID();
 			String dateToStr = get16Number.DateToStr(new Date());
 			
+			//添加订单
 			Record record = new Record(null, rOrderId, strNmnber, id, merchantId, price, dateToStr, null, 1, str, name, number);
 			recordMapper.insertSelective(record);
+			
+			//修改余额
+			Money money2 = new Money(monId, strNmnber, i);
+			moneyMapper.updateByPrimaryKey(money2);
+			
 			sc.removeItem(id);
 			
 			return true;
