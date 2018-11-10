@@ -87,7 +87,7 @@ $(function(){
 				
 				if(confirm("确定【"+ ddh +"】要发货吗？")){
 					$text.text("待收货");
-					$anniu.text("完成发货");
+					$anniu.text("已发货");
 					
 				}
 			}
