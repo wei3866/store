@@ -107,7 +107,7 @@ $(function(){
 			success:function(result){
 				
 				if(confirm("确定该订单【"+ ddhh +"】要收货吗？")){
-					$textt.text("已收货");
+					$textt.text("完成发货");
 					$anniuu.text("订单完成");
 					
 				}
