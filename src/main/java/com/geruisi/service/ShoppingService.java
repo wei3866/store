@@ -4,21 +4,16 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.geruisi.bean.Commodity;
 import com.geruisi.bean.Money;
-import com.geruisi.bean.MoneyExample;
-import com.geruisi.bean.MoneyExample.Criteria;
 import com.geruisi.bean.Record;
 import com.geruisi.dao.CommodityMapper;
-import com.geruisi.dao.MerchantMapper;
 import com.geruisi.dao.MoneyMapper;
 import com.geruisi.dao.RecordMapper;
-import com.geruisi.until.EncodingTool;
 import com.geruisi.until.Get16Number;
 import com.geruisi.until.ShoppingCart;
 
@@ -145,10 +140,15 @@ public class ShoppingService {
 				
 				String rOrderId = get16Number.getUUID();
 				String dateToStr = get16Number.DateToStr(new Date());
-				Record record = new Record(null, rOrderId, strNmnber, id, merchantId, price, dateToStr, null, "1", str);
+				
+				Record record = new Record(null, rOrderId, strNmnber, id, merchantId, price, dateToStr, null, 1, str, name, number);
 				recordMapper.insertSelective(record);
+				
 				sc.removeItem(id);
 			}
+			Money money2 = new Money(i);
+			moneyMapper.updateByPrimaryKeySelective(money2);
+			
 			return true;
 		}
 		
@@ -175,7 +175,8 @@ public class ShoppingService {
 			
 			String rOrderId = get16Number.getUUID();
 			String dateToStr = get16Number.DateToStr(new Date());
-			Record record = new Record(null, rOrderId, strNmnber, id, merchantId, price, dateToStr, null, "1", str);
+			
+			Record record = new Record(null, rOrderId, strNmnber, id, merchantId, price, dateToStr, null, 1, str, name, number);
 			recordMapper.insertSelective(record);
 			sc.removeItem(id);
 			

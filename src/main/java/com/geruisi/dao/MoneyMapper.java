@@ -2,6 +2,7 @@ package com.geruisi.dao;
 
 import com.geruisi.bean.Money;
 import com.geruisi.bean.MoneyExample;
+import com.geruisi.bean.MoneyKey;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,7 +11,7 @@ public interface MoneyMapper {
 
     int deleteByExample(MoneyExample example);
 
-    int deleteByPrimaryKey(Integer mId);
+    int deleteByPrimaryKey(MoneyKey key);
 
     int insert(Money record);
 
@@ -18,9 +19,9 @@ public interface MoneyMapper {
 
     List<Money> selectByExample(MoneyExample example);
 
-    Money selectByPrimaryKey(Integer mId);
+    Money selectByPrimaryKey(MoneyKey key);
     
-    Money selectByKey(String number);
+    Money selectByKey(String strNmnber);
 
     int updateByExampleSelective(@Param("record") Money record, @Param("example") MoneyExample example);
 

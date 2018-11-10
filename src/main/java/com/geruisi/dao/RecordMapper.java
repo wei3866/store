@@ -17,8 +17,6 @@ public interface RecordMapper {
     int insertSelective(Record record);
 
     List<Record> selectByExample(RecordExample example);
-    
-    List<Record> selectByExampleWithAll(RecordExample example);
 
     Record selectByPrimaryKey(Integer rId);
 
