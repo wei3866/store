@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geruisi.dao.RecordMapper">
+  <resultMap id="BaseResultMap" type="com.geruisi.bean.Record">
+    <id column="r_id" jdbcType="INTEGER" property="rId" />
+    <result column="r_order_id" jdbcType="VARCHAR" property="rOrderId" />
+    <result column="r_u_number" jdbcType="VARCHAR" property="rUNumber" />
+    <result column="r_c_id" jdbcType="INTEGER" property="rCId" />
+    <result column="r_mer_id" jdbcType="INTEGER" property="rMerId" />
+    <result column="r_monery" jdbcType="INTEGER" property="rMonery" />
+    <result column="r_deliver" jdbcType="DATE" property="rDeliver" />
+    <result column="r_Receiving" jdbcType="DATE" property="rReceiving" />
+    <result column="r_state" jdbcType="INTEGER" property="rState" />
+    <result column="r_del" jdbcType="VARCHAR" property="rDel" />
+    <result column="r_user" jdbcType="VARCHAR" property="rUser" />
+    <result column="r_number" jdbcType="VARCHAR" property="rNumber" />
+  </resultMap>
+   <resultMap type="com.geruisi.bean.Record" id="WithAllBaseResultMap">
+  	<id column="r_id" jdbcType="INTEGER" property="rId" />
+    <result column="r_order_id" jdbcType="VARCHAR" property="rOrderId" />
+    <result column="r_u_number" jdbcType="VARCHAR" property="rUNumber" />
+    <result column="r_c_id" jdbcType="INTEGER" property="rCId" />
+    <result column="r_mer_id" jdbcType="INTEGER" property="rMerId" />
+    <result column="r_monery" jdbcType="INTEGER" property="rMonery" />
+    <result column="r_deliver" jdbcType="DATE" property="rDeliver" />
+    <result column="r_Receiving" jdbcType="DATE" property="rReceiving" />
+    <result column="r_state" jdbcType="INTEGER" property="rState" />
+    <result column="r_del" jdbcType="VARCHAR" property="rDel" />
+    <result column="r_user" jdbcType="VARCHAR" property="rUser" />
+    <result column="r_number" jdbcType="VARCHAR" property="rNumber" />
+    <association property="user" javaType="com.geruisi.bean.User">
+    	<id column="u_number" property="uNumber"/>
+    	<result column="u_name" property="uName"/>
+    	<result column="u_mer" property="uMer"/>
+    </association>
+   
+    <association property="commodity" javaType="com.geruisi.bean.Commodity">
+    	<id column="c_id" property="cId"/>
+    	<result column="c_name" property="cName"/>
+    	<result column="c_type_a" property="cTypeA"/>
+    	<result column="c_type_b" property="cTypeB"/>
+    	
+    </association>
+    <association property="status" javaType="com.geruisi.bean.Status">
+    	<id column="s_id" property="sId"/>
+    	<result column="s_r_state" property="sRState"/>
+    </association>
+    <association property="merchant" javaType="com.geruisi.bean.Merchant">
+    	<id column="mer_id" property="merId"/>
+    	<result column="mer_user_number" property="merUserNumber"/>
+    </association>
+  </resultMap>
+   <sql id="WithAllBase_Column_List">
+  		r.r_id, r.r_order_id, u.u_name,r.r_u_number  ,r.r_c_id,c.c_name , c.c_type_a,c.c_type_b,r.r_mer_id, r.r_monery, r.r_deliver, r.r_Receiving, 
+  	 r.r_state, s.s_r_state ,r.r_del,m.mer_user_number,u.u_mer, r.r_user,r.r_number
+  </sql>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    r_id, r_order_id, r_u_number, r_c_id, r_mer_id, r_monery, r_deliver, r_Receiving, 
+    r_state, r_del, r_user, r_number
+  </sql>
+  <!-- List<Record> selectByExampleWithAll(RecordExample example); -->
+  <select id="selectByExampleWithAll" resultMap="WithAllBaseResultMap">
+  	select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="WithAllBase_Column_List" />
+    from record r   
+    left join user u on r.r_u_number = u.u_number 
+    left join commodity c on r.r_c_id = c.c_id 
+    left join status s on r.r_state = s.s_id  
+    left join merchant m on r.r_mer_id = m.mer_id	
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.geruisi.bean.RecordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from record
+    where r_id = #{rId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from record
+    where r_id = #{rId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.geruisi.bean.RecordExample">
+    delete from record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.geruisi.bean.Record">
+    insert into record (r_id, r_order_id, r_u_number, 
+      r_c_id, r_mer_id, r_monery, 
+      r_deliver, r_Receiving, r_state, 
+      r_del, r_user, r_number
+      )
+    values (#{rId,jdbcType=INTEGER}, #{rOrderId,jdbcType=VARCHAR}, #{rUNumber,jdbcType=VARCHAR}, 
+      #{rCId,jdbcType=INTEGER}, #{rMerId,jdbcType=INTEGER}, #{rMonery,jdbcType=INTEGER}, 
+      #{rDeliver,jdbcType=DATE}, #{rReceiving,jdbcType=DATE}, #{rState,jdbcType=INTEGER}, 
+      #{rDel,jdbcType=VARCHAR}, #{rUser,jdbcType=VARCHAR}, #{rNumber,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.geruisi.bean.Record">
+    insert into record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rId != null">
+        r_id,
+      </if>
+      <if test="rOrderId != null">
+        r_order_id,
+      </if>
+      <if test="rUNumber != null">
+        r_u_number,
+      </if>
+      <if test="rCId != null">
+        r_c_id,
+      </if>
+      <if test="rMerId != null">
+        r_mer_id,
+      </if>
+      <if test="rMonery != null">
+        r_monery,
+      </if>
+      <if test="rDeliver != null">
+        r_deliver,
+      </if>
+      <if test="rReceiving != null">
+        r_Receiving,
+      </if>
+      <if test="rState != null">
+        r_state,
+      </if>
+      <if test="rDel != null">
+        r_del,
+      </if>
+      <if test="rUser != null">
+        r_user,
+      </if>
+      <if test="rNumber != null">
+        r_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rId != null">
+        #{rId,jdbcType=INTEGER},
+      </if>
+      <if test="rOrderId != null">
+        #{rOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="rUNumber != null">
+        #{rUNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="rCId != null">
+        #{rCId,jdbcType=INTEGER},
+      </if>
+      <if test="rMerId != null">
+        #{rMerId,jdbcType=INTEGER},
+      </if>
+      <if test="rMonery != null">
+        #{rMonery,jdbcType=INTEGER},
+      </if>
+      <if test="rDeliver != null">
+        #{rDeliver,jdbcType=DATE},
+      </if>
+      <if test="rReceiving != null">
+        #{rReceiving,jdbcType=DATE},
+      </if>
+      <if test="rState != null">
+        #{rState,jdbcType=INTEGER},
+      </if>
+      <if test="rDel != null">
+        #{rDel,jdbcType=VARCHAR},
+      </if>
+      <if test="rUser != null">
+        #{rUser,jdbcType=VARCHAR},
+      </if>
+      <if test="rNumber != null">
+        #{rNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.geruisi.bean.RecordExample" resultType="java.lang.Long">
+    select count(*) from record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update record
+    <set>
+      <if test="record.rId != null">
+        r_id = #{record.rId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rOrderId != null">
+        r_order_id = #{record.rOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rUNumber != null">
+        r_u_number = #{record.rUNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rCId != null">
+        r_c_id = #{record.rCId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rMerId != null">
+        r_mer_id = #{record.rMerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rMonery != null">
+        r_monery = #{record.rMonery,jdbcType=INTEGER},
+      </if>
+      <if test="record.rDeliver != null">
+        r_deliver = #{record.rDeliver,jdbcType=DATE},
+      </if>
+      <if test="record.rReceiving != null">
+        r_Receiving = #{record.rReceiving,jdbcType=DATE},
+      </if>
+      <if test="record.rState != null">
+        r_state = #{record.rState,jdbcType=INTEGER},
+      </if>
+      <if test="record.rDel != null">
+        r_del = #{record.rDel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rUser != null">
+        r_user = #{record.rUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rNumber != null">
+        r_number = #{record.rNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update record
+    set r_id = #{record.rId,jdbcType=INTEGER},
+      r_order_id = #{record.rOrderId,jdbcType=VARCHAR},
+      r_u_number = #{record.rUNumber,jdbcType=VARCHAR},
+      r_c_id = #{record.rCId,jdbcType=INTEGER},
+      r_mer_id = #{record.rMerId,jdbcType=INTEGER},
+      r_monery = #{record.rMonery,jdbcType=INTEGER},
+      r_deliver = #{record.rDeliver,jdbcType=DATE},
+      r_Receiving = #{record.rReceiving,jdbcType=DATE},
+      r_state = #{record.rState,jdbcType=INTEGER},
+      r_del = #{record.rDel,jdbcType=VARCHAR},
+      r_user = #{record.rUser,jdbcType=VARCHAR},
+      r_number = #{record.rNumber,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.geruisi.bean.Record">
+    update record
+    <set>
+      <if test="rOrderId != null">
+        r_order_id = #{rOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="rUNumber != null">
+        r_u_number = #{rUNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="rCId != null">
+        r_c_id = #{rCId,jdbcType=INTEGER},
+      </if>
+      <if test="rMerId != null">
+        r_mer_id = #{rMerId,jdbcType=INTEGER},
+      </if>
+      <if test="rMonery != null">
+        r_monery = #{rMonery,jdbcType=INTEGER},
+      </if>
+      <if test="rDeliver != null">
+        r_deliver = #{rDeliver,jdbcType=DATE},
+      </if>
+      <if test="rReceiving != null">
+        r_Receiving = #{rReceiving,jdbcType=DATE},
+      </if>
+      <if test="rState != null">
+        r_state = #{rState,jdbcType=INTEGER},
+      </if>
+      <if test="rDel != null">
+        r_del = #{rDel,jdbcType=VARCHAR},
+      </if>
+      <if test="rUser != null">
+        r_user = #{rUser,jdbcType=VARCHAR},
+      </if>
+      <if test="rNumber != null">
+        r_number = #{rNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where r_id = #{rId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.geruisi.bean.Record">
+    update record
+    set r_order_id = #{rOrderId,jdbcType=VARCHAR},
+      r_u_number = #{rUNumber,jdbcType=VARCHAR},
+      r_c_id = #{rCId,jdbcType=INTEGER},
+      r_mer_id = #{rMerId,jdbcType=INTEGER},
+      r_monery = #{rMonery,jdbcType=INTEGER},
+      r_deliver = #{rDeliver,jdbcType=DATE},
+      r_Receiving = #{rReceiving,jdbcType=DATE},
+      r_state = #{rState,jdbcType=INTEGER},
+      r_del = #{rDel,jdbcType=VARCHAR},
+      r_user = #{rUser,jdbcType=VARCHAR},
+      r_number = #{rNumber,jdbcType=VARCHAR}
+    where r_id = #{rId,jdbcType=INTEGER}
+  </update>
+</mapper>
