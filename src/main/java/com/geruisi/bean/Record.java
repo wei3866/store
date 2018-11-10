@@ -1,51 +1,33 @@
 package com.geruisi.bean;
 
-import org.apache.shiro.authz.aop.UserAnnotationHandler;
+import java.util.Date;
 
 public class Record {
-	
-	//id
     private Integer rId;
-    //订单号
+
     private String rOrderId;
-    //客户手机号
+
     private String rUNumber;
-    //商品id
+
     private Integer rCId;
-    //商家id
+
     private Integer rMerId;
-    //价格
+
     private Integer rMonery;
-    //下单时间
+
     private String rDeliver;
-    //收货时间
+
     private String rReceiving;
-    //商品状态
-    private String rState;
-    
-    private Status status;
-    
-    private Commodity commodity;
-    
-    private User user; 
-    
-    private Merchant merchant;
-    
-	
 
+    private Integer rState;
 
-    public Merchant getMerchant() {
-		return merchant;
-	}
+    private String rDel;
 
-	public void setMerchant(Merchant merchant) {
-		this.merchant = merchant;
-	}
+    private String rUser;
 
-	private String rDel;
+    private String rNumber;
 
     public Integer getrId() {
-
         return rId;
     }
 
@@ -109,74 +91,40 @@ public class Record {
         this.rReceiving = rReceiving;
     }
 
-    public String  getrState() {
+    public Integer getrState() {
         return rState;
     }
 
-    public void setrState(String rState) {
+    public void setrState(Integer rState) {
         this.rState = rState;
     }
 
-	public Status getStatus() {
-		return status;
-	}
+    public String getrDel() {
+        return rDel;
+    }
 
-	public void setStatus(Status status) {
-		this.status = status;
-	}
+    public void setrDel(String rDel) {
+        this.rDel = rDel == null ? null : rDel.trim();
+    }
 
-	public Commodity getCommodity() {
-		return commodity;
-	}
+    public String getrUser() {
+        return rUser;
+    }
 
-	public void setCommodity(Commodity commodity) {
-		this.commodity = commodity;
-	}
+    public void setrUser(String rUser) {
+        this.rUser = rUser == null ? null : rUser.trim();
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public String getrNumber() {
+        return rNumber;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setrNumber(String rNumber) {
+        this.rNumber = rNumber == null ? null : rNumber.trim();
+    }
 
 	public Record(Integer rId, String rOrderId, String rUNumber, Integer rCId, Integer rMerId, Integer rMonery,
-			String rDeliver, String rReceiving, String rState, Status status, Commodity commodity, User user) {
-		super();
-		this.rId = rId;
-		this.rOrderId = rOrderId;
-		this.rUNumber = rUNumber;
-		this.rCId = rCId;
-		this.rMerId = rMerId;
-		this.rMonery = rMonery;
-		this.rDeliver = rDeliver;
-		this.rReceiving = rReceiving;
-		this.rState = rState;
-		this.status = status;
-		this.commodity = commodity;
-		this.user = user;
-	}
-
-	public Record() {
-		super();
-	}
-
-	@Override
-	public String toString() {
-		return "Record [rId=" + rId + ", rOrderId=" + rOrderId + ", rUNumber=" + rUNumber + ", rCId=" + rCId
-				+ ", rMerId=" + rMerId + ", rMonery=" + rMonery + ", rDeliver=" + rDeliver + ", rReceiving="
-				+ rReceiving + ", rState=" + rState + ", status=" + status + ", commodity=" + commodity + ", user="
-				+ user + "]";
-	}
-
-	
-
-	
-    
-    public Record(Integer rId, String rOrderId, String rUNumber, Integer rCId, Integer rMerId, Integer rMonery,
-			String rDeliver, String rReceiving, String rState, 
-			String rDel) {
+			String rDeliver, String rReceiving, Integer rState, String rDel, String rUser, String rNumber) {
 		super();
 		this.rId = rId;
 		this.rOrderId = rOrderId;
@@ -188,13 +136,11 @@ public class Record {
 		this.rReceiving = rReceiving;
 		this.rState = rState;
 		this.rDel = rDel;
+		this.rUser = rUser;
+		this.rNumber = rNumber;
 	}
 
-	public String getrDel() {
-        return rDel;
-    }
-
-    public void setrDel(String rDel) {
-        this.rDel = rDel == null ? null : rDel.trim();
-    }
+    
+    
+    
 }

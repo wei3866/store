@@ -33,15 +33,14 @@ public class ShoppingController {
 	/**
 	 * 结算
 	 * @return
-	 * "name=" + name + "&number="+ number + "&str="+ str + "&ids="+ ids + "&moneys="+ moneys,
 	 */
 	@RequestMapping("/allStive")
 	@ResponseBody
-	public Msg getallStive(@RequestParam("name")String name,@RequestParam("number")String number,
+	public Msg getallStive(@RequestParam("name")String names,@RequestParam("number")String number,
 			@RequestParam("str")String str,@RequestParam("ids")String idString,
 			@RequestParam("moneys")String strmoneys,HttpServletRequest request, HttpServletResponse response){
 		String strs = EncodingTool.encodeStr(str);
-		
+		String name = EncodingTool.encodeStr(names);
 		if (idString.contains(",")) {
 			List<Integer> ids = new ArrayList<>();
 			String[] strids = idString.split(",");

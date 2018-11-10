@@ -30,4 +30,13 @@ public class Money {
     public void setmMoney(Integer mMoney) {
         this.mMoney = mMoney;
     }
+
+	public Money(Integer mId, String mUserNumber, Integer mMoney) {
+		super();
+		this.mId = mId;
+		this.mUserNumber = mUserNumber;
+		this.mMoney = mMoney;
+	}
+    
+    
 }

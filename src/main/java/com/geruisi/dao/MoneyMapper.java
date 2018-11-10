@@ -29,4 +29,6 @@ public interface MoneyMapper {
     int updateByPrimaryKeySelective(Money record);
 
     int updateByPrimaryKey(Money record);
+    
+    int updateByKey(Money record);
 }

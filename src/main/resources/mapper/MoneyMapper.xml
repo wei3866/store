@@ -186,4 +186,10 @@
       m_money = #{mMoney,jdbcType=INTEGER}
     where m_id = #{mId,jdbcType=INTEGER}
   </update>
+  <!-- int updateByKey(Money record); -->
+  <update id="updateByKey">
+    update money
+    set m_money = #{mMoney,jdbcType=INTEGER}
+    where m_user_number = #{mId,jdbcType=INTEGER}
+  </update>
 </mapper>

@@ -761,6 +761,146 @@ public class RecordExample {
             addCriterion("r_del not between", value1, value2, "rDel");
             return (Criteria) this;
         }
+
+        public Criteria andRUserIsNull() {
+            addCriterion("r_user is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRUserIsNotNull() {
+            addCriterion("r_user is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRUserEqualTo(String value) {
+            addCriterion("r_user =", value, "rUser");
+            return (Criteria) this;
+        }
+
+        public Criteria andRUserNotEqualTo(String value) {
+            addCriterion("r_user <>", value, "rUser");
+            return (Criteria) this;
+        }
+
+        public Criteria andRUserGreaterThan(String value) {
+            addCriterion("r_user >", value, "rUser");
+            return (Criteria) this;
+        }
+
+        public Criteria andRUserGreaterThanOrEqualTo(String value) {
+            addCriterion("r_user >=", value, "rUser");
+            return (Criteria) this;
+        }
+
+        public Criteria andRUserLessThan(String value) {
+            addCriterion("r_user <", value, "rUser");
+            return (Criteria) this;
+        }
+
+        public Criteria andRUserLessThanOrEqualTo(String value) {
+            addCriterion("r_user <=", value, "rUser");
+            return (Criteria) this;
+        }
+
+        public Criteria andRUserLike(String value) {
+            addCriterion("r_user like", value, "rUser");
+            return (Criteria) this;
+        }
+
+        public Criteria andRUserNotLike(String value) {
+            addCriterion("r_user not like", value, "rUser");
+            return (Criteria) this;
+        }
+
+        public Criteria andRUserIn(List<String> values) {
+            addCriterion("r_user in", values, "rUser");
+            return (Criteria) this;
+        }
+
+        public Criteria andRUserNotIn(List<String> values) {
+            addCriterion("r_user not in", values, "rUser");
+            return (Criteria) this;
+        }
+
+        public Criteria andRUserBetween(String value1, String value2) {
+            addCriterion("r_user between", value1, value2, "rUser");
+            return (Criteria) this;
+        }
+
+        public Criteria andRUserNotBetween(String value1, String value2) {
+            addCriterion("r_user not between", value1, value2, "rUser");
+            return (Criteria) this;
+        }
+
+        public Criteria andRNumberIsNull() {
+            addCriterion("r_number is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRNumberIsNotNull() {
+            addCriterion("r_number is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRNumberEqualTo(String value) {
+            addCriterion("r_number =", value, "rNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRNumberNotEqualTo(String value) {
+            addCriterion("r_number <>", value, "rNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRNumberGreaterThan(String value) {
+            addCriterion("r_number >", value, "rNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRNumberGreaterThanOrEqualTo(String value) {
+            addCriterion("r_number >=", value, "rNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRNumberLessThan(String value) {
+            addCriterion("r_number <", value, "rNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRNumberLessThanOrEqualTo(String value) {
+            addCriterion("r_number <=", value, "rNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRNumberLike(String value) {
+            addCriterion("r_number like", value, "rNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRNumberNotLike(String value) {
+            addCriterion("r_number not like", value, "rNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRNumberIn(List<String> values) {
+            addCriterion("r_number in", values, "rNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRNumberNotIn(List<String> values) {
+            addCriterion("r_number not in", values, "rNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRNumberBetween(String value1, String value2) {
+            addCriterion("r_number between", value1, value2, "rNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRNumberNotBetween(String value1, String value2) {
+            addCriterion("r_number not between", value1, value2, "rNumber");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

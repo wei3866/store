@@ -4,21 +4,16 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.geruisi.bean.Commodity;
 import com.geruisi.bean.Money;
-import com.geruisi.bean.MoneyExample;
-import com.geruisi.bean.MoneyExample.Criteria;
 import com.geruisi.bean.Record;
 import com.geruisi.dao.CommodityMapper;
-import com.geruisi.dao.MerchantMapper;
 import com.geruisi.dao.MoneyMapper;
 import com.geruisi.dao.RecordMapper;
-import com.geruisi.until.EncodingTool;
 import com.geruisi.until.Get16Number;
 import com.geruisi.until.ShoppingCart;
 
@@ -133,7 +128,7 @@ public class ShoppingService {
 		//查询用户余额
 		Money money = moneyMapper.selectByKey(strNmnber);
 		int mon = money.getmMoney();
-		
+		int monId = money.getmId();
 		int i = mon-moneys;
 		
 		if (i>0) {
@@ -145,10 +140,18 @@ public class ShoppingService {
 				
 				String rOrderId = get16Number.getUUID();
 				String dateToStr = get16Number.DateToStr(new Date());
-				Record record = new Record(null, rOrderId, strNmnber, id, merchantId, price, dateToStr, null, "1", str);
+				
+				//添加订单
+				Record record = new Record(null, rOrderId, strNmnber, id, merchantId, price, dateToStr, null, 1, str, name, number);
 				recordMapper.insertSelective(record);
+				
 				sc.removeItem(id);
 			}
+			
+			//修改余额
+			Money money2 = new Money(monId, strNmnber, i);
+			moneyMapper.updateByPrimaryKey(money2);
+			
 			return true;
 		}
 		
@@ -164,7 +167,7 @@ public class ShoppingService {
 		//查询用户余额
 		Money money = moneyMapper.selectByKey(strNmnber);
 		int mon = money.getmMoney();
-		
+		int monId = money.getmId();
 		int i = mon-moneys;
 		
 		if (i>0) {
@@ -175,8 +178,15 @@ public class ShoppingService {
 			
 			String rOrderId = get16Number.getUUID();
 			String dateToStr = get16Number.DateToStr(new Date());
-			Record record = new Record(null, rOrderId, strNmnber, id, merchantId, price, dateToStr, null, "1", str);
+			
+			//添加订单
+			Record record = new Record(null, rOrderId, strNmnber, id, merchantId, price, dateToStr, null, 1, str, name, number);
 			recordMapper.insertSelective(record);
+			
+			//修改余额
+			Money money2 = new Money(monId, strNmnber, i);
+			moneyMapper.updateByPrimaryKey(money2);
+			
 			sc.removeItem(id);
 			
 			return true;
