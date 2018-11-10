@@ -60,8 +60,8 @@ $(function(){
 					$("#shouhuo").text("收货时间: "+item.rReceiving);
 					}
 					$("#zhuangtai").text("商品状态: "+item.status.sRState);
-					$("#shouhuoren").text("买家信息: "+item.user.uName);
-					$("#kdianhua").text("买家电话: " +item.rUNumber);
+					$("#shouhuoren").text("收货人姓名: "+item.rUser);
+					$("#kdianhua").text("收货人电话: " +item.rNumber);
 					$("#shouhuodizhi").text("收货地址: " +item.rDel);
 					$("#sdianhua").text("商家电话: " +item.merchant.merUserNumber);
 					
@@ -85,9 +85,9 @@ $(function(){
 			data:"id="+ddh,
 			success:function(result){
 				
-				if(confirm("确定【"+ ddh +"】要发货吗？")){
+				if(confirm("确定订单【"+ ddh +"】要发货吗？")){
 					$text.text("待收货");
-					$anniu.text("已发货");
+					$anniu.text("完成发货").addClass("glyphicon glyphicon-ok");
 					
 				}
 			}
@@ -184,7 +184,7 @@ $(function(){
 								查看订单
 								</button>
 								<c:if test="${reca.rState==1 }">
-									<button class="btn btn-danger fahuo btn-sm" ondblclick="">
+									<button class="btn btn-danger fahuo btn-sm">
 									<span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
 									我要发货
 									</button>

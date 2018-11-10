@@ -53,7 +53,7 @@ public class RecordService {
 		RecordExample.Criteria criteria = recordExample.createCriteria();
 	     	criteria.andROrderIdEqualTo(str);
 	     	Record record = new Record();
-	     	record.setrState("2");
+	     	record.setrState(2);
 	     	recordMapper.updateByExampleSelective(record, recordExample);
 	}
 	public void shuo(String str) {
@@ -61,7 +61,7 @@ public class RecordService {
 		RecordExample.Criteria criteria = recordExample.createCriteria();
 	     	criteria.andROrderIdEqualTo(str);
 	     	Record record = new Record();
-	     	record.setrState("3");
+	     	record.setrState(3);
 	     	recordMapper.updateByExampleSelective(record, recordExample);
 		
 	}

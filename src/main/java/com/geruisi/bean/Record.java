@@ -27,6 +27,50 @@ public class Record {
 
     private String rNumber;
 
+    
+    private Status status;
+    
+    public Record() {
+		super();
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public Commodity getCommodity() {
+		return commodity;
+	}
+
+	public void setCommodity(Commodity commodity) {
+		this.commodity = commodity;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Merchant getMerchant() {
+		return merchant;
+	}
+
+	public void setMerchant(Merchant merchant) {
+		this.merchant = merchant;
+	}
+
+	private Commodity commodity;
+    
+    private User user; 
+    
+    private Merchant merchant;
     public Integer getrId() {
         return rId;
     }
