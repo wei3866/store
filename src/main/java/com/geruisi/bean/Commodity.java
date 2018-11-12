@@ -22,8 +22,18 @@ public class Commodity {
     private Integer cSales;
 
     private String cExpressage;
+    
+    private Merchant merchant;
 
-    public Integer getcId() {
+    public Merchant getMerchant() {
+		return merchant;
+	}
+
+	public void setMerchant(Merchant merchant) {
+		this.merchant = merchant;
+	}
+
+	public Integer getcId() {
         return cId;
     }
 

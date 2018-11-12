@@ -13,6 +13,25 @@
     <result column="c_sales" jdbcType="INTEGER" property="cSales" />
     <result column="c_expressage" jdbcType="VARCHAR" property="cExpressage" />
   </resultMap>
+  <resultMap id="InfoBaseResultMap" type="com.geruisi.bean.Commodity">
+    <id column="c_id" jdbcType="INTEGER" property="cId" />
+    <result column="c_merchant_id" jdbcType="INTEGER" property="cMerchantId" />
+    <result column="c_name" jdbcType="VARCHAR" property="cName" />
+    <result column="c_type_a" jdbcType="VARCHAR" property="cTypeA" />
+    <result column="c_type_b" jdbcType="VARCHAR" property="cTypeB" />
+    <result column="c_price" jdbcType="INTEGER" property="cPrice" />
+    <result column="c_putaway" jdbcType="DATE" property="cPutaway" />
+    <result column="c_inventory" jdbcType="INTEGER" property="cInventory" />
+    <result column="c_sales" jdbcType="INTEGER" property="cSales" />
+    <result column="c_expressage" jdbcType="VARCHAR" property="cExpressage" />
+    <!-- 指定联合查询商家信息 -->
+    <association property="merchant" javaType="com.geruisi.bean.Merchant">
+      <id column="mer_id" jdbcType="INTEGER" property="merId"/>
+      <result column="mer_name" jdbcType="VARCHAR" property="merName"/>
+      <result column="mer_user_number" jdbcType="VARCHAR" property="merUserNumber"/>
+      <result column="mer_begin" jdbcType="DATE" property="merBegin"/>
+    </association>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -75,6 +94,47 @@
     c_id, c_merchant_id, c_name, c_type_a, c_type_b, c_price, c_putaway, c_inventory, 
     c_sales, c_expressage
   </sql>
+  <sql id="InfoBase_Column_List">
+     c.c_id,c.c_name, c.c_type_a, c.c_type_b, c.c_price, c.c_putaway, c.c_inventory, 
+    c.c_sales, c.c_expressage, m.mer_name
+  </sql>
+  <!-- //查询商品信息并且带店铺名称的
+    List<Commodity> selectByExampleMer(CommodityExample example);
+    //按条件查找
+    List<Commodity> selectCommodityAll(); -->
+  <select id="selectByExampleMer" resultMap="InfoBaseResultMap">
+	  select
+	    <if test="distinct">
+	      distinct
+	    </if> 
+	    <include refid="InfoBase_Column_List" />
+        FROM commodity c
+        LEFT JOIN merchant m
+        ON c.`c_merchant_id` = m.`mer_id`	
+	    <if test="_parameter != null">
+	      <include refid="Example_Where_Clause" />
+	    </if>
+	    <if test="orderByClause != null">
+	      order by ${orderByClause}
+	    </if>
+  </select>	   
+  <select id="selectCommodityAll" parameterType="String" resultMap="InfoBaseResultMap" >
+     select * from commodity
+     <where>
+       <!-- 如果带cName用 cName 查,带cType 用 cType 查,只会进入其中一个 -->
+       <choose>
+         <when test="cName != null">
+           c_name like #{cName}
+         </when>
+         <when test="cTypeA != null">
+           c_type_a = #{cTypeA}
+         </when>
+         <when test="c_type_b != null">
+           cName = #{cTypeB}
+         </when>
+       </choose>
+     </where>
+  </select>	     
   <select id="selectByExample" parameterType="com.geruisi.bean.CommodityExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
