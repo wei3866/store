@@ -453,7 +453,7 @@ window.onload = function () {
     	});
     
     }
-  //显示分页信息
+    //显示分页信息
     function build_page_info(result){
    	 $("#page_info_area").empty();
    	 $("#page_info_area").append("当前第"+ result.extent.pageInfo.pageNum +"页,总"+ 
