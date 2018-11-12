@@ -17,6 +17,7 @@ public class Msg {
 	private Map<String, Object> extent = new HashMap<>();
 
 	public static Msg success(){
+		System.out.println("处理成功");
 		Msg result = new Msg();
 		result.setCode(100);
 		result.setMsg("处理成功!");
