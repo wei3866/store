@@ -14,6 +14,7 @@
 
 <a href="${APP_PATH }/records">客户查看订单</a>
 <a href="${APP_PATH }/sjRecords">商家查看订单</a>
+<a href="${APP_PATH }/sjzxs">卖家中心</a>
   
 
 </body>

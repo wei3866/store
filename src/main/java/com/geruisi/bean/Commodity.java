@@ -15,7 +15,7 @@ public class Commodity {
 
     private Integer cPrice;
 
-    private Date cPutaway;
+    private String  cPutaway;
 
     private Integer cInventory;
 
@@ -81,11 +81,11 @@ public class Commodity {
         this.cPrice = cPrice;
     }
 
-    public Date getcPutaway() {
+    public String getcPutaway() {
         return cPutaway;
     }
 
-    public void setcPutaway(Date cPutaway) {
+    public void setcPutaway(String cPutaway) {
         this.cPutaway = cPutaway;
     }
 

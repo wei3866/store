@@ -96,7 +96,7 @@
   </sql>
   <sql id="InfoBase_Column_List">
      c.c_id,c.c_name, c.c_type_a, c.c_type_b, c.c_price, c.c_putaway, c.c_inventory, 
-    c.c_sales, c.c_expressage, m.mer_name
+     c.c_sales, c.c_expressage, m.mer_name
   </sql>
   <!-- //查询商品信息并且带店铺名称的
     List<Commodity> selectByExampleMer(CommodityExample example);
@@ -108,9 +108,9 @@
 	      distinct
 	    </if> 
 	    <include refid="InfoBase_Column_List" />
-        FROM commodity c
-        LEFT JOIN merchant m
-        ON c.`c_merchant_id` = m.`mer_id`	
+        from commodity c
+        left join merchant m
+        on c.c_merchant_id = m.mer_id	
 	    <if test="_parameter != null">
 	      <include refid="Example_Where_Clause" />
 	    </if>
