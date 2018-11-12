@@ -15,97 +15,46 @@
 <!-- 引入样式 -->
 <link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(function(){
+		$.ajax({
+			url:"${APP_PATH }/getcommodityInfo",
+			type:"GET",
+			success:function(result){
+				var commodity = result.extent.commodityInfo;
+				$.each(commodity,function(index,item){
+		    		$("#name1").text("店铺名: "+item.merchant.merName);
+		    		$("#name2").text("宝贝名: "+item.cName);
+		    		$("#typeA").text("宝贝归类: "+item.cTypeA);
+		    		$("#typeB").text("宝贝类型: "+item.cTypeB);
+		    		$("#price").text("宝贝价格: "+item.cPrice);
+		    		$("#time").text("上架时间: "+item.cPutaway);
+		    		$("#sales").text("销量: "+item.cSales);
+		    		$("#expressage").text("是否包邮: "+item.cExpressage);
+		    	});
+			}
+		});
+		return false;
+});
+</script>
 </head>
 <body>
-<!-- 搭建显示页面 -->
-	<div class="container">
-		<!-- 标题 -->
-		<div class="row">
-			<div class="col-md-12">
-				<h1>我的宝贝</h1>
-			</div>
-		</div>
-		<br>
-		<!-- 显示表格数据 -->
-		<div class="row">
-			<div class="col-md10">
-				<table class="table table-hover">
-					<tr>
-						<th>店铺名</th>
-						<th>宝贝名</th>
-						<th>宝贝归类</th>
-						<th>宝贝类型</th>
-						<th>宝贝价格</th>
-						<th>上架时间</th>
-						<th>加入购物车</th>
-						<th>继续购物</th>
-					</tr>
-					<c:forEach items="${pageInfo.list }" var="commodity">
-						<tr>
-							<th>${commodity.cMerchantId.merName }</th>
-							<th>${commodity.cName }</th>
-							<th>${commodity.cTypeA }</th>
-							<th>${commodity.cTypeB }</th>
-							<th>${commodity.cPrice }</th>
-							<th>${commodity.cPutaway }</th>
-							<th>
-								<button class="btn btn-primary record_get_model_btn btn-sm">
-									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-									加入购物车
-								</button>
-							</th>
-							<th>
-								<button class="btn btn-primary record_get_model_btn btn-sm">
-									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-									继续购物
-								</button>
-							</th>
-						</tr>
-					</c:forEach>
-				</table>
-			</div>
-		</div>
+<center>
 
-		<!-- 显示分页信息 -->
-		<div class="row">
-			<!--分页文字信息  -->
-			<div class="col-md-6">当前 ${pageInfo.pageNum }页,总${pageInfo.pages }
-				页,总 ${pageInfo.total } 条记录</div>
-			<!-- 分页条信息 -->
-			<div class="col-md-6">
-				<nav aria-label="Page navigation">
-				<ul class="pagination">
-					<li><a href="${APP_PATH }/commodityes?pn=1">首页</a></li>
-					<c:if test="${pageInfo.hasPreviousPage }">
-						<li>
-						  <a href="${APP_PATH }/commodityes?pn=${pageInfo.pageNum-1}" aria-label="Previous"> 
-							<span aria-hidden="true">&laquo;</span>
-						  </a>
-						</li>
-					</c:if>
-					<c:forEach items="${pageInfo.navigatepageNums }" var="page_Num">
-						<c:if test="${page_Num == pageInfo.pageNum }">
-							<li class="active"><a href="#">${page_Num }</a></li>
-						</c:if>
-						<c:if test="${page_Num != pageInfo.pageNum }">
-							<li><a href="${APP_PATH }/commodityes?pn=${page_Num }">${page_Num }</a></li>
-						</c:if>
-
-					</c:forEach>
-					<c:if test="${pageInfo.hasNextPage }">
-						<li><a href="${APP_PATH }/commodityes?pn=${pageInfo.pageNum+1 }"
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-						</a></li>
-					</c:if>
-					<li><a href="${APP_PATH }/commodityes?pn=${pageInfo.pages}">末页</a></li>
-				</ul>
-				</nav>
-			</div>
-		</div>
+        <h3>我的选择</h3>
+		<p id="name1"></p>
+		<p id="name2"></p>
+		<p id="typeA"></p>
+		<p id="typeB"></p>
+		<p id="price"></p>
+		<p id="time"></p>
+		<p id="sales"></p>
+		<p id="expressage"></p>
+		<br><br> 
 		
-	</div>
-	
-
-   
+		<a href="">继续购物</a>
+		<a href="">加入购物车</a>
+		<a href="${APP_PATH }/index.jsp">返回首页</a>
+	</center>
 </body>
 </html>

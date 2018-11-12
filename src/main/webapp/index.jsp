@@ -47,8 +47,15 @@
 <!-- 引入样式 -->
 <link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-</head>
 
+<script type="text/javascript">
+$(function(){
+
+	
+	return false;
+})
+</script>
+</head>
 <body>
 <!-- 搭建显示页面 ,用柵格系統 -->
 <div class="container">
@@ -80,9 +87,10 @@
 		    <div class="search">
 				<div class="cnt">
 					<input name="" type="text" class="sh" onfocus="if(this.value == this.defaultValue) this.value = ''"  onblur="if(this.value == '') this.value = this.defaultValue" value="请输入搜索关键字" id="keyword" />
-					<input name="" type="button" class="ss" value="搜索"  />
+					<input name="" type="button" class="ss" value="搜索" />
 					<img alt="" src="images/shousuo.jpg" >
 				</div> 
+			</div>	
 				<div class="hots">
 					<span>热门搜索：</span>
 					<a href="">手机</a>
@@ -92,7 +100,6 @@
 					<a href="">手表</a>
 				</div>
 			</div>
-			</div>
 			<div class="shopcart" id="scroll-cart">
 				<div class="shopcart-a">  
 				<span class="a"><img src="images/huiyuan.jpg" width="25" height="25" /></span>
@@ -100,18 +107,49 @@
 					<a class="gw" href="" id="div_pro" onclick="">
 						<span class="sj"><img src="images/gowuche.jpg" width="25" height="25" /></span>
 						<span class="b" id="tosettle">我的购物车</span>
-						
 					</a>  
 				</div> 
 			</div>
 		</div>
 </div>
+
+
+<!-- 查看该订单号的订单信息的模态框 -->
+<div class="modal fade" id="CommodityInfoModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">我的选择</h4>
+      </div>
+      <div class="modal-body">
+        <a href="${APP_PATH }/merchant.jsp"><p id="name1"></p></a>
+		<p id="name2"></p>
+		<p id="typeA"></p>
+		<p id="typeB"></p>
+		<p id="price"></p>
+		<p id="time"></p>
+		<p id="sales"></p>
+		<p id="expressage"></p>
+		<br><br> 
+		
+		<a href="">继续购物</a>
+		<a href="">加入购物车</a>
+		<a href="${APP_PATH }/index.jsp">返回首页</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- 导航 -->
 <div class="navbox" id="test">
 <div class="newdh">
 	<div class="menu">
       <ul> 
-		<li class="sete"><a href="">首页</a></li>
+		<li class="sete"><a href="${APP_PATH }/index.jsp">首页</a></li>
       </ul>
     </div>
     <div id="nav">
@@ -119,8 +157,8 @@
     	<div class="col-md-3">
     	<ul class="tit">
     	    <li class="mod_cate mod_on">
-            	<h2><i class="arrow_dot fr"></i><a href="">数码</a></h2>
-                <p class="mod_cate_r"><a href="">手机</a></p>
+            	<h2><i class="arrow_dot fr"></i><a href="https://search.jd.com/Search?keyword=%E7%94%B5%E8%84%91%E6%95%B0%E7%A0%81&enc=utf-8&wq=%E7%94%B5%E8%84%91%E6%95%B0%E7%A0%81&pvid=ac4cbec14e71443791e1593667864580">数码</a></h2>
+                <p class="mod_cate_r"><a href="https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=utf-8&wq=%E6%89%8B%E6%9C%BA&pvid=26a0d39cb898434cab17be5ac8eff62b">手机</a></p>
                 <p class="mod_cate_r"><a href="">电脑</a></p>
                 <p class="mod_cate_r"><a href="">平板</a></p>
             </li>
@@ -150,7 +188,7 @@
           </ul>
       </div>   
       </div>
-      <div class="col-xs-6">
+      <div class="col-xs-8">
 		<div class="all" id='all'>
 		    <div class="screen" id="screen">
 		        <ul id="ul">
@@ -169,27 +207,21 @@
 		        </div>
 		    </div>
 		</div>
-		<table class="table">
-		  <tr>
-		    <td><a href="${APP_PATH }/commodity.jsp">小米6</a><br>归类:数码&nbsp;&nbsp;类型:手机</td>
-		    <td>3000</td>
-		    <td><a href="${APP_PATH }/commodity.jsp">华为p20</a><br>归类:数码&nbsp;&nbsp;类型:手机</td>
-			<td>3500</td>
-		  </tr>
-		  <tr>
-			 <td><a href="${APP_PATH }/commodity.jsp">夹克</a><br>归类:服装&nbsp;&nbsp;类型:上衣</td>
-			 <td>100</td>
-			 <td><a href="${APP_PATH }/commodity.jsp">安踏</a><br>归类:服装&nbsp;&nbsp;类型:鞋子</td>
-			 <td>100</td>
-		  </tr>
-		  <tr>
-			 <td><a href="${APP_PATH }/commodity.jsp">牛仔裤</a><br>归类:服装&nbsp;&nbsp;类型:裤子</td>
-			 <td>200</td>
-			 <td><a href="${APP_PATH }/commodity.jsp">联想</a><br>归类:数码&nbsp;&nbsp;类型:电脑</td>
-			 <td>5000</td>
-		  </tr>
-		</table>
-   </div>
+		<!-- 显示表格数据 -->
+		<table class="table table-hover" id="commodity_table">
+		   <thead>
+			 <tr>
+				<th>宝贝名</th>
+				<th>宝贝归类</th>
+				<th>宝贝类型</th>
+				<th>宝贝价格</th>
+				<th>详情</th>			
+			 </tr>			
+		  </thead>
+		  <tbody>
+			
+		  </tbody>		    
+		</table>  		 
 	   <!-- 显示分页信息 -->
 	   <div class="row">
 	     <!-- 分页文字信息 -->
@@ -197,10 +229,8 @@
 	     <!-- 分页条信息 -->
 	     <div class="col-md-6" id="page_nav_area"></div>
 	   </div>
-</div>
-
-</div>
-
+	 </div> 
+  </div>
 </div>
 <div class="row">
 <div class="col-xs-6 col-sm-3">
@@ -232,9 +262,7 @@
   </ul>
 </div>
 </div>
- 	
-
-
+</div>
 <script type="text/javascript">
 window.onload = function () {
     //需求：无缝滚动。
@@ -338,149 +366,160 @@ window.onload = function () {
                 }
             },10)  
     }
-
-}
-
-
-
-var totalRecord, currentPage;
-//1.页面加载完成后,直接去发送ajax请求,要到分页数据
-$(function(){
-	$(".ss").click(function(){
-		//去首页
-		search()
-	 
-	})
-		
-
-
-function to_page(pn){
-	
-	
-	$.ajax({
-		url:"${APP_PATH}/commodityes",
-		data:"pn="+pn,
-		type:"GET",
-		success:function(result){
-			search();
-			//1.解析并显示商品数据
- 			build_commodity_table(result);
- 			//2.解析并显示分页信息
- 			build_page_info(result);
- 			//3.解析显示分页条数据
- 			build_page_nav(result);
-		}
-	});
- }
-		
-		//搜索
-		function search(){
-			
+    //点击进行搜索
+    
+    var totalRecord, currentPage;
+     //1.页面加载完成后,直接去发送ajax请求,要到分页数据
+     $(function(){
+    	 //去首页
+    	 to_page(1);
+     });
+	function to_page(pn){
 		$.ajax({
-			url:"${APP_PATH}/commodityes",
-		    type: "GET",
-		    success: function(result){
-		    	
-		    	$.each(result.extent.pageInfo,function(index,item){
-		    		var cName = $("<td></td>").append(item.cName);
-		    		var cTypeA = $("<td></td>").append(item.cTypeA);
-		    		var cTypeB = $("<td></td>").append(item.cTypeB);
-		    		var cPrice = $("<td></td>").append(item.cPrice);
-		    		$("<tr></tr>").append(cName)
-		    		              .append(cTypeA)
-		    		              .append(cTypeB)
-		    		              .append(cPrice)
-		    		              .appendTo("#table");
-		    		
-		    	});
-		    }
-		});
-		
-		}
-
-//显示商品数据
-function build_commodity_table(){
-	var commdity = result.extend.pageInfo.list;
-	$.search(commdity,function(index,item){
-		//alert(item,cName)
-		var cName = $("<td></td>").append(item.cName);
-		var cTypeA = $("<td></td>").append(item.cTypeA);
-		var cTypeB = $("<td></td>").append(item.cTypeB);
-		var cPrice = $("<td></td>").append(item.cPrice);
-		$("<tr></tr>").append(cName)
-		              .append(cTypeA)
-		              .append(cTypeB)
-		              .append(cPrice)
-		              .appendTo("#table");
-		
+	  		url:"${APP_PATH }/commodityes",
+	  		type:"GET",
+	  		data:"pn=1",
+	  		success:function(result){
+	  			console.log(result);
+	  			//1.解析并显示商品数据
+	   			build_commodity_table(result);
+	   			//2.解析并显示分页信息
+	   			build_page_info(result);
+	   			//3.解析显示分页条数据
+	   			build_page_nav(result);
+	  		}
+	  	});
+  }  
+  
+	$(".ss").onclick(function(){
+		build_commodity_table(result);
 	});
+	
+    //显示商品数据
+    function build_commodity_table(result){
+    	 //清空table表格
+   	    $("#commodity_table tbody").empty();
+    	 //商品所有信息
+    	var commdity = result.extent.pageInfo.list;
+    
+    	$.each(commdity,function(index,item){
+    		//alert(item.cName);
+    		var cNameTd = $("<td></td>").append("<a></a>").append(item.cName);
+    		var cTypeATd = $("<td></td>").append(item.cTypeA);
+    		var cTypeBTd = $("<td></td>").append(item.cTypeB);
+    		var cPriceTd = $("<td></td>").append(item.cPrice);
+    		var selectBtn =$("<button></button>").addClass("btn btn-primary btn-sm select_btn")
+		        .append("查看详情页");
+    		var cId = $("<td></td>").addClass("cidd").append(item.cId);
+    		$("<tr></tr>").append(cNameTd)
+    		              .append(cTypeATd)
+    		              .append(cTypeBTd)
+    		              .append(cPriceTd)
+    		              .append(selectBtn)
+    		              .append(cId)
+    		              .appendTo("#commodity_table tbody");
+    		
+    		
+    	});
+   	 	$(".cidd").hide();
+    	
+    	$(".select_btn").click(function(){
+    		var cid = $(this).next().text();
+    		
+    		$("#CommodityInfoModel").modal({
+    			backdrop:"static"
+    		});
+    		
+    		$.ajax({
+    			url:"${APP_PATH }/getcommodityInfo",
+    			type:"GET",
+    			data:"id="+cid,
+    			success:function(result){
+    				var commodity = result.extent.commodityInfo;
+    				$.each(commodity,function(index,item){
+    		    		$("#name1").text("店铺名: "+item.merchant.merName);
+    		    		$("#name2").text("宝贝名: "+item.cName);
+    		    		$("#typeA").text("宝贝归类: "+item.cTypeA);
+    		    		$("#typeB").text("宝贝类型: "+item.cTypeB);
+    		    		$("#price").text("宝贝价格: "+item.cPrice);
+    		    		$("#time").text("上架时间: "+item.cPutaway);
+    		    		$("#sales").text("销量: "+item.cSales);
+    		    		
+    		    		
+    		    		$("#expressage").text("是否包邮: "+item.cExpressage);
+    		    	});
+    			}
+    		});
+    	});
+    
+    }
+  //显示分页信息
+    function build_page_info(result){
+   	 $("#page_info_area").empty();
+   	 $("#page_info_area").append("当前第"+ result.extent.pageInfo.pageNum +"页,总"+ 
+   			 result.extent.pageInfo.pages +"页,总"+ result.extent.pageInfo.total +"条记录");
+   	 totalRecord=result.extent.pageInfo.total;
+   	 currentPage=result.extent.pageInfo.pageNum;
+    }
+    //导航条解析显示分页条,点击分页要能去下一页...
+    function build_page_nav(result){
+    	 $("#page_nav_area").empty();
+    	 var ul = $("<ul></ul>").addClass("pagination");
+    	 
+    	 //构建元素
+    	var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href","#"));
+        var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
+    	if(result.extent.pageInfo.hasPreviousPage == false){
+    		 firstPageLi.addClass("disabled");
+    		 prePageLi.addClass("disabled");
+    	 }else{
+    		//为元素添加翻页事件
+       	 firstPageLi.click(function(){
+       		 to_page(1);
+       	 });
+       	 prePageLi.click(function(){
+       		 to_page(result.extent.pageInfo.pageNum - 1);
+       	 });
+    	 }
+    	 
+        var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
+    	var lastPageLi = $("<li></li>").append($("<a></a>").append("末页").attr("href","#"));
+    	 if(result.extent.pageInfo.hasNextPage == false){
+    		 nextPageLi.addClass("disabled");
+    		 lastPageLi.addClass("disabled");
+    	 }else{
+    		 nextPageLi.click(function(){
+       		 to_page(result.extent.pageInfo.pageNum + 1);
+       	 });
+       	 lastPageLi.click(function(){
+       		 to_page(result.extent.pageInfo.pages);
+       	 });
+    	 }
+    	
+    	 //添加首页和前一页的提示
+    	 ul.append(firstPageLi).append(prePageLi);
+    	 //1,2,3遍历给ul中添加页码提示
+    	 $.each(result.extent.pageInfo.navigatepageNums,function(index,item){
+    		 var numLi = $("<li></li>").append($("<a></a>").append(item));
+    		 if(result.extent.pageInfo.pageNum == item){
+    			 //激活,使用
+    			 numLi.addClass("active");
+    		 }
+    		 numLi.click(function(){
+    			 to_page(item);
+    		 });
+    		 ul.append(numLi);
+    	 });
+    	 //添加下一页和末页的提示
+    	 ul.append(nextPageLi).append(lastPageLi);
+    	 //把ul加入到nav
+    	 var navEle = $("<nav></nav>").append(ul);
+    	 navEle.appendTo("#page_nav_area");
+    }
 }
 
-//显示分页信息
-function build_page_info(result){
-	 $("#page_info_area").empty();
-	 $("#page_info_area").append("当前第"+ result.extend.pageInfo.pageNum +"页,总"+ 
-			 result.extend.pageInfo.pages +"页,总"+ result.extend.pageInfo.total +"条记录");
-	 totalRecord=result.extend.pageInfo.total;
-	 currentPage=result.extend.pageInfo.pageNum;
-}
-//导航条解析显示分页条,点击分页要能去下一页...
-function build_page_nav(result){
-	 $("#page_nav_area").empty();
-	 //page_nav_area
-	 var ul = $("<ul></ul>").addClass("pagination");
-	 
-	 //构建元素
-	var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href","#"));
-    var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
-	if(result.extend.pageInfo.hasPreviousPage == false){
-		 firstPageLi.addClass("disabled");
-		 prePageLi.addClass("disabled");
-	 }else{
-		//为元素添加翻页事件
-   	 firstPageLi.click(function(){
-   		 to_page(1);
-   	 });
-   	 prePageLi.click(function(){
-   		 to_page(result.extend.pageInfo.pageNum - 1);
-   	 });
-	 }
-	 
-    var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
-	 var lastPageLi = $("<li></li>").append($("<a></a>").append("末页").attr("href","#"));
-	 if(result.extend.pageInfo.hasNextPage == false){
-		 nextPageLi.addClass("disabled");
-		 lastPageLi.addClass("disabled");
-	 }else{
-		 nextPageLi.click(function(){
-   		 to_page(result.extend.pageInfo.pageNum + 1);
-   	 });
-   	 lastPageLi.click(function(){
-   		 to_page(result.extend.pageInfo.pages);
-   	 });
-	 }
-	
-	 //添加首页和前一页的提示
-	 ul.append(firstPageLi).append(prePageLi);
-	 //1,2,3遍历给ul中添加页码提示
-	 $.each(result.extend.pageInfo.navigatepageNums,function(index,item){
-		 var numLi = $("<li></li>").append($("<a></a>").append(item));
-		 if(result.extend.pageInfo.pageNum == item){
-			 //激活,使用
-			 numLi.addClass("active");
-		 }
-		 numLi.click(function(){
-			 to_page(item);
-		 });
-		 ul.append(numLi);
-	 });
-	 //添加下一页和末页的提示
-	 ul.append(nextPageLi).append(lastPageLi);
-	 //把ul加入到nav
-	 var navEle = $("<nav></nav>").append(ul);
-	 navEle.appendTo("#page_nav_area");
-}
-});
+
+
 </script>
 	
 </body>

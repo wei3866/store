@@ -20,22 +20,34 @@ public class CommodityController {
 	CommodityService commodityService;
 
 	/**
-	 * 根据条件查找所有商品并分页
+	 * 根据条件(商品名,商品类型A,类型B,店铺名)查找所有商品并分页
 	 * @param cName
 	 * @return
-	 */
-	@RequestMapping("/commodityes")
+	 */	
 	@ResponseBody
+	@RequestMapping("/commodityes")
 	public Msg getCommodityJson(@RequestParam(value="pn",defaultValue="1")Integer pn){
 		//引入PageHelper分页插件
 		//在查询之前只需要调用,传入页码,以及每页大小
-		PageHelper.startPage(pn, 5);
+		PageHelper.startPage(pn, 3);
 		//startPage后面紧跟的这个查询就是一个分页查询
-		List<Commodity> commodities = commodityService.getCommodityByName();
+		List<Commodity> commodities = commodityService.getCommodityAll();
 		
 		//使用pageInfo包装查询后的结果,只需将pageInfo交给页面
-		//封装了相详细的分页信息,包括查询出的数据,传入连续显示的页数
+		//封装了详细的分页信息,包括查询出的数据,传入连续显示的页数
 		PageInfo page = new PageInfo(commodities,5);
 		return Msg.success().add("pageInfo", page);
+	}
+	
+	/**
+	 * 查询商品详细信息,用于宝贝详情页
+	 * @param integer
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getcommodityInfo")
+	public Msg getCommodityInfo(@RequestParam("id")Integer integer){
+		List<Commodity> commodity = commodityService.getCommodityInfo(integer);
+		return Msg.success().add("commodityInfo", commodity);
 	}
 }

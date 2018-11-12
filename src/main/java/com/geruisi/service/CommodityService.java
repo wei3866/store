@@ -19,16 +19,37 @@ public class CommodityService {
 	 * 根据条件查找商品
 	 * @return
 	 */
-	public List<Commodity> getCommodityByName() {
+	public List<Commodity> getCommodityAll() {
 		
-		CommodityExample example = new CommodityExample();
-		CommodityExample.Criteria criteria = example.createCriteria();
-		criteria.andCNameEqualTo("小米6");
-		criteria.andCTypeAEqualTo("数码");
-		criteria.andCTypeBEqualTo("手机");
+//		CommodityExample example = new CommodityExample();
+//		CommodityExample.Criteria criteria = example.createCriteria();
+//		criteria.andCNameEqualTo(null);
+//		criteria.andCTypeAEqualTo(null);
+//		criteria.andCTypeBEqualTo(null);
 		// TODO Auto-generated method stub
-		
-		return commodityMapper.selectByExample(example);
+		//return commodityMapper.selectByExample(example);
+		List<Commodity> commodities = commodityMapper.selectByExample(null);
+		return commodities;
 	}
 
+	/**
+	 * 查询商品信息,用于宝贝详情页
+	 * @return
+	 */
+	public List<Commodity> getCommodityInfo(Integer integer) {
+
+		CommodityExample example = new CommodityExample();
+		CommodityExample.Criteria criteria = example.createCriteria();
+		criteria.andCIdEqualTo(integer);
+		List<Commodity> commodities = commodityMapper.selectByExampleMer(example);
+		return commodities;
+	}
+	//	public Commodity getCommodityInfo(Integer integer) {
+//		// TODO Auto-generated method stub
+//		Commodity commodity = commodityMapper.selectByExampleMer(null);
+//		return commodity;
+//	}
+
+
+	
 }
