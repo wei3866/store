@@ -60,8 +60,8 @@ $(function(){
 					$("#shouhuo").text("收货时间: "+item.rReceiving);
 					}
 					$("#zhuangtai").text("商品状态: "+item.status.sRState);
-					$("#shouhuoren").text("买家信息: "+item.user.uName);
-					$("#kdianhua").text("买家电话: " +item.rUNumber);
+					$("#shouhuoren").text("收货人姓名: "+item.rUser);
+					$("#kdianhua").text("收货人电话: " +item.rNumber);
 					$("#shouhuodizhi").text("收货地址: " +item.rDel);
 					$("#sdianhua").text("商家电话: " +item.merchant.merUserNumber);
 					
@@ -72,6 +72,51 @@ $(function(){
 			}
 		});
 	}
+	
+	$(".fahuo").click(function (){
+		
+		var ddh = $(this).parent().parent().find("th:eq(0)").text();
+		var $text = $(this).parent().parent().find("th:eq(3)");
+		var $anniu = $(this);
+		
+		$.ajax({
+			url:"${APP_PATH }/faHuo",
+			type:"PUT",
+			data:"id="+ddh,
+			success:function(result){
+				
+				if(confirm("确定订单【"+ ddh +"】要发货吗？")){
+					$text.text("待收货");
+					$anniu.text("完成发货").addClass("glyphicon glyphicon-ok");
+					
+				}
+			}
+		})
+	});
+	
+	$(".qrsh").click(function (){
+		
+		var ddhh = $(this).parent().parent().find("th:eq(0)").text();
+		var $textt = $(this).parent().parent().find("th:eq(3)");
+		var $anniuu = $(this);
+		
+		$.ajax({
+			url:"${APP_PATH }/shouhuo",
+			type:"PUT",
+			data:"id="+ddhh,
+			success:function(result){
+				
+				if(confirm("确定该订单【"+ ddhh +"】要收货吗？")){
+					$textt.text("完成发货");
+					$anniuu.text("订单完成");
+					
+				}
+			}
+		})
+	});
+	
+	
+	
 	return false;
 })
 </script>		
@@ -123,7 +168,8 @@ $(function(){
 						<th>订单号</th>
 						<th>商品</th>
 						<th>下单时间</th>
-						<th>查看</th>
+						<th>商品状态</th>
+						<th>操作</th>
 						
 					</tr>
 					<c:forEach items="${pageInfo.list }" var="reca">
@@ -131,12 +177,48 @@ $(function(){
 							<th>${reca.rOrderId }</th>
 							<th>${reca.commodity.cName }</th>
 							<th>${reca.rDeliver }</th>
-							
+							<th>${reca.status.sRState }</th>
 							<th>
 								<button class="btn btn-primary record_get_model_btn btn-sm">
-									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-									查看
+								<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+								查看订单
 								</button>
+								<c:if test="${reca.rState==1 }">
+									<button class="btn btn-danger fahuo btn-sm">
+									<span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
+									我要发货
+									</button>
+								</c:if>
+								<c:if test="${reca.rState==2 }">
+									<button class="btn btn-danger fahuo1 btn-sm">
+									<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+									完成发货
+									</button>
+								</c:if>
+								<c:if test="${reca.rState==3 }">
+									<button class="btn btn-danger fahuo1 btn-sm">
+									<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+									交易完成
+									</button>
+								</c:if>
+								<c:if test="${reca.rState==1 }">
+									<button class="btn btn-danger qrsh2 btn-sm">
+									<span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span>
+									等待发货
+									</button>
+								</c:if>
+								<c:if test="${reca.rState==2 }">
+									<button class="btn btn-danger qrsh btn-sm">
+									<span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span>
+									确认收货
+									</button>
+								</c:if>
+								<c:if test="${reca.rState==3 }">
+									<button class="btn btn-danger qrsh2 btn-sm">
+									<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+									订单完成
+									</button>
+								</c:if>
 							</th>
 						</tr>
 					</c:forEach>
@@ -152,7 +234,7 @@ $(function(){
 			<!-- 分页条信息 -->
 			<div class="col-md-6">
 				<nav aria-label="Page navigation">
-				<ul class="pagination">
+				<ul class="pagination  kehuhu">
 					<li><a href="${APP_PATH }/records?pn=1">首页</a></li>
 					<c:if test="${pageInfo.hasPreviousPage }">
 						<li><a href="${APP_PATH }/records?pn=${pageInfo.pageNum-1}"
@@ -177,12 +259,55 @@ $(function(){
 					</c:if>
 					<li><a href="${APP_PATH }/records?pn=${pageInfo.pages}">末页</a></li>
 				</ul>
+				<ul class="pagination shangjaja">
+					<li><a href="${APP_PATH }/sjRecords?pn=1">首页</a></li>
+					<c:if test="${pageInfo.hasPreviousPage }">
+						<li><a href="${APP_PATH }/sjRecords?pn=${pageInfo.pageNum-1}"
+							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						</a></li>
+					</c:if>
+
+
+					<c:forEach items="${pageInfo.navigatepageNums }" var="page_Num">
+						<c:if test="${page_Num == pageInfo.pageNum }">
+							<li class="active"><a href="#">${page_Num }</a></li>
+						</c:if>
+						<c:if test="${page_Num != pageInfo.pageNum }">
+							<li><a href="${APP_PATH }/sjRecords?pn=${page_Num }">${page_Num }</a></li>
+						</c:if>
+
+					</c:forEach>
+					<c:if test="${pageInfo.hasNextPage }">
+						<li><a href="${APP_PATH }/sjRecords?pn=${pageInfo.pageNum+1 }"
+							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+						</a></li>
+					</c:if>
+					<li><a href="${APP_PATH }/sjRecords?pn=${pageInfo.pages}">末页</a></li>
+				</ul>
 				</nav>
 			</div>
 		</div>
 		
 	</div>
+	<script type="text/javascript">
+	$(function(){
 	
+		if(window.location.pathname == "/store/records"){
+			$(".shangjaja").hide();
+			$(".fahuo").hide();
+			$(".fahuo1").hide();
+		}
+		if(window.location.pathname == "/store/sjRecords"){
+			$(".kehuhu").hide();
+			$(".qrsh").hide();	
+			$(".qrsh2").hide();	
+			
+		}
+		
+		
+	});
+	
+	</script>
 
 
 </body>

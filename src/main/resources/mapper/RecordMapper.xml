@@ -12,8 +12,10 @@
     <result column="r_Receiving" jdbcType="DATE" property="rReceiving" />
     <result column="r_state" jdbcType="INTEGER" property="rState" />
     <result column="r_del" jdbcType="VARCHAR" property="rDel" />
+    <result column="r_user" jdbcType="VARCHAR" property="rUser" />
+    <result column="r_number" jdbcType="VARCHAR" property="rNumber" />
   </resultMap>
-  <resultMap type="com.geruisi.bean.Record" id="WithAllBaseResultMap">
+   <resultMap type="com.geruisi.bean.Record" id="WithAllBaseResultMap">
   	<id column="r_id" jdbcType="INTEGER" property="rId" />
     <result column="r_order_id" jdbcType="VARCHAR" property="rOrderId" />
     <result column="r_u_number" jdbcType="VARCHAR" property="rUNumber" />
@@ -24,9 +26,12 @@
     <result column="r_Receiving" jdbcType="DATE" property="rReceiving" />
     <result column="r_state" jdbcType="INTEGER" property="rState" />
     <result column="r_del" jdbcType="VARCHAR" property="rDel" />
+    <result column="r_user" jdbcType="VARCHAR" property="rUser" />
+    <result column="r_number" jdbcType="VARCHAR" property="rNumber" />
     <association property="user" javaType="com.geruisi.bean.User">
     	<id column="u_number" property="uNumber"/>
     	<result column="u_name" property="uName"/>
+    	<result column="u_mer" property="uMer"/>
     </association>
    
     <association property="commodity" javaType="com.geruisi.bean.Commodity">
@@ -45,6 +50,10 @@
     	<result column="mer_user_number" property="merUserNumber"/>
     </association>
   </resultMap>
+   <sql id="WithAllBase_Column_List">
+  		r.r_id, r.r_order_id, u.u_name,r.r_u_number  ,r.r_c_id,c.c_name , c.c_type_a,c.c_type_b,r.r_mer_id, r.r_monery, r.r_deliver, r.r_Receiving, 
+  	 r.r_state, s.s_r_state ,r.r_del,m.mer_user_number,u.u_mer, r.r_user,r.r_number
+  </sql>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -104,28 +113,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-
-    r_id, r_order_id,r_u_number, r_c_id, r_mer_id, r_monery, r_deliver, r_Receiving, 
-   r_state，r_del
+    r_id, r_order_id, r_u_number, r_c_id, r_mer_id, r_monery, r_deliver, r_Receiving, 
+    r_state, r_del, r_user, r_number
   </sql>
-  <sql id="WithAllBase_Column_List">
-  	r.r_id, r.r_order_id, u.u_name,r.r_u_number  ,r.r_c_id,c.c_name , c.c_type_a,c.c_type_b,r.r_mer_id, r.r_monery, r.r_deliver, r.r_Receiving, 
-   r.r_state, s.s_r_state ,r.r_del,m.mer_user_number
-  </sql>
-  <select id="selectByExample" parameterType="com.geruisi.bean.RecordExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from record
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <!-- List<Record> selectByExampleWithAll(RecordExample example); -->
   <select id="selectByExampleWithAll" resultMap="WithAllBaseResultMap">
   	select
@@ -145,8 +135,20 @@
       order by ${orderByClause}
     </if>
   </select>
-  
-  
+  <select id="selectByExample" parameterType="com.geruisi.bean.RecordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -167,11 +169,13 @@
     insert into record (r_id, r_order_id, r_u_number, 
       r_c_id, r_mer_id, r_monery, 
       r_deliver, r_Receiving, r_state, 
-      r_del)
+      r_del, r_user, r_number
+      )
     values (#{rId,jdbcType=INTEGER}, #{rOrderId,jdbcType=VARCHAR}, #{rUNumber,jdbcType=VARCHAR}, 
       #{rCId,jdbcType=INTEGER}, #{rMerId,jdbcType=INTEGER}, #{rMonery,jdbcType=INTEGER}, 
       #{rDeliver,jdbcType=DATE}, #{rReceiving,jdbcType=DATE}, #{rState,jdbcType=INTEGER}, 
-      #{rDel,jdbcType=VARCHAR})
+      #{rDel,jdbcType=VARCHAR}, #{rUser,jdbcType=VARCHAR}, #{rNumber,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.geruisi.bean.Record">
     insert into record
@@ -206,6 +210,12 @@
       <if test="rDel != null">
         r_del,
       </if>
+      <if test="rUser != null">
+        r_user,
+      </if>
+      <if test="rNumber != null">
+        r_number,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="rId != null">
@@ -237,6 +247,12 @@
       </if>
       <if test="rDel != null">
         #{rDel,jdbcType=VARCHAR},
+      </if>
+      <if test="rUser != null">
+        #{rUser,jdbcType=VARCHAR},
+      </if>
+      <if test="rNumber != null">
+        #{rNumber,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -279,6 +295,12 @@
       <if test="record.rDel != null">
         r_del = #{record.rDel,jdbcType=VARCHAR},
       </if>
+      <if test="record.rUser != null">
+        r_user = #{record.rUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rNumber != null">
+        r_number = #{record.rNumber,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -295,7 +317,9 @@
       r_deliver = #{record.rDeliver,jdbcType=DATE},
       r_Receiving = #{record.rReceiving,jdbcType=DATE},
       r_state = #{record.rState,jdbcType=INTEGER},
-      r_del = #{record.rDel,jdbcType=VARCHAR}
+      r_del = #{record.rDel,jdbcType=VARCHAR},
+      r_user = #{record.rUser,jdbcType=VARCHAR},
+      r_number = #{record.rNumber,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -330,6 +354,12 @@
       <if test="rDel != null">
         r_del = #{rDel,jdbcType=VARCHAR},
       </if>
+      <if test="rUser != null">
+        r_user = #{rUser,jdbcType=VARCHAR},
+      </if>
+      <if test="rNumber != null">
+        r_number = #{rNumber,jdbcType=VARCHAR},
+      </if>
     </set>
     where r_id = #{rId,jdbcType=INTEGER}
   </update>
@@ -343,7 +373,9 @@
       r_deliver = #{rDeliver,jdbcType=DATE},
       r_Receiving = #{rReceiving,jdbcType=DATE},
       r_state = #{rState,jdbcType=INTEGER},
-      r_del = #{rDel,jdbcType=VARCHAR}
+      r_del = #{rDel,jdbcType=VARCHAR},
+      r_user = #{rUser,jdbcType=VARCHAR},
+      r_number = #{rNumber,jdbcType=VARCHAR}
     where r_id = #{rId,jdbcType=INTEGER}
   </update>
 </mapper>

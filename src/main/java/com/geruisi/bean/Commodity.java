@@ -112,11 +112,4 @@ public class Commodity {
     public void setcExpressage(String cExpressage) {
         this.cExpressage = cExpressage == null ? null : cExpressage.trim();
     }
-
-	@Override
-	public String toString() {
-		return "Commodity [cName=" + cName + ", cTypeA=" + cTypeA + ", cTypeB=" + cTypeB + "]";
-	}
-
-	
 }

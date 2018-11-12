@@ -19,12 +19,32 @@ public class ShoppingCart {
 	public void updateItemQuantity(Integer id,int quantity){
 		ShoppingCartItem sci = commoditys.get(id);
 		if (sci != null) {
-			System.out.println(quantity);
 			sci.setQuantity(quantity);
-		}else {
-			System.out.println("wwwwwww");
 		}
 	}
+	
+	/**
+	 * 商品数量+1
+	 * @param id
+	 */
+	public void plusQuantity(Integer id){
+		ShoppingCartItem sci = commoditys.get(id);
+		if (sci != null) {
+			sci.increment();
+		}
+	}
+	
+	/**
+	 * 商品数量-1
+	 * @param id
+	 */
+	public void minusQuantity(Integer id){
+		ShoppingCartItem sci = commoditys.get(id);
+		if (sci != null) {
+			sci.minus();
+		}
+	}
+	
 	
 	/**
 	 * 移除指定的购物项
@@ -94,7 +114,6 @@ public class ShoppingCart {
 		//1. 检查购物车中有没有该商品, 若有, 则使其数量 +1, 若没有, 
 		//新创建其对应的 ShoppingCartItem, 并把其加入到 books 中
 		ShoppingCartItem sci = commoditys.get(commodity.getcId());
-		System.out.println(commodity.getcId());
 		if(sci == null){
 			sci = new ShoppingCartItem(commodity,shoops);
 			commoditys.put(commodity.getcId(), sci);
