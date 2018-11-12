@@ -34,7 +34,7 @@
 	
 		$(function() {
 			$.ajax({
-				url : "${APP_PATH }/commoditys",
+				url : "${APP_PATH }/commod",
 				type : "get",
 				success : function(result) {
 					var commoditys = result.extent.commodities;

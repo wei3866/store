@@ -1,7 +1,5 @@
 package com.geruisi.bean;
 
-import java.util.Date;
-
 public class Commodity {
     private Integer cId;
 
@@ -15,7 +13,7 @@ public class Commodity {
 
     private Integer cPrice;
 
-    private Date cPutaway;
+    private String  cPutaway;
 
     private Integer cInventory;
 
@@ -81,11 +79,11 @@ public class Commodity {
         this.cPrice = cPrice;
     }
 
-    public Date getcPutaway() {
+    public String getcPutaway() {
         return cPutaway;
     }
 
-    public void setcPutaway(Date cPutaway) {
+    public void setcPutaway(String cPutaway) {
         this.cPutaway = cPutaway;
     }
 
@@ -114,7 +112,7 @@ public class Commodity {
     }
 
 	public Commodity(Integer cId, Integer cMerchantId, String cName, String cTypeA, String cTypeB, Integer cPrice,
-			Date cPutaway, Integer cInventory, Integer cSales, String cExpressage) {
+			String cPutaway, Integer cInventory, Integer cSales, String cExpressage) {
 		super();
 		this.cId = cId;
 		this.cMerchantId = cMerchantId;
@@ -127,6 +125,12 @@ public class Commodity {
 		this.cSales = cSales;
 		this.cExpressage = cExpressage;
 	}
-    
+
+	public Commodity() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	
     
 }
