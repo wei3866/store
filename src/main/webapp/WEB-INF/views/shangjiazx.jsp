@@ -21,8 +21,85 @@
 	rel="stylesheet">
 <script
 	src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+	$("#add_bao").click(function(){
+		
+		$("#addshangpin").modal({
+			backdrop:"static"
+		});
+		
+	});
+	return false;
+})
+</script>
 </head>
 <body>
+<!-- 新增商品的模态框 -->
+<div class="modal fade" id="addshangpin" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">添加商品</h4>
+      </div>
+      <div class="modal-body">
+       	<form class="form-horizontal">
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">商品标题</label>
+		    <div class="col-sm-10">
+		      <input type="text" name="cName" class="form-control" id="cName_add_input" >
+		    </div>
+		    </div>
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">商品类目</label>
+		    <div class="col-sm-10">
+		      <input type="text" name="cTypeA" class="form-control" id="cTypeA_add_input" >
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">商品类型</label>
+		    <div class="col-sm-10">
+		      <input type="text" name="cTypeB" class="form-control" id="cTypeB_add_input" >
+		     
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">商品价格</label>
+		    <div class="col-sm-10">
+		      <input type="text" name="cPrice" class="form-control" id="cPrice_add_input" >
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">商品库存</label>
+		    <div class="col-sm-10">
+		      <input type="text" name="cInventory" class="form-control" id="cInventory_add_input" >
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">是否包邮</label>
+		    <div class="col-sm-10">
+		       <label class="radio-inline">
+				  <input type="radio" name="cExpressage" id="gender1_add_input" value="是" checked="checked"> 是
+				</label>
+				<label class="radio-inline">
+				  <input type="radio" name="cExpressage" id="gender2_add_input" value="否"> 否
+				</label>
+		    </div>
+		  </div>
+		  
+		 </form>
+       		
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary">上架</button>
+      </div>
+    </div>
+  </div>
+</div>
 	<!-- 搭建显示页面 -->
 	<div class="container">
 		<!-- 标题 -->
@@ -45,7 +122,7 @@
 				<table class="table table-hover">
 					<tr>
 						<th>宝贝标题</th>
-						<th>类型</th>
+						<th>类目</th>
 						<th>类型</th>
 						<th>价格</th>
 						<th>上架时间</th>
