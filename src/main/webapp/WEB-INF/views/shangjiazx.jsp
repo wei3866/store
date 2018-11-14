@@ -146,6 +146,9 @@ $(function(){
 			window.location.reload();
 		}
 	});
+	$("#kandingdan").click(function(){
+		window.location.href="${APP_PATH }/sjRecords"; 
+	});
 	return false;
 })
 </script>
@@ -316,6 +319,8 @@ $(function(){
 		<!-- 按钮 -->
 		<div class="row">
 			<div class="col-md-4 col-md-offset-8">
+			
+				<button class="btn btn-primary" id="kandingdan">查看订单</button>
 				<button class="btn btn-primary" id="add_bao">新增</button>
 				<button class="btn btn-danger" id="delete_bao">下架</button>
 			</div>

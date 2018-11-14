@@ -2,6 +2,9 @@ package com.geruisi.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,8 +45,11 @@ public class RecordController {
 	}
 	@RequestMapping("/sjRecords")
 	public String  getShangjiaRe(@RequestParam(value = "pn", defaultValue = "1") Integer pn,
-			Model model){
-		User user = recordService.getAllSJId("17890364829");
+			Model model ,HttpServletRequest request, HttpServletResponse response){
+		HttpSession session = request.getSession();
+		String inputNumber = (String) session.getAttribute("userLogin");
+
+		User user = recordService.getAllSJId(inputNumber);
 		int  merid = user.getuMer() ;
 		PageHelper.startPage(pn, 5);
 		List<Record> records = recordService.getAllSjdd(merid);
