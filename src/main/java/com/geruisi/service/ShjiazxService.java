@@ -34,4 +34,9 @@ public class ShjiazxService {
 		
 		return commodityMapper.selectByExampleMer(example);
 	}
+
+	public void shangjias(Commodity commods) {
+		
+		commodityMapper.insert(commods);
+	}
 }

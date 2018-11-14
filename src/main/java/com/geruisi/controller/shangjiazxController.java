@@ -1,17 +1,21 @@
 package com.geruisi.controller;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.geruisi.bean.Commodity;
-import com.geruisi.bean.Record;
 import com.geruisi.bean.User;
 import com.geruisi.service.ShjiazxService;
+import com.geruisi.test.mapper;
+import com.geruisi.until.Get16Number;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -23,7 +27,7 @@ public class shangjiazxController {
 	@RequestMapping("/sjzxs")
 	public String getSjZx(
 		@RequestParam(value = "pn", defaultValue = "1") Integer pn,
-		Model model){
+		Model model ,Map<String , Object> map){
 			
 		User user = shjiazxService.getAllSJId("17890364829");
 		int  sid = user.getuMer() ;
@@ -38,6 +42,19 @@ public class shangjiazxController {
 		// 封装了详细的分页信息,包括有我们查询出来的数据，传入连续显示的页数
 		PageInfo page = new PageInfo(commods, 5);
 		model.addAttribute("pageInfo", page);
+		Get16Number dates = new Get16Number(); 
+		
+		String  cPutaways = dates.DateToStr(new Date());
+		
+		map.put("cPutaways",cPutaways );
+		map.put("mid", sid);
 		return "shangjiazx";
+	}
+	//上架
+	@RequestMapping(value="/shangjia",method=RequestMethod.POST)
+	public Msg shangjia( Commodity commods ){
+		
+		shjiazxService.shangjias(commods);
+		return Msg.success();
 	}
 }

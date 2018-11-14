@@ -25,11 +25,27 @@
 $(function(){
 	
 	$("#add_bao").click(function(){
-		
+		$(".form-control111").hide();
 		$("#addshangpin").modal({
 			backdrop:"static"
 		});
 		
+	});
+	
+	$(".shangjia").click(function(){
+	
+		$.ajax({
+			url:"${APP_PATH}/shangjia",
+			type:"POST",
+			data:$("#addshangpin form").serialize(),
+			success:function(result){
+				
+				
+			}
+			
+		});
+		$("#addshangpin").modal("hide");
+		 window.location.href="${APP_PATH }/sjzxs?pn=9999"; 
 	});
 	return false;
 })
@@ -46,6 +62,12 @@ $(function(){
       </div>
       <div class="modal-body">
        	<form class="form-horizontal">
+		     
+		      <input type="text" name="cMerchantId" class="form-control111" id="sssiidd" value="${requestScope.mid }" />
+		      <input type="text" name="cPutaway" class="form-control111" id="sssiidd" value="${requestScope.cPutaways }" />
+		      <input type="text" name="cSales" class="form-control111" id="sssiidd" value="0" />
+		    
+		    
 		  <div class="form-group">
 		    <label class="col-sm-2 control-label">商品标题</label>
 		    <div class="col-sm-10">
@@ -95,7 +117,7 @@ $(function(){
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary">上架</button>
+        <button type="button" class="btn btn-primary shangjia" >上架</button>
       </div>
     </div>
   </div>
