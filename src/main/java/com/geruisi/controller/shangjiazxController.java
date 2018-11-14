@@ -1,5 +1,7 @@
 package com.geruisi.controller;
 
+import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -7,9 +9,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.geruisi.bean.Commodity;
 import com.geruisi.bean.User;
@@ -55,6 +59,43 @@ public class shangjiazxController {
 	public Msg shangjia( Commodity commods ){
 		
 		shjiazxService.shangjias(commods);
+		return Msg.success();
+	}
+	//下架
+	@RequestMapping(value="/xiajia/{ids}",method=RequestMethod.DELETE)
+	public Msg shangchuById(@PathVariable("ids")String ids){
+		if(ids.contains("-")){
+			List<Integer> del_ids = new ArrayList<>();
+			String[] str_ids = ids.split("-");
+			//组装id的集合
+			for (String string : str_ids) {
+				del_ids.add(Integer.parseInt(string));
+			}
+			shjiazxService.deleteByIds(del_ids);
+		}else{
+			Integer id = Integer.parseInt(ids);
+			shjiazxService.deletebyId(id);
+		}
+		return Msg.success();
+	}
+	/**
+	 * 根据id查询商品
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/updatesp/{id}",method=RequestMethod.GET)
+	@ResponseBody
+	public Msg getshangpinByID(@PathVariable("id")Integer id){
+		
+		Commodity commodity = shjiazxService.getShangPin(id);
+		return Msg.success().add("comm", commodity);
+	}
+	
+	//根究id修改商品信息
+	@RequestMapping(value="/updatesp/{sid}",method=RequestMethod.PUT)
+	@ResponseBody
+	public  Msg updateByid(Commodity commodity){
+		shjiazxService.updateById(commodity);
 		return Msg.success();
 	}
 }

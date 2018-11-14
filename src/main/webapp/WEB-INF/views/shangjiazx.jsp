@@ -45,13 +45,196 @@ $(function(){
 			
 		});
 		$("#addshangpin").modal("hide");
+		alert("成功上架");
 		 window.location.href="${APP_PATH }/sjzxs?pn=9999"; 
+	});
+	
+	//完成全选/全不选功能
+	$("#check_all").click(function(){
+		//attr获取checked是undefined;
+		//我们这些dom原生的属性；attr获取自定义属性的值；
+		//prop修改和读取dom原生属性的值
+		$(".check_one").prop("checked",$(this).prop("checked"));
+	});
+	$(document).on("click",".check_one",function(){
+		//判断当前选择中的元素是否5个
+		var flag = $(".check_one:checked").length==$(".check_one").length;
+		$("#check_all").prop("checked",flag);
+	});
+	
+	/*  单个下架*/
+	$(document).on("click",".xiajia_one_btn",function(){
+		var ccName = $(this).parents("tr").find("th:eq(2)").text();
+		var ccid = $(this).parents("tr").find("th:eq(1)").text()
+		if(confirm("确定下架【"+ccName+"】吗？")){
+			$.ajax({
+				url:"${APP_PATH}/xiajia/"+ccid,
+				type:"DELETE",
+				success:function(result){
+				}
+			});
+			alert("完成下架");
+			window.location.href="${APP_PATH }/sjzxs?pn=1"; 
+			
+		}
+	});
+	
+	//批量下架
+	$("#delete_bao").click(function(){
+		var ciiid = "";
+		$.each($(".check_one:checked"),function(){
+			//组装商品id字符串
+			ciiid += $(this).parents("tr").find("th:eq(1)").text()+"-";
+		
+		});
+		//去除删除的id多余的-
+		ciiid = ciiid.substring(0,ciiid.length-1);
+		if(confirm("确认要批量下架选中的商品吗？")){
+			$.ajax({
+				url:"${APP_PATH}/xiajia/"+ciiid,
+				type:"DELETE",
+				success:function(result){
+					
+				}
+			});
+			alert("完成下架");
+			window.location.href="${APP_PATH }/sjzxs?pn=1";
+		}
+	});
+//修改商品
+	$(".update_one_btn").click(function(){
+		var id = $(this).parents("tr").find("th:eq(1)").text();
+		$(".form-control33").hide();
+		$(".xill").hide();
+		$("#updateshangpin").modal({
+			backdrop:"static"
+		});
+		
+		$.ajax({
+			url:"${APP_PATH }/updatesp/"+id,
+			type:"GET",
+			success:function(result){
+				var sp = result.extent.comm;
+				$("#cId_upd_input").val(sp.cId);
+				$("#cMerchantId_upd_input").val(sp.cMerchantId);
+				$("#cName_upd_input").val(sp.cName);
+				$("#cTypeA_upd_input").val(sp.cTypeA);
+				$("#cTypeB_upd_input").val(sp.cTypeB);
+				$("#cPrice_upd_input").val(sp.cPrice);
+				$("#cPutaway_upd_input").val(sp.cPutaway);
+				$("#cInventory_upd_input").val(sp.cInventory);
+				$("#updateshangpin input[name=cExpressage]").val([sp.cExpressage]);
+			}
+		});
+	});
+	//提交修改
+	$(".tijiao").click(function(){
+		
+		var id = $(this).parent().prev().find("form").find("input:eq(0)").val();
+	
+		if(confirm("确认要修改该商品的信息吗？")){
+			$.ajax({
+				url:"${APP_PATH }/updatesp/"+id,
+				type:"PUT",
+				data:$("#updateshangpin form").serialize(),
+				success:function(result){
+					
+				}
+			});
+			alert("修改成功");
+			
+			window.location.reload();
+		}
 	});
 	return false;
 })
 </script>
 </head>
 <body>
+
+
+<!-- 修改商品的模态框 -->
+<div class="modal fade" id="updateshangpin" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">修改商品</h4>
+      </div>
+      <div class="modal-body">
+       	<form class="form-horizontal">
+		     
+		      <input type="text" name="cId" class="form-control33" id="cId_upd_input" value="" />
+		      <input type="text" name="cMerchantId" class="form-control33" id="cMerchantId_upd_input" value="" />		      
+
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">商品标题</label>
+		    <div class="col-sm-10">
+		      <input type="text" name="cName" class="form-control" id="cName_upd_input" >
+		    </div>
+		    </div>
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">商品类目</label>
+		    <div class="col-sm-10">
+		      <input type="text" name="cTypeA" class="form-control" id="cTypeA_upd_input" >
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">商品类型</label>
+		    <div class="col-sm-10">
+		      <input type="text" name="cTypeB" class="form-control" id="cTypeB_upd_input" >
+		     
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">商品价格</label>
+		    <div class="col-sm-10">
+		      <input type="text" name="cPrice" class="form-control" id="cPrice_upd_input" >
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">商品库存</label>
+		    <div class="col-sm-10">
+		      <input type="text" name="cInventory" class="form-control" id="cInventory_upd_input" >
+		    </div>
+		  </div>
+		  
+		   <div class="form-group xill">
+		    <label class="col-sm-2 control-label">上架时间</label>
+		    <div class="col-sm-10">
+		    <input type="text" name="cPutaway" class="form-control" id="cPutaway_upd_input" value="" />
+		    </div>
+		  </div>
+		   <div class="form-group xill">
+		    <label class="col-sm-2 control-label">商品销量</label>
+		    <div class="col-sm-10">
+		      <input type="text" name="cSales" class="form-control" id="cSales" value="" />
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">是否包邮</label>
+		    <div class="col-sm-10">
+		       <label class="radio-inline">
+				  <input type="radio" name="cExpressage" id="gender1_add_input" value="是" checked="checked"> 是
+				</label>
+				<label class="radio-inline">
+				  <input type="radio" name="cExpressage" id="gender2_add_input" value="否"> 否
+				</label>
+		    </div>
+		  </div>
+		  
+		 </form>
+       		
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary tijiao" >提交</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- 新增商品的模态框 -->
 <div class="modal fade" id="addshangpin" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -134,7 +317,7 @@ $(function(){
 		<div class="row">
 			<div class="col-md-4 col-md-offset-8">
 				<button class="btn btn-primary" id="add_bao">新增</button>
-				<button class="btn btn-danger" id="update_bao">下架</button>
+				<button class="btn btn-danger" id="delete_bao">下架</button>
 			</div>
 		</div>
 		<br>
@@ -143,6 +326,10 @@ $(function(){
 			<div class="col-md10">
 				<table class="table table-hover">
 					<tr>
+						<th>
+							<input type="checkbox" id="check_all"/>
+						</th>
+						<th class="iddddd">#</th>
 						<th>宝贝标题</th>
 						<th>类目</th>
 						<th>类型</th>
@@ -156,6 +343,10 @@ $(function(){
 					</tr>
 					<c:forEach items="${pageInfo.list }" var="sjzx">
 						<tr>
+							<th>
+								<input type="checkbox" class="check_one"/>
+							</th>
+							<th class="iddddd">${sjzx.cId }</th>
 							<th>${sjzx.cName }</th>
 							<th>${sjzx.cTypeA }</th>
 							<th>${sjzx.cTypeB }</th>
@@ -165,12 +356,12 @@ $(function(){
 							<th>${sjzx.cSales }</th>
 							<th>${sjzx.cExpressage }</th>
 							<th>
-								<button class="btn btn-primary record_get_model_btn btn-sm">
+								<button class="btn btn-primary update_one_btn btn-sm">
 								<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
 								编辑
 								</button>
 								
-								<button class="btn btn-danger fahuo btn-sm">
+								<button class="btn btn-danger xiajia_one_btn btn-sm">
 								<span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
 								下架
 								</button>
@@ -220,6 +411,10 @@ $(function(){
 		
 	</div>
 
-
+<script type="text/javascript">
+	$(function(){
+		$(".iddddd").hide();
+	})
+</script>
 </body>
 </html>
