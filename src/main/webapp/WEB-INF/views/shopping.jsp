@@ -2016,7 +2016,7 @@
 				url:"${APP_PATH}/loginUser",
 				type:"GET",
 				success:function(result){
-					if (result.code == 100) {
+					if (result.code == 200) {
 						 alert(result.extent.login);
 						 return false;
 					}else{
@@ -2122,7 +2122,7 @@
 				id = $.trim(id);
 				ids.push(id);
             });
-			alert(str);
+			
 			$.ajax({
 				url:"${APP_PATH}/allStive",
 				data : "name=" + name + "&number="+ number + "&str="+ str + "&ids="+ ids + "&moneys="+ moneys,
@@ -2151,6 +2151,8 @@
 				}
 			})
 			
+			$("#site").modal("hide");
+			
 			
 		})
 		
@@ -2162,10 +2164,6 @@
 				return false;
 			}
 			if($("#b_select").val() == ""){
-				alert("请检查收货地址!");
-				return false;
-			}
-			if($("#c_select").val() == ""){
 				alert("请检查收货地址!");
 				return false;
 			}

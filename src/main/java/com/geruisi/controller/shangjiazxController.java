@@ -6,6 +6,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,11 +33,13 @@ public class shangjiazxController {
 	ShjiazxService  shjiazxService; 
 	
 	@RequestMapping("/sjzxs")
-	public String getSjZx(
-		@RequestParam(value = "pn", defaultValue = "1") Integer pn,
-		Model model ,Map<String , Object> map){
-			
-		User user = shjiazxService.getAllSJId("17890364829");
+	public String getSjZx(@RequestParam(value = "pn", defaultValue = "1") Integer pn,Model model,
+			HttpServletRequest request, HttpServletResponse response,Map<String , Object> map){
+		
+		HttpSession session = request.getSession();
+		String inputNumber = (String) session.getAttribute("userLogin");
+		
+		User user = shjiazxService.getAllSJId(inputNumber);
 		int  sid = user.getuMer() ;
 		
 		// 这不是一个分页查询；

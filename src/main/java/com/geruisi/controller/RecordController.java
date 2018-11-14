@@ -29,13 +29,15 @@ public class RecordController {
 	@RequestMapping("/records")
 	public String getRecordAll(
 			@RequestParam(value = "pn", defaultValue = "1") Integer pn,
-			Model model){
+			HttpServletRequest request, HttpServletResponse response,Model model){
+		HttpSession session = request.getSession();
+		String inputNumber = (String) session.getAttribute("userLogin");
 			// 这不是一个分页查询；
 			// 引入PageHelper分页插件
 			// 在查询之前只需要调用，传入页码，以及每页的大小
 			PageHelper.startPage(pn, 5);
 			// startPage后面紧跟的这个查询就是一个分页查询
-			List<Record> records = recordService.getAllKH("18463903746");
+			List<Record> records = recordService.getAllKH(inputNumber);
 			// 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面就行了。
 			// 封装了详细的分页信息,包括有我们查询出来的数据，传入连续显示的页数
 			PageInfo page = new PageInfo(records, 5);

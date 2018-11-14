@@ -1,7 +1,5 @@
 package com.geruisi.bean;
 
-import java.util.Date;
-
 public class Commodity {
     private Integer cId;
 
@@ -112,4 +110,27 @@ public class Commodity {
     public void setcExpressage(String cExpressage) {
         this.cExpressage = cExpressage == null ? null : cExpressage.trim();
     }
+
+	public Commodity(Integer cId, Integer cMerchantId, String cName, String cTypeA, String cTypeB, Integer cPrice,
+			String cPutaway, Integer cInventory, Integer cSales, String cExpressage) {
+		super();
+		this.cId = cId;
+		this.cMerchantId = cMerchantId;
+		this.cName = cName;
+		this.cTypeA = cTypeA;
+		this.cTypeB = cTypeB;
+		this.cPrice = cPrice;
+		this.cPutaway = cPutaway;
+		this.cInventory = cInventory;
+		this.cSales = cSales;
+		this.cExpressage = cExpressage;
+	}
+
+	public Commodity() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	
+    
 }
