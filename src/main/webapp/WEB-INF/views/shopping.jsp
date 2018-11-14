@@ -2122,7 +2122,7 @@
 				id = $.trim(id);
 				ids.push(id);
             });
-			alert(str);
+			
 			$.ajax({
 				url:"${APP_PATH}/allStive",
 				data : "name=" + name + "&number="+ number + "&str="+ str + "&ids="+ ids + "&moneys="+ moneys,
@@ -2150,6 +2150,8 @@
 					}
 				}
 			})
+			
+			$("#site").modal("hide");
 			
 			
 		})

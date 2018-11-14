@@ -2,6 +2,10 @@ package com.geruisi.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.geruisi.bean.Commodity;
-import com.geruisi.bean.Record;
 import com.geruisi.bean.User;
 import com.geruisi.service.ShjiazxService;
 import com.github.pagehelper.PageHelper;
@@ -21,11 +24,13 @@ public class shangjiazxController {
 	ShjiazxService  shjiazxService; 
 	
 	@RequestMapping("/sjzxs")
-	public String getSjZx(
-		@RequestParam(value = "pn", defaultValue = "1") Integer pn,
-		Model model){
-			
-		User user = shjiazxService.getAllSJId("17890364829");
+	public String getSjZx(@RequestParam(value = "pn", defaultValue = "1") Integer pn,Model model,
+			HttpServletRequest request, HttpServletResponse response){
+		
+		HttpSession session = request.getSession();
+		String inputNumber = (String) session.getAttribute("userLogin");
+		
+		User user = shjiazxService.getAllSJId(inputNumber);
 		int  sid = user.getuMer() ;
 		
 		// 这不是一个分页查询；

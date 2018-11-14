@@ -9,7 +9,7 @@ public class Merchant {
 
     private String merUserNumber;
 
-    private Date merBegin;
+    private String merBegin;
 
     public Integer getMerId() {
         return merId;
@@ -35,11 +35,26 @@ public class Merchant {
         this.merUserNumber = merUserNumber == null ? null : merUserNumber.trim();
     }
 
-    public Date getMerBegin() {
+    public String getMerBegin() {
         return merBegin;
     }
 
-    public void setMerBegin(Date merBegin) {
+    public void setMerBegin(String merBegin) {
         this.merBegin = merBegin;
     }
+
+	public Merchant(Integer merId, String merName, String merUserNumber, String merBegin) {
+		super();
+		this.merId = merId;
+		this.merName = merName;
+		this.merUserNumber = merUserNumber;
+		this.merBegin = merBegin;
+	}
+
+	public Merchant() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+    
+    
 }
