@@ -48,10 +48,6 @@ public class Commodity {
     }
 
     public String getcName() {
-    	if(cName == null)
-    		cName = "%%";
-		else 
-			cName = "%"+ cName +"%";
         return cName;
     }
 
@@ -60,10 +56,6 @@ public class Commodity {
     }
 
     public String getcTypeA() {
-    	if(cTypeA == null)
-    		cTypeA = "%%";
-		else 
-			cTypeA = "%"+ cTypeA +"%";
         return cTypeA;
     }
 
@@ -72,10 +64,6 @@ public class Commodity {
     }
 
     public String getcTypeB() {
-    	if(cTypeB == null)
-    		cTypeB = "%%";
-		else 
-			cTypeB = "%"+ cTypeB +"%";
         return cTypeB;
     }
 

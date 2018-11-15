@@ -299,7 +299,7 @@
 			var merchantNumber = $(".NumberTd").text();
 			
 			$.ajax({
-				url : "${APP_PATH }/merchant",
+				url : "${APP_PATH }/merchants",
 				data: "merchantName="+merchantName+"&merchantNumber="+merchantNumber,
 				type : "get",
 				success : function(result) {

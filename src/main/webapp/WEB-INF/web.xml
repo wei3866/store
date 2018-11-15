@@ -84,5 +84,14 @@
         <filter-name>shiroFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    
+    <servlet>
+    	<servlet-name>ValidateColorServlet</servlet-name>
+    	<servlet-class>com.geruisi.until.ValidateColorServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>ValidateColorServlet</servlet-name>
+    	<url-pattern>/ValidateColorServlet</url-pattern>
+    </servlet-mapping>
 	
 </web-app>

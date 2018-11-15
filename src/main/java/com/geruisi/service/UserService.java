@@ -10,8 +10,10 @@ import com.geruisi.bean.Merchant;
 import com.geruisi.bean.MerchantExample;
 import com.geruisi.bean.MerchantExample.Criteria;
 import com.geruisi.bean.User;
+import com.geruisi.bean.UserExample;
 import com.geruisi.dao.MerchantMapper;
 import com.geruisi.dao.UserMapper;
+import com.geruisi.until.AESUtil;
 import com.geruisi.until.Get16Number;
 
 @Service
@@ -87,6 +89,27 @@ public class UserService {
 		}
 		
 		return null;
+	}
+
+	public void updatePassWord(String number, String password) {
+		String aesEncode = AESUtil.aesEncode(password);
+		User user = new User(number, null, null, null, aesEncode, null, null, null, null, null);
+		userMapper.updateByPrimaryKeySelective(user);
+		
+	}
+
+	public long loginUser(String number) {
+		UserExample example = new UserExample();
+		com.geruisi.bean.UserExample.Criteria criteria = example.createCriteria();
+		criteria.andUNumberEqualTo(number);
+		long l = userMapper.countByExample(example);
+		return l;
+	}
+
+	public void loginSaveUser(String number, String password, String passwordEncrypted) {
+		String uPassword = AESUtil.aesEncode(password);
+		User user = new User(number, null, null, null, uPassword, null, null, null, passwordEncrypted, null);
+		userMapper.insertSelective(user);
 	}
 
 	

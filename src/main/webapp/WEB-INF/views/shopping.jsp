@@ -93,6 +93,12 @@
 		  </div>
 		  
 		  <div class="row manage_but">
+			<div class="col-md-4">
+				<a href="${APP_PATH }/index.jsp">继续购物</a>
+			</div>
+		  </div>
+		  
+		  <div class="row manage_but">
 			<div class="col-md-4 col-md-offset-8">
 				<button class="btn btn-primary" id="manage_but">管理</button>
 			</div>
@@ -124,7 +130,7 @@
 									<input type="checkbox" class="check_merchan"/>
 								</td>
 								<td>
-									<a href="">${item.commodity.cName }</a>
+									${item.commodity.cName }
 								</td>
 								<td>￥${item.commodity.cPrice }</td>
 								<td>

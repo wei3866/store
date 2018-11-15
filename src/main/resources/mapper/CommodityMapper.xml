@@ -102,7 +102,15 @@
   <!-- //查询商品信息并且带店铺名称的
     List<Commodity> selectByExampleMer(CommodityExample example);
     //按条件查找
-    List<Commodity> selectCommodityAll(); -->
+    List<Commodity> selectCommodityAll(); 
+    List<Commodity> selectByExampleLike(CommodityExample example);
+   -->
+  <select id="selectByExampleLike" resultMap="BaseResultMap">
+   	select 
+    <include refid="Base_Column_List" />
+    from commodity
+    where c_name like '%${cName}%'
+  </select>
   <select id="selectByExampleMer" resultMap="InfoBaseResultMap">
 	  select
 	    <if test="distinct">

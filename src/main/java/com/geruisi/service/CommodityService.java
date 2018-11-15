@@ -2,12 +2,16 @@ package com.geruisi.service;
 
 import java.util.List;
 
+import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.geruisi.bean.Commodity;
 import com.geruisi.bean.CommodityExample;
+import com.geruisi.bean.CommodityExample.Criteria;
+import com.geruisi.bean.User;
 import com.geruisi.dao.CommodityMapper;
+import com.geruisi.dao.UserMapper;
 
 @Service
 public class CommodityService {
@@ -15,27 +19,16 @@ public class CommodityService {
 	@Autowired
 	CommodityMapper commodityMapper;
 
-	/**
-	 * 展示商品
-	 * @return
-	 */
-	public List<Commodity> getCommodityAll() {
-		
-		List<Commodity> commodities = commodityMapper.selectByExample(null);
-		return commodities;
-	}
-
+	@Autowired
+	private UserMapper userMapper;
+	
 	/**
 	 * 查询商品信息,用于宝贝详情页
 	 * @return
 	 */
-	public List<Commodity> getCommodityInfo(Integer integer) {
-
-		CommodityExample example = new CommodityExample();
-		CommodityExample.Criteria criteria = example.createCriteria();
-		criteria.andCIdEqualTo(integer);
-		List<Commodity> commodities = commodityMapper.selectByExampleMer(example);
-		return commodities;
+	public Commodity getCommodityInfo(Integer integer) {
+		Commodity commodity = commodityMapper.selectByPrimaryKey(integer);
+		return commodity;
 	}
 
 	
@@ -45,42 +38,26 @@ public class CommodityService {
 	 * @return
 	 */
 	public List<Commodity> getCmerchant(Integer cMerchantId) {
-		// TODO Auto-generated method stub
 		CommodityExample example = new CommodityExample();
 		CommodityExample.Criteria criteria = example.createCriteria();
 		criteria.andCMerchantIdEqualTo(1);
 		return commodityMapper.selectByExampleMer(example);
 	}
-//	public List<Commodity> getCmerchant(Integer integer) {
-//		// TODO Auto-generated method stub
-//		CommodityExample example = new CommodityExample();
-//		CommodityExample.Criteria criteria = example.createCriteria();
-//		criteria.andCMerchantIdEqualTo(integer);
-//		List<Commodity> commodities = commodityMapper.selectByExample(example);
-//		return commodities;
-//	}
 
-	/**
-	 * 根据条件查找商品
-	 * @return
-	 */
-//	public List<Commodity> getCommodityType() {
-//		List<Commodity> commodities = commodityMapper.selectCommodityAll();
-//		return commodities;
-//	}
 
-//	public List<Commodity> getCommodityType(CriteriaCommodity cc) {
-//		
-//		List<Commodity> commodities = commodityMapper.selectCommodityAll(cc);
-//		return commodities;
-//	}
-	
-	public List<Commodity> getCommodityType(String cName) {
-		CommodityExample example = new CommodityExample();
-		CommodityExample.Criteria criteria = example.createCriteria();
-		criteria.andCNameLike(cName);
-		List<Commodity> commodities = commodityMapper.selectByExample(example);
-		return commodities;
+
+	public User getUserName(String number) {
+		User user = userMapper.selectByPrimaryKey(number);
+		return user;
 	}
+
+
+
+	public List<Commodity> getCommodityName(String soText) {
+		Commodity commodity = new Commodity(null, null, soText, null, null, null, null, null, null, null);
+		List<Commodity> exampleLike = commodityMapper.selectByExampleLike(commodity);
+		return exampleLike;
+	}
+
 	
 }

@@ -20,7 +20,6 @@
 <br>
 <br>
   	<div class="container">
-
       <form class="form-signin">
         <h2 class="form-signin-heading">请登录</h2>
         <br>
@@ -37,20 +36,26 @@
         		<span class="help-block"></span>
         	</div>
         </div>
-        
+        <br>
+        <div class="row">
+		    <div class="col-md-6 col-md-offset-3">
+		      <input id="checks" class="form-control verification_code" type="text" style="width:300px;" placeholder="验证码"/>
+		      <img id="imgVerify" src="${APP_PATH }/ValidateColorServlet" alt="点击更换验证码" />
+		    </div>
+		</div>
         <div class="row">
         	<div class="col-md-6 col-md-offset-3">
-        		<a class="forget_password">忘记密码</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        		<a href="login2">忘记密码</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         					  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         					  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         					  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        		<a class="register_account">注册账号</a>
+        		<a href="login3">注册账号</a>
      		</div>
      	</div>
      	
         <div class="row">
         	<div class="col-md-6 col-md-offset-3">
-        		<button class="btn btn-lg btn-primary btn-block btn_submit" type="submit">登录</button>
+        		<button class="btn btn-lg btn-primary btn-block btn_submit">登录</button>
      		</div>
      	</div>
       </form>
@@ -60,7 +65,7 @@
 
 <script type="text/javascript">
 	
-		$(".text").change(function(){
+	   $(".text").change(function(){
 			var number = $(".inputNumber").val();
 			var regName = /(^[0-9]{11}$)/;
 			
@@ -75,7 +80,7 @@
 		
 		$(".btn_submit").click(function(){
 			
-			var result = 0;
+			var resul = 0;
 			
 			var number = $(".inputNumber").val();
 			var regName = /(^[0-9]{11}$)/;
@@ -90,18 +95,25 @@
 			var inputNumber = number;
 			var inputPassword = $(".inputPassword").val();
 			
+			var verification = $.trim($(".verification_code").val());
+			if (verification == null) {
+				show_validate_msg(".verification_code", "error","验证码不能为空!");
+				return;
+			}
+			
 			$.ajax({
 				url:"${APP_PATH}/loginAll",
-				data: "inputNumber="+inputNumber+"&inputPassword="+inputPassword,
+				data: "inputNumber="+inputNumber+"&inputPassword="+inputPassword+"&verification="+verification,
 				type:"GET",
 				success:function(result){
-					
-					if (result.code == 100) {
-						 result = 1;
-						 login_All(result);
+					var code = result.code
+					if (code == 100) {
+						 resul = 1;
+						 login_All(resul);
 					}else{
-						result = 2;
-						login_All(result);
+						resul = 2;
+						alert(result.extent.loginAll);
+						login_All(resul);
 					}
 				}
 			});
@@ -112,12 +124,9 @@
 			if (result == 1) {
 				var number = $(".inputNumber").val();
 				location.href = "user?inputNumber="+number;
-				//url = "user?inputNumber="+number;
-	            //window.location.href = "user";
-				return;
 			}else if (result == 2){
 				show_validate_msg(".inputPassword", "error", "登录失败，校验登录名和密码");
-				alert("登录失败，校验登录名和密码");
+				
 			}
 		}
 		
@@ -136,9 +145,6 @@
 				$(ele).next("span").text(msg);
 			}
 		}
-
-		//忘记密码
-		$(".")
 		
 </script>
 </body>

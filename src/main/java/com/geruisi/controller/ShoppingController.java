@@ -198,29 +198,13 @@ public class ShoppingController {
 	 * @param request
 	 * @param response
 	 * @return
-	 
+	 */
 	@RequestMapping("/commodity")
 	@ResponseBody
 	public Msg getCommodity(@RequestParam("id")Integer id,@RequestParam("shoops")Integer shoops,
 			HttpServletRequest request, HttpServletResponse response){
-		
-		if (id > 0 && shoops > 0) {
-			//2. 获取购物车对象
-			ShoppingCart sc = CommodityStoreWebUtils.getShoppingCart(request);
-			
-			//3. 调用 BookService 的 addToCart() 方法把商品放到购物车中
-			shoppingService.addCommodity(id,shoops	,sc);
-			return Msg.success().add("shoop", "添加成功!");
-		}
-		
-		return Msg.fail().add("shoop", "添加失败!");
-	}*/
-	
-	@RequestMapping("/commodity")
-	@ResponseBody
-	public Msg getCommodity(@RequestParam("id")Integer id,
-			HttpServletRequest request, HttpServletResponse response){
-		int shoops = 2;
+		System.out.println(id);
+		System.out.println(shoops);
 		if (id > 0 && shoops > 0) {
 			//2. 获取购物车对象
 			ShoppingCart sc = CommodityStoreWebUtils.getShoppingCart(request);
@@ -232,7 +216,7 @@ public class ShoppingController {
 		
 		return Msg.fail().add("shoop", "添加失败!");
 	}
-	
+		
 	/**
 	 * 转想购物车页面
 	 * @return

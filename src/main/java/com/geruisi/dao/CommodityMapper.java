@@ -22,9 +22,6 @@ public interface CommodityMapper {
     //查询商品信息并且带店铺名称的
     List<Commodity> selectByExampleMer(CommodityExample example);
 
-    //按条件查找所有商品
-    //CriteriaCommodity 封装了查询条件cName,cTypeA,cTypeB
-    //List<Commodity> selectCommodityAll(CriteriaCommodity cc);
     List<Commodity> selectCommodityAll();
 
     List<Commodity> selectByExample(CommodityExample example);
@@ -38,4 +35,6 @@ public interface CommodityMapper {
     int updateByPrimaryKeySelective(Commodity record);
 
     int updateByPrimaryKey(Commodity record);
+    
+    List<Commodity> selectByExampleLike(Commodity record);
 }
