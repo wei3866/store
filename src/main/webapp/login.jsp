@@ -40,11 +40,11 @@
         
         <div class="row">
         	<div class="col-md-6 col-md-offset-3">
-        		<a>忘记密码</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        		<a class="forget_password">忘记密码</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         					  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         					  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         					  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        		<a>注册账号</a>
+        		<a class="register_account">注册账号</a>
      		</div>
      	</div>
      	
@@ -60,8 +60,6 @@
 
 <script type="text/javascript">
 	
-	$(function(){
-		
 		$(".text").change(function(){
 			var number = $(".inputNumber").val();
 			var regName = /(^[0-9]{11}$)/;
@@ -139,8 +137,9 @@
 			}
 		}
 
-	})
+		//忘记密码
+		$(".")
+		
 </script>
-
 </body>
 </html>

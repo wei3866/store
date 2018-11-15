@@ -1,7 +1,6 @@
 package com.geruisi.controller;
 
 import java.util.ArrayList;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.geruisi.bean.Commodity;
 import com.geruisi.bean.User;
 import com.geruisi.service.ShjiazxService;
-import com.geruisi.test.mapper;
 import com.geruisi.until.Get16Number;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
