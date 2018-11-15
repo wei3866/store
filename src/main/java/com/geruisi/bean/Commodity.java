@@ -1,7 +1,5 @@
 package com.geruisi.bean;
 
-import java.util.Date;
-
 public class Commodity {
     private Integer cId;
 
@@ -15,7 +13,7 @@ public class Commodity {
 
     private Integer cPrice;
 
-    private Date cPutaway;
+    private String cPutaway;
 
     private Integer cInventory;
 
@@ -50,6 +48,10 @@ public class Commodity {
     }
 
     public String getcName() {
+    	if(cName == null)
+    		cName = "%%";
+		else 
+			cName = "%"+ cName +"%";
         return cName;
     }
 
@@ -58,6 +60,10 @@ public class Commodity {
     }
 
     public String getcTypeA() {
+    	if(cTypeA == null)
+    		cTypeA = "%%";
+		else 
+			cTypeA = "%"+ cTypeA +"%";
         return cTypeA;
     }
 
@@ -66,6 +72,10 @@ public class Commodity {
     }
 
     public String getcTypeB() {
+    	if(cTypeB == null)
+    		cTypeB = "%%";
+		else 
+			cTypeB = "%"+ cTypeB +"%";
         return cTypeB;
     }
 
@@ -81,11 +91,11 @@ public class Commodity {
         this.cPrice = cPrice;
     }
 
-    public Date getcPutaway() {
+    public String getcPutaway() {
         return cPutaway;
     }
 
-    public void setcPutaway(Date cPutaway) {
+    public void setcPutaway(String cPutaway) {
         this.cPutaway = cPutaway;
     }
 
@@ -112,4 +122,23 @@ public class Commodity {
     public void setcExpressage(String cExpressage) {
         this.cExpressage = cExpressage == null ? null : cExpressage.trim();
     }
+
+	public Commodity() {
+		super();
+	}
+
+	public Commodity(Integer cId, Integer cMerchantId, String cName, String cTypeA, String cTypeB) {
+		super();
+		this.cId = cId;
+		this.cMerchantId = cMerchantId;
+		this.cName = cName;
+		this.cTypeA = cTypeA;
+		this.cTypeB = cTypeB;
+	}
+
+	@Override
+	public String toString() {
+		return "Commodity [cId=" + cId + ", cMerchantId=" + cMerchantId + ", cName=" + cName + ", cTypeA=" + cTypeA
+				+ ", cTypeB=" + cTypeB + "]";
+	}
 }

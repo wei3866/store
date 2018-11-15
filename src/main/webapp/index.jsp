@@ -47,14 +47,98 @@
 <!-- 引入样式 -->
 <link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-
 <script type="text/javascript">
 $(function(){
-
-	
-	return false;
-})
+	$("#btn").click(function(){
+		//获取文本框输入
+		var text = $("#search").val();
+		if($.trim(text) != ""){
+			$.ajax({
+				url:"${APP_PATH}/getCommodityType",
+				type:"GET",
+				data:"cName="+text,
+				success:function(result){
+						var commodity = result.extent.commocities
+						$.each(commodity,function(index,item){
+	                		var cNameTd = $("<td></td>").append(item.cName);
+	                		var cTypeATd = $("<td></td>").append(item.cTypeA);
+	                		var cTypeBTd = $("<td></td>").append(item.cTypeB);
+	                		var cPriceTd = $("<td></td>").append(item.cPrice);
+	                		var selectBtn =$("<button></button>").addClass("btn btn-primary btn-sm select_btn")
+	            		        .append("查看详情页");
+	                		var cId = $("<td></td>").addClass("cidd").append(item.cId);
+	                		$("<tr></tr>").append(cNameTd)
+	                		              .append(cTypeATd)
+	                		              .append(cTypeBTd)
+	                		              .append(cPriceTd)
+	                		              .append(selectBtn)
+	                		              .append(cId)
+	                		              .appendTo("#tb");
+						});
+					
+					
+				}
+              
+			});
+			$(".cidd").hide();
+		}else{
+			alert("请输入宝贝关键字!");
+		}
+	});
+});		
 </script>
+<!-- 
+<script type="text/javascript">
+$(function(){
+	$("#btn").click(function(){
+		alert("123");
+		$("#commodity_table").remove();
+			alert("111");
+			$.ajax({
+				url:"${APP_PATH}/getCommodityType",
+				type:"GET",
+				data:"search="+name,
+				success:function(result){
+				  alert("222");
+				  var search = $("#search").val();	
+				  alert("333");
+                  var name = $("#cNameTd").val();
+                  $("#tb").empty();
+                  if(search == name){
+                	  alert("444");
+                	  var commodity = result.extent.search
+                	  var name = result.extent.search.cName
+                	  $.each(commodity,function(index,item){
+                		  alert("555");
+                    		alert(item.cName);
+                    		var cMidTd = $("<td></td>").addClass("midd").append(item.cMerchantId);
+                    		var cNameTd = $("<td></td>").append(item.cName);
+                    		var cTypeATd = $("<td></td>").append(item.cTypeA);
+                    		var cTypeBTd = $("<td></td>").append(item.cTypeB);
+                    		var cPriceTd = $("<td></td>").append(item.cPrice);
+                    		var selectBtn =$("<button></button>").addClass("btn btn-primary btn-sm select_btn")
+                		        .append("查看详情页");
+                    		var cId = $("<td></td>").addClass("cidd").append(item.cId);
+                    		$("<tr></tr>").append(cMidTd)
+                    		              .append(cNameTd)
+                    		              .append(cTypeATd)
+                    		              .append(cTypeBTd)
+                    		              .append(cPriceTd)
+                    		              .append(selectBtn)
+                    		              .append(cId)
+                    		              .appendTo("#tb");
+                    	}); 
+                  }else{
+                	  alert("请输入宝贝名");
+                  }
+                 
+				}
+			});
+	});
+});
+		
+</script>
+ -->
 </head>
 <body>
 <!-- 搭建显示页面 ,用柵格系統 -->
@@ -84,13 +168,9 @@ $(function(){
 			</div>
 			<!-- search搜索 -->
 			<div class="col-md-4 col-md-offset-4">
-		    <div class="search">
-				<div class="cnt">
-					<input name="" type="text" class="sh" onfocus="if(this.value == this.defaultValue) this.value = ''"  onblur="if(this.value == '') this.value = this.defaultValue" value="请输入搜索关键字" id="keyword" />
-					<input name="" type="button" class="ss" value="搜索" />
-					<img alt="" src="images/shousuo.jpg" >
-				</div> 
-			</div>	
+					<input type="text" name="search" id="search" onfocus="if(this.value == this.defaultValue) this.value = ''"  onblur="if(this.value == '') this.value = this.defaultValue" value="请输入宝贝名关键字"/>
+					<input type="button" name="btn" id="btn" value="搜索" />
+					<img src="images/shousuo.jpg" >
 				<div class="hots">
 					<span>热门搜索：</span>
 					<a href="">手机</a>
@@ -123,8 +203,8 @@ $(function(){
         <h4 class="modal-title" id="myModalLabel">我的选择</h4>
       </div>
       <div class="modal-body">
-        <a href="${APP_PATH }/merchant.jsp"><p id="name1"></p></a>
-		<p id="name2"></p>
+        <a href="${APP_PATH }/merchant?cMerchantId=1"><p id="name1"></p></a>
+		<p id="name2" ></p>
 		<p id="typeA"></p>
 		<p id="typeB"></p>
 		<p id="price"></p>
@@ -133,9 +213,8 @@ $(function(){
 		<p id="expressage"></p>
 		<br><br> 
 		
-		<a href="">继续购物</a>
-		<a href="">加入购物车</a>
-		<a href="${APP_PATH }/index.jsp">返回首页</a>
+		<button class="gouwu_btn">继续购物</button>
+		<button class="edit_btn">加入购物车</button>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -218,7 +297,7 @@ $(function(){
 				<th>详情</th>			
 			 </tr>			
 		  </thead>
-		  <tbody>
+		  <tbody id="tb">
 			
 		  </tbody>		    
 		</table>  		 
@@ -338,7 +417,7 @@ window.onload = function () {
     divArr[1].onclick = autoPlay;
     function autoPlay() {
         key++;
-        //当不满足下面的条件是时候，轮播图到了最后一个孩子，进入条件中后，瞬移到
+        //当不满足下面的条件的时候，轮播图到了最后一个图片，进入条件中后，瞬移到
         //第一张，继续滚动。
         if(key > ul.children.length - 1) {
             ul.style.left = 0;
@@ -390,21 +469,15 @@ window.onload = function () {
 	  		}
 	  	});
   }  
-  
-	$(".ss").onclick(function(){
-		build_commodity_table(result);
-	});
-	
     //显示商品数据
     function build_commodity_table(result){
     	 //清空table表格
    	    $("#commodity_table tbody").empty();
     	 //商品所有信息
     	var commdity = result.extent.pageInfo.list;
-    
     	$.each(commdity,function(index,item){
     		//alert(item.cName);
-    		var cNameTd = $("<td></td>").append("<a></a>").append(item.cName);
+    		var cNameTd = $("<td></td>").append(item.cName);
     		var cTypeATd = $("<td></td>").append(item.cTypeA);
     		var cTypeBTd = $("<td></td>").append(item.cTypeB);
     		var cPriceTd = $("<td></td>").append(item.cPrice);
@@ -418,14 +491,13 @@ window.onload = function () {
     		              .append(selectBtn)
     		              .append(cId)
     		              .appendTo("#commodity_table tbody");
-    		
-    		
     	});
    	 	$(".cidd").hide();
-    	
-    	$(".select_btn").click(function(){
+
+   	 	$(".select_btn").click(function(){
     		var cid = $(this).next().text();
     		
+    		//弹出模态框
     		$("#CommodityInfoModel").modal({
     			backdrop:"static"
     		});
@@ -437,19 +509,36 @@ window.onload = function () {
     			success:function(result){
     				var commodity = result.extent.commodityInfo;
     				$.each(commodity,function(index,item){
-    		    		$("#name1").text("店铺名: "+item.merchant.merName);
+    		    		$("#name1").addClass("name").text("店铺名: "+item.merchant.merName);
+    		    		$("#mid").addClass("midd").text(item.cMerchantId);
     		    		$("#name2").text("宝贝名: "+item.cName);
     		    		$("#typeA").text("宝贝归类: "+item.cTypeA);
     		    		$("#typeB").text("宝贝类型: "+item.cTypeB);
     		    		$("#price").text("宝贝价格: "+item.cPrice);
     		    		$("#time").text("上架时间: "+item.cPutaway);
     		    		$("#sales").text("销量: "+item.cSales);
-    		    		
-    		    		
     		    		$("#expressage").text("是否包邮: "+item.cExpressage);
     		    	});
     			}
     		});
+    		$(".midd").hide();
+    		$(".name").click(function(){
+        		var mid = $(this).next().text();
+    		});
+    		
+    		$(document).on("click",".edit_btn",function(){
+    			var cid = $(this).attr("cid");
+    			var name = $(this).parents("tr").find("td:eq(1)").text();
+    			$.ajax({
+    				url : "${APP_PATH}/commodity",
+    				data : "id=" + cid,
+    				type : "GET",
+    				success : function(result) {
+
+    				}
+    			})
+    				
+    		})
     	});
     
     }
@@ -515,11 +604,8 @@ window.onload = function () {
     	 //把ul加入到nav
     	 var navEle = $("<nav></nav>").append(ul);
     	 navEle.appendTo("#page_nav_area");
+      }
     }
-}
-
-
-
 </script>
 	
 </body>

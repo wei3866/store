@@ -1,9 +1,11 @@
 package com.geruisi.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.geruisi.bean.Commodity;
 import com.geruisi.bean.CommodityExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface CommodityMapper {
 	
@@ -21,6 +23,8 @@ public interface CommodityMapper {
     List<Commodity> selectByExampleMer(CommodityExample example);
 
     //按条件查找所有商品
+    //CriteriaCommodity 封装了查询条件cName,cTypeA,cTypeB
+    //List<Commodity> selectCommodityAll(CriteriaCommodity cc);
     List<Commodity> selectCommodityAll();
 
     List<Commodity> selectByExample(CommodityExample example);

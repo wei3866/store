@@ -184,12 +184,12 @@ public class ShoppingController {
 	 * 获取全部商品
 	 * @return
 	 */
-//	@RequestMapping("/commoditys")
-//	@ResponseBody
-//	public Msg getCommoditys(){
-//		List<Commodity> commodities = shoppingService.getAll();
-//		return Msg.success().add("commodities", commodities);
-//	}
+	@RequestMapping("/commoditys")
+	@ResponseBody
+	public Msg getCommoditys(){
+		List<Commodity> commodities = shoppingService.getAll();
+		return Msg.success().add("commodities", commodities);
+	}
 	
 	/**
 	 * 将商品加入购物车

@@ -16,18 +16,11 @@ public class CommodityService {
 	CommodityMapper commodityMapper;
 
 	/**
-	 * 根据条件查找商品
+	 * 展示商品
 	 * @return
 	 */
 	public List<Commodity> getCommodityAll() {
 		
-//		CommodityExample example = new CommodityExample();
-//		CommodityExample.Criteria criteria = example.createCriteria();
-//		criteria.andCNameEqualTo(null);
-//		criteria.andCTypeAEqualTo(null);
-//		criteria.andCTypeBEqualTo(null);
-		// TODO Auto-generated method stub
-		//return commodityMapper.selectByExample(example);
 		List<Commodity> commodities = commodityMapper.selectByExample(null);
 		return commodities;
 	}
@@ -44,12 +37,50 @@ public class CommodityService {
 		List<Commodity> commodities = commodityMapper.selectByExampleMer(example);
 		return commodities;
 	}
-	//	public Commodity getCommodityInfo(Integer integer) {
+
+	
+
+	/**
+	 * 查找店铺商品
+	 * @return
+	 */
+	public List<Commodity> getCmerchant(Integer cMerchantId) {
+		// TODO Auto-generated method stub
+		CommodityExample example = new CommodityExample();
+		CommodityExample.Criteria criteria = example.createCriteria();
+		criteria.andCMerchantIdEqualTo(1);
+		return commodityMapper.selectByExampleMer(example);
+	}
+//	public List<Commodity> getCmerchant(Integer integer) {
 //		// TODO Auto-generated method stub
-//		Commodity commodity = commodityMapper.selectByExampleMer(null);
-//		return commodity;
+//		CommodityExample example = new CommodityExample();
+//		CommodityExample.Criteria criteria = example.createCriteria();
+//		criteria.andCMerchantIdEqualTo(integer);
+//		List<Commodity> commodities = commodityMapper.selectByExample(example);
+//		return commodities;
 //	}
 
+	/**
+	 * 根据条件查找商品
+	 * @return
+	 */
+//	public List<Commodity> getCommodityType() {
+//		List<Commodity> commodities = commodityMapper.selectCommodityAll();
+//		return commodities;
+//	}
 
+//	public List<Commodity> getCommodityType(CriteriaCommodity cc) {
+//		
+//		List<Commodity> commodities = commodityMapper.selectCommodityAll(cc);
+//		return commodities;
+//	}
+	
+	public List<Commodity> getCommodityType(String cName) {
+		CommodityExample example = new CommodityExample();
+		CommodityExample.Criteria criteria = example.createCriteria();
+		criteria.andCNameLike(cName);
+		List<Commodity> commodities = commodityMapper.selectByExample(example);
+		return commodities;
+	}
 	
 }

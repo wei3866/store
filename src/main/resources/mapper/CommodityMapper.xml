@@ -95,8 +95,8 @@
     c_sales, c_expressage
   </sql>
   <sql id="InfoBase_Column_List">
-     c.c_id,c.c_name, c.c_type_a, c.c_type_b, c.c_price, c.c_putaway, c.c_inventory, 
-    c.c_sales, c.c_expressage, m.mer_name
+     c.c_id, c.c_merchant_id,c.c_name, c.c_type_a, c.c_type_b, c.c_price, c.c_putaway, c.c_inventory, 
+    c.c_sales, c.c_expressage, m.mer_id, m.mer_name
   </sql>
   <!-- //查询商品信息并且带店铺名称的
     List<Commodity> selectByExampleMer(CommodityExample example);
@@ -119,21 +119,14 @@
 	    </if>
   </select>	   
   <select id="selectCommodityAll" parameterType="String" resultMap="InfoBaseResultMap" >
-     select * from commodity
-     <where>
-       <!-- 如果带cName用 cName 查,带cType 用 cType 查,只会进入其中一个 -->
-       <choose>
-         <when test="cName != null">
-           c_name like #{cName}
-         </when>
-         <when test="cTypeA != null">
-           c_type_a = #{cTypeA}
-         </when>
-         <when test="c_type_b != null">
-           cName = #{cTypeB}
-         </when>
-       </choose>
-     </where>
+     select 
+	    <include refid="InfoBase_Column_List" />
+	     from commodity c
+        LEFT JOIN merchant m
+        ON c.`c_merchant_id` = m.`mer_id`
+        WHERE c.`c_name` LIKE #{cName}
+        AND c.`c_type_a` LIKE #{cTypeA}
+        AND c.`c_type_b` LIKE #{cTypeB} 
   </select>	     
   <select id="selectByExample" parameterType="com.geruisi.bean.CommodityExample" resultMap="BaseResultMap">
     select
