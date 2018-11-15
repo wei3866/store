@@ -135,11 +135,31 @@ public class ShoppingService {
 			for (Integer id : ids) {
 				
 				Commodity commodity = commodityMapper.selectByPrimaryKey(id);
+				//商品id
 				Integer merchantId = commodity.getcMerchantId();
+				//商品价格
 				Integer price = commodity.getcPrice();
 				
+				//订单号
 				String rOrderId = get16Number.getUUID();
+				//时间
 				String dateToStr = get16Number.DateToStr(new Date());
+				
+				//商品件数
+				int commodityNumber = sc.getCommodityNumber();
+				
+				//修改库存
+				Integer inventory = commodity.getcInventory();
+				Integer sales = commodity.getcSales();
+				if (inventory > commodityNumber) {
+					Integer inven = inventory-commodityNumber;
+					Integer sale = sales+commodityNumber;
+					Commodity commodity2 = new Commodity(id, null, null, null, null, null, null, inven, sale, null);
+					commodityMapper.updateByPrimaryKey(commodity2);
+				}else {
+					return false;
+				}
+				
 				
 				//添加订单
 				Record record = new Record(null, rOrderId, strNmnber, id, merchantId, price, dateToStr, null, 1, str, name, number);
@@ -186,6 +206,21 @@ public class ShoppingService {
 			//修改余额
 			Money money2 = new Money(monId, strNmnber, i);
 			moneyMapper.updateByPrimaryKey(money2);
+			
+			//商品件数
+			int commodityNumber = sc.getCommodityNumber();
+			
+			//修改库存
+			Integer inventory = commodity.getcInventory();
+			Integer sales = commodity.getcSales();
+			if (inventory > commodityNumber) {
+				Integer inven = inventory-commodityNumber;
+				Integer sale = sales+commodityNumber;
+				Commodity commodity2 = new Commodity(id, null, null, null, null, null, null, inven, sale, null);
+				commodityMapper.updateByPrimaryKey(commodity2);
+			}else {
+				return false;
+			}
 			
 			sc.removeItem(id);
 			

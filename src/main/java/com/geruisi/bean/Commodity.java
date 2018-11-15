@@ -141,4 +141,21 @@ public class Commodity {
 		return "Commodity [cId=" + cId + ", cMerchantId=" + cMerchantId + ", cName=" + cName + ", cTypeA=" + cTypeA
 				+ ", cTypeB=" + cTypeB + "]";
 	}
+
+	public Commodity(Integer cId, Integer cMerchantId, String cName, String cTypeA, String cTypeB, Integer cPrice,
+			String cPutaway, Integer cInventory, Integer cSales, String cExpressage) {
+		super();
+		this.cId = cId;
+		this.cMerchantId = cMerchantId;
+		this.cName = cName;
+		this.cTypeA = cTypeA;
+		this.cTypeB = cTypeB;
+		this.cPrice = cPrice;
+		this.cPutaway = cPutaway;
+		this.cInventory = cInventory;
+		this.cSales = cSales;
+		this.cExpressage = cExpressage;
+	}
+
+	
 }

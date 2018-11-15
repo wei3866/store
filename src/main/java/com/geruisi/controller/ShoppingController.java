@@ -184,7 +184,7 @@ public class ShoppingController {
 	 * 获取全部商品
 	 * @return
 	 */
-	@RequestMapping("/commoditys")
+	@RequestMapping("/commod")
 	@ResponseBody
 	public Msg getCommoditys(){
 		List<Commodity> commodities = shoppingService.getAll();

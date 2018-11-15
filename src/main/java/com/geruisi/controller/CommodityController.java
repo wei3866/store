@@ -73,7 +73,7 @@ public class CommodityController {
 		PageInfo page = new PageInfo(commodities,2);
 		return Msg.success().add("pageInfo", page);
 	}
-	
+
 	/**
 	 * 显示店铺商品
 	 * @param pn

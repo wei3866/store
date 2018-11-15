@@ -103,11 +103,26 @@ public class User {
         this.uMer = uMer;
     }
 
-
-	@Override
-	public String toString() {
-		return "User [uName=" + uName + "]";
+	public User(String uNumber, Integer uId, String uName, Integer uGender, String uPassword, String uEmail,
+			Integer uUserNumber, Date uBirthday, String uPassPus, Integer uMer) {
+		super();
+		this.uNumber = uNumber;
+		this.uId = uId;
+		this.uName = uName;
+		this.uGender = uGender;
+		this.uPassword = uPassword;
+		this.uEmail = uEmail;
+		this.uUserNumber = uUserNumber;
+		this.uBirthday = uBirthday;
+		this.uPassPus = uPassPus;
+		this.uMer = uMer;
 	}
+
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 
 
 }
