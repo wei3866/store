@@ -17,13 +17,19 @@ import com.geruisi.dao.CommodityMapper;
 public class CommodityMapperTest {
 	
 	@Autowired
-	CommodityMapper commodityMapper;
+	private CommodityMapper commodityMapper;
 	
 	@Test
-	public void getCommodityInfo(){
-		CommodityExample example = new CommodityExample();
-		CommodityExample.Criteria criteria = example.createCriteria();
-		
+	public void getCommodityType() {
+		// TODO Auto-generated method stub
+//		CriteriaCommodity cc = new CriteriaCommodity("夹克", null, null);
+//		List<Commodity> commodities = commodityMapper.selectCommodityAll(cc);
+//		List<Commodity> commodities = commodityMapper.selectCommodityAll();
+//			System.out.println(commodities);
+	}
+	
+	@Test
+	public void testgetCommodityInfo(){
 		List<Commodity> list = commodityMapper.selectByExampleMer(null);
 		for (Commodity commodity : list) {
 			System.out.println(commodity);
@@ -45,4 +51,10 @@ public class CommodityMapperTest {
 		}
 	}
 	
-}
+	@Test
+	public void getCmerchant(Integer integer){
+		List<Commodity> list = commodityMapper.selectByExampleMer(null);
+		for (Commodity commodity : list) {
+			System.out.println(commodity);
+		}
+}}

@@ -13,7 +13,7 @@ public class Commodity {
 
     private Integer cPrice;
 
-    private String  cPutaway;
+    private String cPutaway;
 
     private Integer cInventory;
 
@@ -48,6 +48,10 @@ public class Commodity {
     }
 
     public String getcName() {
+    	if(cName == null)
+    		cName = "%%";
+		else 
+			cName = "%"+ cName +"%";
         return cName;
     }
 
@@ -56,6 +60,10 @@ public class Commodity {
     }
 
     public String getcTypeA() {
+    	if(cTypeA == null)
+    		cTypeA = "%%";
+		else 
+			cTypeA = "%"+ cTypeA +"%";
         return cTypeA;
     }
 
@@ -64,6 +72,10 @@ public class Commodity {
     }
 
     public String getcTypeB() {
+    	if(cTypeB == null)
+    		cTypeB = "%%";
+		else 
+			cTypeB = "%"+ cTypeB +"%";
         return cTypeB;
     }
 
@@ -111,6 +123,25 @@ public class Commodity {
         this.cExpressage = cExpressage == null ? null : cExpressage.trim();
     }
 
+	public Commodity() {
+		super();
+	}
+
+	public Commodity(Integer cId, Integer cMerchantId, String cName, String cTypeA, String cTypeB) {
+		super();
+		this.cId = cId;
+		this.cMerchantId = cMerchantId;
+		this.cName = cName;
+		this.cTypeA = cTypeA;
+		this.cTypeB = cTypeB;
+	}
+
+	@Override
+	public String toString() {
+		return "Commodity [cId=" + cId + ", cMerchantId=" + cMerchantId + ", cName=" + cName + ", cTypeA=" + cTypeA
+				+ ", cTypeB=" + cTypeB + "]";
+	}
+
 	public Commodity(Integer cId, Integer cMerchantId, String cName, String cTypeA, String cTypeB, Integer cPrice,
 			String cPutaway, Integer cInventory, Integer cSales, String cExpressage) {
 		super();
@@ -126,11 +157,5 @@ public class Commodity {
 		this.cExpressage = cExpressage;
 	}
 
-	public Commodity() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	
-    
 }
