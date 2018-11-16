@@ -14,7 +14,7 @@
 <script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-	
+<a href="${APP_PATH }/index.jsp">继续购物</a>
 	<!-- 模态框 -->
 	<div class="modal fade" id="site" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
@@ -2007,7 +2007,9 @@
 			}
 			
 			//发送Ajax请求,把地址信息显示到下拉框中
-			getDepts();
+			if(getDepts() == false){
+				return;
+			}
 			
 			//弹出模态框
 			$("#site").modal({
@@ -2024,6 +2026,7 @@
 				success:function(result){
 					if (result.code == 200) {
 						 alert(result.extent.login);
+						 location.href = "login";
 						 return false;
 					}else{
 						return true;

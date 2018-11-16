@@ -13,6 +13,7 @@
 <script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
+<a href="login">返回</a>
 <center>
 <br>
 <br>
@@ -186,15 +187,18 @@
 					var code = result.code;
 					if (code == 100) {
 						var number = $.trim($(".inputNumber").val());
-						location.href = "user?inputNumber="+number;
+						user_input(number);
 					}else{
 						alert(result.extent.verification);
 					}
 				}
 			})
 			
-			
 		})
+		
+		function user_input(number) {
+			location.href = "user?inputNumber="+number;
+		}
 
 </script>
 </body>

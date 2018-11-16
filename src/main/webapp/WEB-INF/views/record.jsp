@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>客户--订单</title>
+<title>订单</title>
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
@@ -115,14 +115,12 @@ $(function(){
 		})
 	});
 	
-	
-	
 	return false;
 })
 </script>		
 </head>
 <body>
-
+<input type="button" name="Submit" onclick="javascript:history.back(-1);" value="返回上一页">
 <!-- 查看该订单号的订单信息的模态框 -->
 <div class="modal fade" id="recordGetModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">

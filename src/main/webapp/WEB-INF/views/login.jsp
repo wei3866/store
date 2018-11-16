@@ -14,6 +14,7 @@
 
 </head>
 <body>
+<a href="${APP_PATH }/index.jsp">返回首页</a>
 <center>
 <br>
 <br>
@@ -40,7 +41,7 @@
         <div class="row">
 		    <div class="col-md-6 col-md-offset-3">
 		      <input id="checks" class="form-control verification_code" type="text" style="width:300px;" placeholder="验证码"/>
-		      <img id="imgVerify" src="${APP_PATH }/ValidateColorServlet" alt="点击更换验证码" />
+		      <img id="imgVerify" onclick="changeCode()" src="${APP_PATH }/ValidateColorServlet" alt="点击更换验证码" />
 		    </div>
 		</div>
         <div class="row">

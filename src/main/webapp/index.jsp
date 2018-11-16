@@ -58,7 +58,16 @@
 	</div>
 <script type="text/javascript">
 	
+	$(function(){
+		$(".so_so").click();
+	})
+
+	
 	$(".so_so").click(function(){
+		
+		$(".table-hover tbody").empty();
+
+		
 		var soText = $.trim($(".so_text").val());
 		
 		$.ajax({
@@ -87,7 +96,7 @@
 															.addClass("glyphicon glyphicon-pencil"))
 															.append("详情");
 						delBtn.attr("del-id",item.cId);
-						var btnTd = $("<td></td>").append(delBtn).append(" ").append(editBtn);
+						var btnTd = $("<td></td>").append(delBtn);
 						$("<tr></tr>").append(NameTd)
 									  .append(PriceTd)
 						              .append(SalesTd)
@@ -112,7 +121,8 @@
 			success:function(result){
 				var code = result.code;
 				if (code == 100) {
-					location.href = "${APP_PATH}/user.jsp";
+					var text = $(".user_test").text();
+					location.href = "user?inputNumber="+text;
 				}else{
 					alert(result.extent.login);
 				}

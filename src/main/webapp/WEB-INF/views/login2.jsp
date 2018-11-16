@@ -13,6 +13,7 @@
 <script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
+<a href="login">返回</a>
 <center>
 <br>
 <br>

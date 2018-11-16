@@ -154,7 +154,7 @@ $(function(){
 </script>
 </head>
 <body>
-
+<a href="${APP_PATH }/index.jsp">返回首页</a>
 
 <!-- 修改商品的模态框 -->
 <div class="modal fade" id="updateshangpin" tabindex="-1" role="dialog">

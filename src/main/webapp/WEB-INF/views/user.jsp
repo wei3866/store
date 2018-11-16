@@ -13,7 +13,7 @@
 <script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-
+<a href="${APP_PATH }/index.jsp">返回首页</a>
 	<!-- 店铺模态框 -->
 	<div class="modal fade" id="merchantModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
@@ -113,7 +113,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h3 class="GenderTd"></h3>
 <button type="button" class="btn btn-info user_records">订单信息</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <button type="button" class="btn btn-info user_NumberTd">信息修改</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<button type="button" class="btn btn-info user_merchant" id="">进入店铺</button>
+<button type="button" class="btn btn-info user_merchant" id=""></button>
 	</center>
 	
 <script type="text/javascript">
