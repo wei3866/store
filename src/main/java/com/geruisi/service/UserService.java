@@ -61,10 +61,8 @@ public class UserService {
 	}
 
 	public long merchantName(String merchantName) {
-		MerchantExample example = new MerchantExample();
-		Criteria criteria = example.createCriteria();
-		criteria.andMerNameNotEqualTo(merchantName);
-		long countByExample = merchantMapper.countByExample(example);
+		long countByExample = merchantMapper.count(merchantName);
+		System.out.println(countByExample);
 		return countByExample;
 	}
 
@@ -72,7 +70,7 @@ public class UserService {
 		//时间
 		String dateToStr = get16Number.DateToStr(new Date());
 		Merchant merchant = new Merchant(null, merchantName, merchantNumber, dateToStr);
-		merchantMapper.insertSelective(merchant);
+		merchantMapper.insert(merchant);
 		
 		MerchantExample example = new MerchantExample();
 		Criteria criteria = example.createCriteria();
@@ -80,12 +78,12 @@ public class UserService {
 		List<Merchant> selectByExample = merchantMapper.selectByExample(example);
 		
 		for (Merchant merchant2 : selectByExample) {
-			Integer id = merchant2.getMerId();
+			Integer merid = merchant2.getMerId();
 			
-			User user = new User(merchantNumber, null, null, null, null, null, null, null, null, id);
+			User user = new User(merchantNumber, null, null, null, null, null, null, null, null, merid);
 			userMapper.updateByPrimaryKeySelective(user);
 			
-			return id;
+			return merid;
 		}
 		
 		return null;
@@ -99,10 +97,8 @@ public class UserService {
 	}
 
 	public long loginUser(String number) {
-		UserExample example = new UserExample();
-		com.geruisi.bean.UserExample.Criteria criteria = example.createCriteria();
-		criteria.andUNumberEqualTo(number);
-		long l = userMapper.countByExample(example);
+		
+		long l = userMapper.count(number);
 		return l;
 	}
 

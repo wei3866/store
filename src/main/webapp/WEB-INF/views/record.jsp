@@ -108,7 +108,7 @@ $(function(){
 				
 				if(confirm("确定该订单【"+ ddhh +"】要收货吗？")){
 					$textt.text("完成发货");
-					$anniuu.text("订单完成");
+					$anniuu.text("订单完成").addClass("glyphicon glyphicon-thumbs-up");
 					
 				}
 			}

@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 public interface MerchantMapper {
     long countByExample(MerchantExample example);
 
+    long count(String name);
+    
     int deleteByExample(MerchantExample example);
 
     int deleteByPrimaryKey(Integer merId);

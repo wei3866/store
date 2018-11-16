@@ -107,7 +107,7 @@
 		<br>
 		<br>
 		
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h3 class="NumberTd"></h3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h3 class="NumberTd" id=""></h3>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h3 class="NameTd"></h3>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h3 class="EmailTd"></h3>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h3 class="GenderTd"></h3>
@@ -137,6 +137,7 @@
 					}
 					
 					$(".NumberTd").text("账号: "+NumberTd);
+					$(".NumberTd").attr("id","NumberTd");
 					$(".NameTd").text("会员名: "+NameTd);
 					$(".EmailTd").text("邮箱: "+EmailTd);
 					$(".GenderTd").text("性别: "+gender);
@@ -275,8 +276,6 @@
 				$("#merchantModal").modal({
 					backdrop : "static"
 				});
-				//验证店铺名
-				save_name();
 				
 			}else{
 				location.href = "sjzxs";
@@ -284,26 +283,21 @@
 		})
 		
 		//申请店铺
-		$(".merchant_save_modal").click(function(){
-			save_merchant();
-		})
-		
-		//申请店铺
-		function save_merchant(){
-			//验证店铺名
-			if(save_name() == false){
+		$("#merchant_save_modal").click(function(){
+			if (save_name() == false) {
 				return;
 			}
-			
 			var merchantName = $("#merchant_input").val();
-			var merchantNumber = $(".NumberTd").text();
-			
+			var merchantNumber = $(".NumberTd").attr("id");
+
 			$.ajax({
 				url : "${APP_PATH }/merchants",
 				data: "merchantName="+merchantName+"&merchantNumber="+merchantNumber,
 				type : "get",
 				success : function(result) {
-					if(result.code == 100){
+					var code = result.code;
+					alert(code);
+					if(code == 100){
 						var MerTd = result.extent.id;
 						$(".user_merchant").text("进入店铺").attr("id",MerTd);
 					}
@@ -311,7 +305,8 @@
 			})
 			
 			$("#merchantModal").modal("hide");
-		}
+		})
+		
 		
 		//验证店铺名
 		$("#merchant_input").change(function() {
@@ -338,6 +333,8 @@
 					if(result.code == 200){
 						show_validate_msg("#merchant_input", "error","店铺名已存在!");
 						return false;
+					}else{
+						return true;
 					}
 				}
 			})

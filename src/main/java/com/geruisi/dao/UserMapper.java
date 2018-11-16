@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 public interface UserMapper {
     long countByExample(UserExample example);
 
+    long count(String name);
+    
     int deleteByExample(UserExample example);
 
     int deleteByPrimaryKey(String uNumber);

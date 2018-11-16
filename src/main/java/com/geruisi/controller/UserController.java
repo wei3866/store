@@ -175,7 +175,6 @@ public class UserController {
 			
 			Integer decodes = Integer.parseInt(decode);
 			Integer inputPasswords = Integer.parseInt(inputPassword);
-			System.out.println(inputPasswords.equals(decodes));
 			if (inputPasswords.equals(decodes)) {
 				return Msg.success();
 			}else {
@@ -232,7 +231,9 @@ public class UserController {
 	//检验店铺名是否可用
 	@RequestMapping("/merchantName")
 	@ResponseBody
-	public Msg getMerchantName(@RequestParam("merchantName")String merchantName){
+	public Msg getMerchantName(@RequestParam("merchantName")String merchant){
+		String merchantName = EncodingTool.encodeStr(merchant);
+		
 		long l = userService.merchantName(merchantName);
 		
 		if (l == 0) {
@@ -246,10 +247,10 @@ public class UserController {
 	//申请店铺
 	@RequestMapping("/merchants")
 	@ResponseBody
-	public Msg getMerchant(@RequestParam("merchantName")String merchantName,
+	public Msg getMerchant(@RequestParam("merchantName")String merchant,
 			@RequestParam("merchantNumber")String merchantNumber){
+		String merchantName = EncodingTool.encodeStr(merchant);
 		Integer id = userService.merchant(merchantName,merchantNumber);
-		
 		if (id != null) {
 			return Msg.success().add("id", id);
 		}else {

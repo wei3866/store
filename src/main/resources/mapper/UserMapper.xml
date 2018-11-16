@@ -75,6 +75,10 @@
     u_number, u_id, u_name, u_gender, u_password, u_email, u_user_number, u_birthday, 
     u_pass_pus, u_mer
   </sql>
+  
+  <select id="count" resultType="java.lang.Long">
+  	select count(*) from user where u_number = #{uNumber}
+  </select>
   <select id="selectByExample" parameterType="com.geruisi.bean.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

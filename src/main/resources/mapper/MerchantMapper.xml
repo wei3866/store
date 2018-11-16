@@ -68,6 +68,10 @@
   <sql id="Base_Column_List">
     mer_id, mer_name, mer_user_number, mer_begin
   </sql>
+  <!-- int count(String name); -->
+  <select id="count" resultType="java.lang.Long">
+  	select count(*) from merchant where mer_name = #{merName}
+  </select>
   <select id="selectByExample" parameterType="com.geruisi.bean.MerchantExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

@@ -1,7 +1,5 @@
 package com.geruisi.bean;
 
-import java.util.Date;
-
 public class Merchant {
     private Integer merId;
 
@@ -32,7 +30,7 @@ public class Merchant {
     }
 
     public void setMerUserNumber(String merUserNumber) {
-        this.merUserNumber = merUserNumber == null ? null : merUserNumber.trim();
+        this.merUserNumber = merUserNumber;
     }
 
     public String getMerBegin() {
