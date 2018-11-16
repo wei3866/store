@@ -24,6 +24,7 @@ import com.geruisi.service.ShjiazxService;
 import com.geruisi.until.Get16Number;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
 
 @Controller
 public class shangjiazxController {
@@ -57,6 +58,7 @@ public class shangjiazxController {
 		map.put("cPutaways",cPutaways );
 		map.put("mid", sid);
 		return "shangjiazx";
+		
 	}
 	//上架
 	@RequestMapping(value="/shangjia",method=RequestMethod.POST)

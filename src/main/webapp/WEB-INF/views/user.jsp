@@ -113,7 +113,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h3 class="GenderTd"></h3>
 <button type="button" class="btn btn-info user_records">订单信息</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <button type="button" class="btn btn-info user_NumberTd">信息修改</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<button type="button" class="btn btn-info user_merchant" id=""></button>
+<button type="button" class="btn btn-info user_merchant" id="">进入店铺</button>
 	</center>
 	
 <script type="text/javascript">
@@ -343,6 +343,7 @@
 			})
 		}
 
+		
 </script>
 </body>
 </html>
